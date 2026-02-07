@@ -74,13 +74,16 @@ spec:
       spec:
         externalTrafficPolicy: Local
     # redirect everything to https
-    entrypoints:
+    entryPoints:
       web:
+        address: ":80"
         http:
           redirections:
             entrypoint:
               to: websecure
               scheme: https
+      websecure:
+        address: ":443"
     # Create an IngressRoute for the dashboard
     ingressRoute:
       dashboard:
