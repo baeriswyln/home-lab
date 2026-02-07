@@ -10,6 +10,6 @@ spec:
     - match: Host(`headlamp.castor.baeriswyl.dev`) && PathPrefix(`/`)
       kind: Rule
       services:
-        - name: 
+        - name: headlamp
           port: 80
           scheme: http
