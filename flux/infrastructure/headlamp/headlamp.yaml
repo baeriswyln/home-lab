@@ -40,5 +40,3 @@ spec:
           kind: Deployment
   values:
     replicaCount: 2
-    config:
-      baseURL: "rancher.castor.baeriswyl.dev"
