@@ -73,6 +73,14 @@ spec:
     service:
       spec:
         externalTrafficPolicy: Local
+    # redirect everything to https
+    entrypoints:
+      web:
+        http:
+          redirections:
+            entrypoint:
+              to: websecure
+              scheme: https
     # Create an IngressRoute for the dashboard
     ingressRoute:
       dashboard:
@@ -80,7 +88,6 @@ spec:
         # Custom match rule with host domain
         matchRule: Host(`traefik.castor.baeriswyl.local`)
         entryPoints:
-          - web
           - websecure
         # Add custom middlewares : authentication and redirection
         middlewares:
