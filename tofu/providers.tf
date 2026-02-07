@@ -22,9 +22,16 @@ provider "proxmox" {
 
 provider "helm" {
   kubernetes = {
-    host = module.talos-cluster.kubernetes_client_configuration.host
-    client_certificate = module.talos-cluster.kubernetes_client_configuration.client_certificate
-    client_key = module.talos-cluster.kubernetes_client_configuration.client_key
-    cluster_ca_certificate = module.talos-cluster.kubernetes_client_configuration.ca_certificate
+    host                   = module.talos-cluster.kubernetes_client_configuration.host
+    client_certificate     = base64decode(module.talos-cluster.kubernetes_client_configuration.client_certificate)
+    client_key             = base64decode(module.talos-cluster.kubernetes_client_configuration.client_key)
+    cluster_ca_certificate = base64decode(module.talos-cluster.kubernetes_client_configuration.ca_certificate)
   }
+}
+
+provider "kubernetes" {
+  host                   = module.talos-cluster.kubernetes_client_configuration.host
+  client_certificate     = base64decode(module.talos-cluster.kubernetes_client_configuration.client_certificate)
+  client_key             = base64decode(module.talos-cluster.kubernetes_client_configuration.client_key)
+  cluster_ca_certificate = base64decode(module.talos-cluster.kubernetes_client_configuration.ca_certificate)
 }
