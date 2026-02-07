@@ -40,3 +40,5 @@ spec:
           kind: Deployment
   values:
     hostname: "rancher.castor.baeriswyl.dev"
+    ingress:
+      enabled: false

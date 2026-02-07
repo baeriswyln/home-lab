@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: podinfo-ingress
+  namespace: podinfo
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`rancher.castor.baeriswyl.dev`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: podinfo
+          port: 9898
+          scheme: http
