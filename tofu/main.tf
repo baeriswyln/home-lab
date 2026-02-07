@@ -21,17 +21,17 @@ module "talos-cluster" {
     # Ensure the storage name is defined correctly based on your system settings
     storage = "local-lvm"
     # Define the DNS IP Address based on your system settings
-    gateway = "172.16.0.1"
+    gateway     = "172.16.0.1"
     nameserver1 = "172.16.0.10"
     nameserver2 = "172.16.0.1"
   }
 
   talos_cluster_details = {
-    name = "castor"
+    name               = "castor"
     version            = "v1.12.2"
     schematic_id_amd64 = local.schematic_id_amd64
     schematic_id_arm   = local.schematic_id_arm
-    virtual_ip = "172.16.11.0"
+    virtual_ip         = "172.16.11.0"
   }
 
   nodes = {
@@ -41,12 +41,12 @@ module "talos-cluster" {
       schematic_id = local.schematic_id_amd64
       vmodel       = "virtio"
       hdd_capacity = ["10G"]
-      iso_name = "local:iso/talos-metal-amd64.iso"
+      iso_name     = "local:iso/talos-metal-amd64.iso"
       vmid         = 101
       vnetwork     = "vmbr0"
       vcores       = 4
-      vram         = 2048
-      ip_addr     = "172.16.11.1/16"
+      vram         = 6144
+      ip_addr      = "172.16.11.1/16"
     },
     "controller02" = {
       target_node  = "hp-node-01"
@@ -54,12 +54,12 @@ module "talos-cluster" {
       schematic_id = local.schematic_id_amd64
       vmodel       = "virtio"
       hdd_capacity = ["10G"]
-      iso_name = "local:iso/talos-metal-amd64.iso"
+      iso_name     = "local:iso/talos-metal-amd64.iso"
       vmid         = 102
       vnetwork     = "vmbr0"
       vcores       = 4
-      vram         = 2048
-      ip_addr     = "172.16.11.2/16"
+      vram         = 6144
+      ip_addr      = "172.16.11.2/16"
     },
     "controller03" = {
       target_node  = "hp-node-01"
@@ -67,12 +67,12 @@ module "talos-cluster" {
       schematic_id = local.schematic_id_amd64
       vmodel       = "virtio"
       hdd_capacity = ["10G"]
-      iso_name = "local:iso/talos-metal-amd64.iso"
+      iso_name     = "local:iso/talos-metal-amd64.iso"
       vmid         = 103
       vnetwork     = "vmbr0"
       vcores       = 4
-      vram         = 2048
-      ip_addr     = "172.16.11.3/16"
+      vram         = 6144
+      ip_addr      = "172.16.11.3/16"
     },
     "workerStorage01" = {
       target_node  = "hp-node-02"
@@ -80,12 +80,12 @@ module "talos-cluster" {
       schematic_id = local.schematic_id_amd64
       vmodel       = "virtio"
       hdd_capacity = ["10G", "400G"]
-      iso_name = "local:iso/talos-metal-amd64.iso"
+      iso_name     = "local:iso/talos-metal-amd64.iso"
       vmid         = 111
       vnetwork     = "vmbr0"
-      vcores       = 2
+      vcores       = 3
       vram         = 16384
-      ip_addr     = "172.16.11.11/16"
+      ip_addr      = "172.16.11.11/16"
     },
     "workerStorage02" = {
       target_node  = "hp-node-03"
@@ -93,12 +93,12 @@ module "talos-cluster" {
       schematic_id = local.schematic_id_amd64
       vmodel       = "virtio"
       hdd_capacity = ["10G", "400G"]
-      iso_name = "local:iso/talos-metal-amd64.iso"
+      iso_name     = "local:iso/talos-metal-amd64.iso"
       vmid         = 112
       vnetwork     = "vmbr0"
       vcores       = 2
-      vram         = 2048
-      ip_addr     = "172.16.11.12/16"
+      vram         = 3076
+      ip_addr      = "172.16.11.12/16"
     },
     "workerStorage03" = {
       target_node  = "hp-node-03"
@@ -106,12 +106,12 @@ module "talos-cluster" {
       schematic_id = local.schematic_id_amd64
       vmodel       = "virtio"
       hdd_capacity = ["10G", "400G"]
-      iso_name = "local:iso/talos-metal-amd64.iso"
+      iso_name     = "local:iso/talos-metal-amd64.iso"
       vmid         = 113
       vnetwork     = "vmbr0"
       vcores       = 2
-      vram         = 2048
-      ip_addr     = "172.16.11.13/16"
+      vram         = 3076
+      ip_addr      = "172.16.11.13/16"
     }
   }
 }
@@ -119,8 +119,8 @@ module "talos-cluster" {
 
 // flux configuration
 // Create the  flux-system namespace.
-resource "kubernetes_namespace" "flux_system" {
-    depends_on = [ module.talos-cluster.kubernetes_client_configuration ]
+resource "kubernetes_namespace_v1" "flux_system" {
+  depends_on = [module.talos-cluster.kubernetes_client_configuration]
 
   metadata {
     name = "flux-system"
@@ -133,9 +133,9 @@ resource "kubernetes_namespace" "flux_system" {
 
 // Create a Kubernetes secret with the Git credentials
 // if a GitHub/GitLab token or GitHub App is provided.
-resource "kubernetes_secret" "git_auth" {
-  count      =  var.git_token != "" || var.github_app_id != "" ? 1 : 0
-  depends_on = [kubernetes_namespace.flux_system]
+resource "kubernetes_secret_v1" "git_auth" {
+  count      = var.git_token != "" || var.github_app_id != "" ? 1 : 0
+  depends_on = [kubernetes_namespace_v1.flux_system]
 
   metadata {
     name      = "flux-system"
@@ -143,19 +143,19 @@ resource "kubernetes_secret" "git_auth" {
   }
 
   data = {
-    username = var.git_token != "" ? "git" : null
-    password = var.git_token != "" ? var.git_token : null
-    githubAppID = var.github_app_id != "" ? var.github_app_id : null
+    username                   = var.git_token != "" ? "git" : null
+    password                   = var.git_token != "" ? var.git_token : null
+    githubAppID                = var.github_app_id != "" ? var.github_app_id : null
     githubAppInstallationOwner = var.github_app_installation_owner != "" ? var.github_app_installation_owner : null
-    githubAppPrivateKey = var.github_app_pem != "" ? var.github_app_pem: null
+    githubAppPrivateKey        = var.github_app_pem != "" ? var.github_app_pem : null
   }
 
   type = "Opaque"
 }
 
-resource "kubernetes_secret" "sops-gpg" {
-  count      =  var.git_token != "" || var.github_app_id != "" ? 1 : 0
-  depends_on = [kubernetes_namespace.flux_system]
+resource "kubernetes_secret_v1" "sops-gpg" {
+  count      = var.git_token != "" || var.github_app_id != "" ? 1 : 0
+  depends_on = [kubernetes_namespace_v1.flux_system]
 
   metadata {
     name      = "sops-gpg"
@@ -170,13 +170,13 @@ resource "kubernetes_secret" "sops-gpg" {
 }
 
 resource "helm_release" "flux_operator" {
-  depends_on = [kubernetes_namespace.flux_system]
+  depends_on = [kubernetes_namespace_v1.flux_system]
 
-  name             = "flux-operator"
-  namespace        = "flux-system"
-  repository       = "oci://ghcr.io/controlplaneio-fluxcd/charts"
-  chart            = "flux-operator"
-  wait = true
+  name       = "flux-operator"
+  namespace  = "flux-system"
+  repository = "oci://ghcr.io/controlplaneio-fluxcd/charts"
+  chart      = "flux-operator"
+  wait       = true
 }
 
 resource "helm_release" "flux_instance" {
@@ -187,7 +187,7 @@ resource "helm_release" "flux_instance" {
   repository = "oci://ghcr.io/controlplaneio-fluxcd/charts"
   chart      = "flux-instance"
 
-    set = [
+  set = [
     {
       name  = "instance.distribution.version"
       value = var.flux_version

@@ -95,6 +95,6 @@ data "talos_cluster_health" "cluster_health" {
 
 
   timeouts = {
-    read = "20m"
+    read = "10m"
   }
 }

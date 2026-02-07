@@ -36,9 +36,4 @@ resource "talos_cluster_kubeconfig" "kubeconfig" {
   client_configuration = talos_machine_secrets.this.client_configuration
 
   node = var.talos_cluster_details.virtual_ip
-  # node = tolist([
-    # for k, v in var.nodes :
-    # split("/", v.ip_addr)[0]
-    # if can(regex("controller", lower(k)))
-  # ])[0]
 }

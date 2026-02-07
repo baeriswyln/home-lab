@@ -6,19 +6,19 @@ variable "api_url" {
 variable "api_token_id" {
   description = "The Proxmox API Toke ID"
   type        = string
-  sensitive = true
+  sensitive   = true
 }
 
 variable "api_token_secret" {
   description = "The Proxmox API Toke Secret"
   type        = string
-  sensitive = true
+  sensitive   = true
 }
 
 variable "gpg_key" {
   description = "GPG key used to encrypt secrets in kubernets configurations"
-  type = string
-  sensitive = true
+  type        = string
+  sensitive   = true
 }
 
 // flux stuff
