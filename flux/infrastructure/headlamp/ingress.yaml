@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`headlamp.castor.baeriswyl.dev`) && PathPrefix(`/`)
+    - match: Host(`headlamp.castor.baeriswyl.local`) && PathPrefix(`/`)
       kind: Rule
       services:
         - name: headlamp
