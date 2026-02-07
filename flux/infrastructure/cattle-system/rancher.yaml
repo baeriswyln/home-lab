@@ -39,4 +39,4 @@ spec:
         target:
           kind: Deployment
   values:
-    hostname: "rancher.baeriswyl.local"
+    hostname: "rancher.castor.baeriswyl.dev"
