@@ -1,0 +1,40 @@
+machine:
+  install:
+    image: ${initial_image}
+  network:
+    nameservers:
+      - ${nameserver1}
+      - ${nameserver2}
+      - 8.8.8.8
+
+    interfaces:
+    - deviceSelector:
+        physical: true
+      dhcp: false
+      addresses:
+        - ${ip_addr}
+      routes:
+        - gateway: ${gateway}
+  
+  kubelet:
+    extraMounts:
+      - destination: /var/mnt/longhorn
+        type: bind
+        source: /var/mnt/longhorn
+        options:
+          - bind
+          - rshared
+          - rw
+---
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: longhorn
+volumeType: disk
+provisioning:
+  diskSelector:
+    match: disk.dev_path == '/dev/sdb'
+---
+apiVersion: v1alpha1
+kind: HostnameConfig
+auto: off
+hostname: ${hostname}

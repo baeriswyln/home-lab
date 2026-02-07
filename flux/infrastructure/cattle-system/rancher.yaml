@@ -1,0 +1,42 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: rancher-latest
+  namespace: cattle-system
+spec:
+  interval: 15m
+  url: https://releases.rancher.com/server-charts/latest
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: rancher
+  namespace: cattle-system
+spec:
+  interval: 15m
+  timeout: 5m
+  chart:
+    spec:
+      chart: rancher
+      sourceRef:
+        kind: HelmRepository
+        name: rancher-latest
+      interval: 5m
+  releaseName: rancher
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  test:
+    enable: true
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths:
+          - /spec/replicas
+        target:
+          kind: Deployment
+  values:
+    hostname: "rancher.baeriswyl.local"

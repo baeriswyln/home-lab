@@ -1,0 +1,24 @@
+machine:
+  install:
+    image: ${initial_image}
+  network:
+    nameservers:
+      - ${nameserver1}
+      - ${nameserver2}
+      - 8.8.8.8
+
+    interfaces:
+    - deviceSelector:
+        physical: true
+      dhcp: false
+      addresses:
+        - ${ip_addr}
+      routes:
+        - gateway: ${gateway}
+      vip:
+        ip: ${virtual_ip}
+---
+apiVersion: v1alpha1
+kind: HostnameConfig
+auto: off
+hostname: ${hostname}

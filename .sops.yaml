@@ -1,0 +1,28 @@
+# .sops.yaml
+---
+creation_rules:
+  - path_regex: cluster/.*\.yaml
+    encrypted_regex: ^(data|stringData)$
+    pgp: >-
+      CBB77C32B08ADF26FBF2624638B8C929AD0DFC51,
+      3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  - path_regex: infrastructure/.*\.yaml
+    encrypted_regex: ^(data|stringData)$
+    pgp: >-
+      CBB77C32B08ADF26FBF2624638B8C929AD0DFC51,
+      3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+
+  - path_regex: talosconfig
+    encrypted_regex: ^key$
+    pgp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+
+  - path_regex: kubeconfig
+    encrypted_regex: ^client-key-data$
+    pgp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+
+  - path_regex: secrets.yaml
+    encrypted_regex: ^(secret|bootstraptoken|secretboxencryptionsecret|token|key)$
+    pgp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+stores:
+  yaml:
+    indent: 2

@@ -1,0 +1,133 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: traefik
+  namespace: traefik
+spec:
+  interval: 15m
+  url: https://traefik.github.io/charts
+sops:
+  lastmodified: "2026-01-10T15:49:07Z"
+  mac: ENC[AES256_GCM,data:RWFMT2SqWFjZuuPixMqQPf/wAQXFtoXPy+pzucLFxohkAiym8mSXekHCX5x4925AQMamUCecxEihy6jNaPm6yFXkBKkqrWSoiB/LkfDjG+2br9I/B3Pq980iRECyAGNG0HpfX09vnYMI1ulqL3P/g/8cdUu7L2DJLeqRjAQBwFc=,iv:ZVr5zeV8BcPNROY3knge5ps0DV5e9xzZ9f1K07AXSRQ=,tag:MuuvazF6gJRJurr3VZOpng==,type:str]
+  pgp:
+    - created_at: "2026-01-10T15:49:07Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAkdYo9eHr2JK7bUNb5DEVtYH3yelN5dOGHBHk6g1zgHow
+        2B/gDKDXSsToPvJ57m2cJ2JR+dHoayx5mpLhZGmhErf3vsB4wNX2+hmRTYS51iVy
+        0lwB4j6an3wLzieIsNJF8MdBJpk/IrzrYYNI3powSihPFTcHkTj/OuRW0WLMXilv
+        trsXtK0CsjZ3mwrLaXETgYUqnz6/n15yBG7h/n8C5DQf7WtprI4VB+nHIg2Ezg==
+        =OW+3
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-01-10T15:49:07Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdAPgHxNBFxJlBHEj0L/Hl3rnGiu1zd+YrtgVk2h+aFczow
+        bOC7JdIVUPlGqCcDGGhnCPtdC2H6LNsKGexll2ggNAzBO7Yug1v0AMub6NqzJQSh
+        0lwBLUEP3KiE3GSvBnzyuaNg1/3SijdJToTprOORafx7pjrPtBKpSnWdohXbjI2F
+        2NtRawiwpY0Nr/O4lSI7ecX8IJbMqyezI+QcB1cEwxsCMsCshimJ3wIJzVPRNQ==
+        =JYGE
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData)$
+  version: 3.11.0
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: traefik
+spec:
+  interval: 15m
+  timeout: 5m
+  chart:
+    spec:
+      chart: traefik
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+      interval: 5m
+  releaseName: traefik
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  test:
+    enable: true
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths:
+          - /spec/replicas
+        target:
+          kind: Deployment
+  values:
+    deployment:
+      enabled: true
+      kind: DaemonSet
+    service:
+      spec:
+        externalTrafficPolicy: Local
+    # Create an IngressRoute for the dashboard
+    ingressRoute:
+      dashboard:
+        enabled: true
+        # Custom match rule with host domain
+        matchRule: Host(`traefik-dashboard.balos.baeriswyl.local`)
+        entryPoints:
+          - web
+          - websecure
+        # Add custom middlewares : authentication and redirection
+        middlewares:
+          - name: traefik-dashboard-auth
+    # Create the custom middlewares used by the IngressRoute dashboard (can also be created in another way).
+    # /!\ Yes, you need to replace "changeme" password with a better one. /!\
+    extraObjects:
+      - apiVersion: v1
+        kind: Secret
+        metadata:
+          name: traefik-dashboard-auth-secret
+        type: kubernetes.io/basic-auth
+        stringData:
+          username: ENC[AES256_GCM,data:McHQFio=,iv:zH0eX8lPXZRl6JKu29WSempdFhbp/r8SFIhTdGd9wnM=,tag:n8Heb1nGC37qvV8MXU/NOA==,type:str]
+          password: ENC[AES256_GCM,data:Oj7ga11832CjYEnwDkwSlAA/5qM4gI7z,iv:tn8MVuGS4ns4BQWli5c3x2wXvKb7olKxbCh0QvoHq8o=,tag:U8aJ48lFEN+IjrVBeNaWsQ==,type:str]
+      - apiVersion: traefik.io/v1alpha1
+        kind: Middleware
+        metadata:
+          name: traefik-dashboard-auth
+        spec:
+          basicAuth:
+            secret: traefik-dashboard-auth-secret
+sops:
+  lastmodified: "2026-01-10T15:49:07Z"
+  mac: ENC[AES256_GCM,data:RWFMT2SqWFjZuuPixMqQPf/wAQXFtoXPy+pzucLFxohkAiym8mSXekHCX5x4925AQMamUCecxEihy6jNaPm6yFXkBKkqrWSoiB/LkfDjG+2br9I/B3Pq980iRECyAGNG0HpfX09vnYMI1ulqL3P/g/8cdUu7L2DJLeqRjAQBwFc=,iv:ZVr5zeV8BcPNROY3knge5ps0DV5e9xzZ9f1K07AXSRQ=,tag:MuuvazF6gJRJurr3VZOpng==,type:str]
+  pgp:
+    - created_at: "2026-01-10T15:49:07Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAkdYo9eHr2JK7bUNb5DEVtYH3yelN5dOGHBHk6g1zgHow
+        2B/gDKDXSsToPvJ57m2cJ2JR+dHoayx5mpLhZGmhErf3vsB4wNX2+hmRTYS51iVy
+        0lwB4j6an3wLzieIsNJF8MdBJpk/IrzrYYNI3powSihPFTcHkTj/OuRW0WLMXilv
+        trsXtK0CsjZ3mwrLaXETgYUqnz6/n15yBG7h/n8C5DQf7WtprI4VB+nHIg2Ezg==
+        =OW+3
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-01-10T15:49:07Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdAPgHxNBFxJlBHEj0L/Hl3rnGiu1zd+YrtgVk2h+aFczow
+        bOC7JdIVUPlGqCcDGGhnCPtdC2H6LNsKGexll2ggNAzBO7Yug1v0AMub6NqzJQSh
+        0lwBLUEP3KiE3GSvBnzyuaNg1/3SijdJToTprOORafx7pjrPtBKpSnWdohXbjI2F
+        2NtRawiwpY0Nr/O4lSI7ecX8IJbMqyezI+QcB1cEwxsCMsCshimJ3wIJzVPRNQ==
+        =JYGE
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData)$
+  version: 3.11.0
