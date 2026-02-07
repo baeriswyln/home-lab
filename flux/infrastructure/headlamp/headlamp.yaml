@@ -1,28 +1,28 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: rancher-latest
-  namespace: cattle-system
+  name: headlamp
+  namespace: headlamp
 spec:
   interval: 15m
-  url: https://releases.rancher.com/server-charts/latest
+  url: https://kubernetes-sigs.github.io/headlamp/
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: rancher
-  namespace: cattle-system
+  name: headlamp
+  namespace: headlamp
 spec:
   interval: 15m
   timeout: 5m
   chart:
     spec:
-      chart: rancher
+      chart: headlamp
       sourceRef:
         kind: HelmRepository
-        name: rancher-latest
+        name: headlamp
       interval: 5m
-  releaseName: rancher
+  releaseName: headlamp
   install:
     remediation:
       retries: 3
@@ -39,6 +39,6 @@ spec:
         target:
           kind: Deployment
   values:
-    hostname: "rancher.castor.baeriswyl.dev"
-    ingress:
-      enabled: false
+    replicaCount: 2
+    config:
+      baseURL: "rancher.castor.baeriswyl.dev"
