@@ -78,7 +78,7 @@ spec:
       dashboard:
         enabled: true
         # Custom match rule with host domain
-        matchRule: Host(`traefik.castor.baeriswyl.dev`)
+        matchRule: Host(`traefik.castor.baeriswyl.local`)
         entryPoints:
           - web
           - websecure

@@ -6,6 +6,7 @@ metadata:
 spec:
   entryPoints:
     - web
+    - websecure
   routes:
     - match: Host(`headlamp.castor.baeriswyl.local`) && PathPrefix(`/`)
       kind: Rule
