@@ -163,7 +163,7 @@ resource "kubernetes_secret_v1" "sops-gpg" {
   }
 
   data = {
-    "sops.asc" = base64encode(file(var.gpg_key))
+    "sops.asc" = file(var.gpg_key)
   }
 
   type = "Opaque"
@@ -186,6 +186,10 @@ resource "helm_release" "flux_instance" {
   namespace  = "flux-system"
   repository = "oci://ghcr.io/controlplaneio-fluxcd/charts"
   chart      = "flux-instance"
+
+  timeouts    = {
+      read = "10m"
+  }
 
   set = [
     {

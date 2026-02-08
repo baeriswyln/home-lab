@@ -15,8 +15,10 @@ machine:
         - ${ip_addr}
       routes:
         - gateway: ${gateway}
-      vip:
-        ip: ${virtual_ip}
+
+  kubelet:
+    extraArgs:
+      rotate-server-certificates: true
 ---
 apiVersion: v1alpha1
 kind: HostnameConfig

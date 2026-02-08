@@ -1,6 +1,6 @@
 # HomeLab Kubernetes Cluster
 
-With this repository, a homelab kubernetes cluster running on TalosOS is deployed, alongside a FluxCD installation. With the included kubernetes configuration, `MetalLB`, `Traefik`, `Longhorn`, `` are deployed. 
+With this repository, a homelab kubernetes cluster running on TalosOS is deployed, alongside a FluxCD installation. With the included kubernetes configuration, `MetalLB`, `Traefik`, `Longhorn`, `Headlamp` are deployed. 
 
 ## Prerequisits
 
@@ -10,6 +10,7 @@ A local working installation of the follwoing utilities is required.
 - [talosctl](https://docs.siderolabs.com/talos/v1.12/getting-started/talosctl)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [helm](https://helm.sh/docs/intro/install/)
+- [Flux](https://fluxcd.io/flux/installation/)
 - **gnupg, sops** for in-repository encryption. `brew install gnupg sops`
 
 ## Getting started
@@ -32,6 +33,7 @@ Next, create a copy of all `*.example.tfvars` files, and populate them with appr
 
 - Metadata: Read-only
 - Administration: Read and write
+- Contents: Read and write
 
 ```shell
 cd tofu
@@ -50,6 +52,14 @@ tofu output client_configuration
 ```
 
 More commands can be found in the [OpenTofu documentation](https://opentofu.org/docs/cli/commands/).
+
+### Accessing Headlamp
+
+Once ready, headlamp is accessible using a token generated with the following command.
+
+```shell
+kubectl create token headlamp -n headlamp
+```
 
 
 ## Maintenance
@@ -70,3 +80,14 @@ As there is no possibility yet to update a talos cluster through terraform witho
 $ talosctl upgrade --nodes 10.20.30.40 \
   --image ghcr.io/siderolabs/installer:v1.12.2
 ```
+
+
+# todo
+
+
+- figure out how fluxcd sees all deployments as a single thing, and not just "infrastructure" and add an order in teployment
+- metrics-server
+- zitadel as a global oicd
+  - configure oicd for headlamp
+- backup
+- update kubeconfig, talosconfig, secrets.yaml

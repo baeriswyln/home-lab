@@ -23,6 +23,8 @@ spec:
         name: bitnami
         namespace: zitadel
   values:
+    image:
+      tag: 17.6.0
     auth:
       existingSecret: zitadel-db-credentials
       secretKeys:

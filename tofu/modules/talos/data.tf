@@ -31,28 +31,13 @@ data "talos_machine_configuration" "machineconfig" {
   talos_version = var.talos_cluster_details.version
 
   cluster_endpoint = "https://${var.talos_cluster_details.virtual_ip}:6443"
-  # cluster_endpoint = "https://${tolist([
-  #   for k, v in var.nodes :
-  #   proxmox_vm_qemu.talos_nodes[k].default_ipv4_address
-  #   if can(regex("controller", lower(k)))
-  # ])[0]}:6443"
 
   machine_secrets = talos_machine_secrets.this.machine_secrets
 
   machine_type = can(regex("controller", lower(each.key))) ? "controlplane" : "worker"
 
-  config_patches = can(regex("controller", lower(each.key))) ? [
-    templatefile("${path.module}/files/init_install_controller.tfmpl", {
-      initial_image = "factory.talos.dev/metal-installer/${each.value.schematic_id}:${var.talos_cluster_details.version}"
-      virtual_ip = var.talos_cluster_details.virtual_ip
-      ip_addr = each.value.ip_addr
-      gateway = var.vm_details.gateway
-      nameserver1 = var.vm_details.nameserver1
-      nameserver2 = var.vm_details.nameserver2
-      hostname = "${var.talos_cluster_details.name}-${each.key}"
-    }),
-    ] : (can(regex("workerCompute", lower(each.key))) ? [
-    templatefile("${path.module}/files/init_install_worker_compute.tfmpl", {
+  config_patches = concat(concat(concat([
+    templatefile("${path.module}/files/node.tfmpl", {
       initial_image = "factory.talos.dev/metal-installer/${each.value.schematic_id}:${var.talos_cluster_details.version}"
       ip_addr = each.value.ip_addr
       gateway = var.vm_details.gateway
@@ -60,16 +45,9 @@ data "talos_machine_configuration" "machineconfig" {
       nameserver2 = var.vm_details.nameserver2
       hostname = "${var.talos_cluster_details.name}-${each.key}"
     }),
-    ] : [
-    templatefile("${path.module}/files/init_install_worker_storage.tfmpl", {
-      initial_image = "factory.talos.dev/metal-installer/${each.value.schematic_id}:${var.talos_cluster_details.version}"
-      ip_addr = each.value.ip_addr
-      gateway = var.vm_details.gateway
-      nameserver1 = var.vm_details.nameserver1
-      nameserver2 = var.vm_details.nameserver2
-      hostname = "${var.talos_cluster_details.name}-${each.key}"
-    })
-  ])
+  ], can(regex("controller", lower(each.key))) ? [templatefile("${path.module}/files/controller_patch.tfmpl", {virtual_ip = var.talos_cluster_details.virtual_ip}),] : [])
+   , can(regex("controller01", lower(each.key))) ? [templatefile("${path.module}/files/controller_primary_patch.tfmpl", {virtual_ip = var.talos_cluster_details.virtual_ip}),] : [])
+   , can(regex("workerstorage", lower(each.key))) ? [templatefile("${path.module}/files/worker_storage_patch.tfmpl", {}),] : [])
 }
 
 # Check Talos cluster healthy state
