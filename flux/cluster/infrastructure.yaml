@@ -2,11 +2,85 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: infrastructure
+  name: metallb
   namespace: flux-system
 spec:
   interval: 10m
-  path: ./flux/infrastructure
+  path: ./flux/infrastructure/metallb
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: traefik
+  namespace: flux-system
+spec:
+  dependsOn:
+    name: metallb
+  interval: 10m
+  path: ./flux/infrastructure/traefik
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cert-manager
+  namespace: flux-system
+spec:
+  interval: 10m
+  path: ./flux/infrastructure/cert-manager
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: longhorn
+  namespace: flux-system
+spec:
+  dependsOn:
+    name: traefik
+  interval: 10m
+  path: ./flux/infrastructure/longhorn
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: headlamp
+  namespace: flux-system
+spec:
+  dependsOn:
+    name: longhorn
+  interval: 10m
+  path: ./flux/infrastructure/headlamp
   prune: true
   sourceRef:
     kind: GitRepository
