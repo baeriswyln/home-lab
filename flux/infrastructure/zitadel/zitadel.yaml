@@ -6,106 +6,22 @@ metadata:
 spec:
   interval: 15m
   url: https://charts.zitadel.com/
-sops:
-  lastmodified: "2026-02-08T13:16:03Z"
-  mac: ENC[AES256_GCM,data:NWGx7b2oe6gOWWm2wy+b6VmuNPd5dOQO6YWZn/+QtID/+poGGl12NCqJVr+CIYX3FpsfN1xX2zM9dd+9L9rJcKBwo/l77p/n2r8MKJ6ydq2RkS0ZExegrw8TUbXaMhm7jQCotSZXzNIpcbg6GxAIxFr2aEs4Yb0QkMPa6Yod4vA=,iv:6OIZwAL8JDc2X2Lc1V1qk/VRtmBTDHyPt0JTI8mWO0I=,tag:2sGvpeB37FZv9I//yasm8g==,type:str]
-  pgp:
-    - created_at: "2026-02-08T12:50:10Z"
-      enc: |-
-        -----BEGIN PGP MESSAGE-----
-
-        hF4Dd4GlSl54jlASAQdAF47grQv2/hhNcyIHPy6M4Uvp1MR3aAuuIasSUp05FUcw
-        nUGo/89rWHJcxluJrPd3fxg6oeNM2qbvIpqnscAFjTyYhje4KcyAk4ZcOtdXXb05
-        0l4BzwoJAHkLuHeJdYs/h1NAKj5Roxz1Ce32GB5O7uF1qMS6EMjWbCARWWzjSTDT
-        46F1fb6HddP34zmu6rXFtuRgOwCtBzw02Yh0ZSyxWgemj7Y2z6YK6BC4wUEnozeP
-        =b/BE
-        -----END PGP MESSAGE-----
-      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
-    - created_at: "2026-02-08T12:50:10Z"
-      enc: |-
-        -----BEGIN PGP MESSAGE-----
-
-        hF4DJS3PlYN8TcgSAQdA8ppRBK+gAjSeOwkxmfy4zFhsVu9nKGF3qX+LlP7UKgIw
-        q5XsNHlZRsaQcAi508UEvLB2V45ISCSkDAC6jvFM5l2CGZzxKJ3u46CHTCR5NXrz
-        0l4BtIKdnfPDUqBKmbo2BiqI+YD/iZUlS7kwtHPVfrvDL+e4pWhyEgak+/eynyvf
-        F9hj+yZYsl1csOS9LxAvUi17tWN4j7oiZbw5MyQBcsu0O9WUXupTasyeORB43DUZ
-        =TtfY
-        -----END PGP MESSAGE-----
-      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
-  encrypted_regex: ^(data|stringData|Human)$
-  version: 3.11.0
 ---
 apiVersion: v1
 data:
-  config-yaml: ENC[AES256_GCM,data:U5xBUU75pZQd1lRO/ojQpNLNzNNtoZy0Wscrj+ui3DIiBhhIAaqfGpzEA85ChBeD8yAVsyiXlKcTaiZd7E7gtestLVgDNNI4zkPJNnVIYQNiCoNxPkNZ0re/H74zc/l4k9aFfyQuw0uqQBhWsQqI1kdCBJ6pRiHxWOej0T8D+yQjOZCf7YaMHYqji7jkZwZS8SB+k1Zr6kLzHEzUjcJTZQ==,iv:6GBvqde3X9iSWe56XqxbFB0Y0YURQlC4MgSY4F/NFMc=,tag:O7E88/EinDzRro1udmjh1g==,type:str]
+  config-yaml: CkRhdGFiYXNlOgogIFBvc3RncmVzOgogICAgVXNlcjoKICAgICAgUGFzc3dvcmQ6IFEqVUY0Zyo2U3I5NnM5QnJhdSM2RjVBMwogICAgQWRtaW46CiAgICAgIFBhc3N3b3JkOiBxei1HSnlCcjJrMWJhMnBzMAo=
 kind: Secret
 metadata:
   name: zitadel-db-credentials
   namespace: zitadel
-sops:
-  lastmodified: "2026-02-08T13:16:03Z"
-  mac: ENC[AES256_GCM,data:NWGx7b2oe6gOWWm2wy+b6VmuNPd5dOQO6YWZn/+QtID/+poGGl12NCqJVr+CIYX3FpsfN1xX2zM9dd+9L9rJcKBwo/l77p/n2r8MKJ6ydq2RkS0ZExegrw8TUbXaMhm7jQCotSZXzNIpcbg6GxAIxFr2aEs4Yb0QkMPa6Yod4vA=,iv:6OIZwAL8JDc2X2Lc1V1qk/VRtmBTDHyPt0JTI8mWO0I=,tag:2sGvpeB37FZv9I//yasm8g==,type:str]
-  pgp:
-    - created_at: "2026-02-08T12:50:10Z"
-      enc: |-
-        -----BEGIN PGP MESSAGE-----
-
-        hF4Dd4GlSl54jlASAQdAF47grQv2/hhNcyIHPy6M4Uvp1MR3aAuuIasSUp05FUcw
-        nUGo/89rWHJcxluJrPd3fxg6oeNM2qbvIpqnscAFjTyYhje4KcyAk4ZcOtdXXb05
-        0l4BzwoJAHkLuHeJdYs/h1NAKj5Roxz1Ce32GB5O7uF1qMS6EMjWbCARWWzjSTDT
-        46F1fb6HddP34zmu6rXFtuRgOwCtBzw02Yh0ZSyxWgemj7Y2z6YK6BC4wUEnozeP
-        =b/BE
-        -----END PGP MESSAGE-----
-      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
-    - created_at: "2026-02-08T12:50:10Z"
-      enc: |-
-        -----BEGIN PGP MESSAGE-----
-
-        hF4DJS3PlYN8TcgSAQdA8ppRBK+gAjSeOwkxmfy4zFhsVu9nKGF3qX+LlP7UKgIw
-        q5XsNHlZRsaQcAi508UEvLB2V45ISCSkDAC6jvFM5l2CGZzxKJ3u46CHTCR5NXrz
-        0l4BtIKdnfPDUqBKmbo2BiqI+YD/iZUlS7kwtHPVfrvDL+e4pWhyEgak+/eynyvf
-        F9hj+yZYsl1csOS9LxAvUi17tWN4j7oiZbw5MyQBcsu0O9WUXupTasyeORB43DUZ
-        =TtfY
-        -----END PGP MESSAGE-----
-      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
-  encrypted_regex: ^(data|stringData|Human)$
-  version: 3.11.0
 ---
 apiVersion: v1
 data:
-  masterkey: ENC[AES256_GCM,data:Vmp2PRij13nyc0K5gBAcpmaYFZd4hHyw6liIN2R9kqxhTOTeCu27tkc8pTo=,iv:WygrKoruHWy/F+jLn7/sm9A9qdzTivg1puLUBcZSKeU=,tag:FlDKVPrQeZ0qwVuIxTaVuQ==,type:str]
+  masterkey: UUo2SUpYWEltR1gxQWN2OXU5SHZya053UGxoblpHclY=
 kind: Secret
 metadata:
   name: zitadel-masterkey
   namespace: zitadel
-sops:
-  lastmodified: "2026-02-08T13:16:03Z"
-  mac: ENC[AES256_GCM,data:NWGx7b2oe6gOWWm2wy+b6VmuNPd5dOQO6YWZn/+QtID/+poGGl12NCqJVr+CIYX3FpsfN1xX2zM9dd+9L9rJcKBwo/l77p/n2r8MKJ6ydq2RkS0ZExegrw8TUbXaMhm7jQCotSZXzNIpcbg6GxAIxFr2aEs4Yb0QkMPa6Yod4vA=,iv:6OIZwAL8JDc2X2Lc1V1qk/VRtmBTDHyPt0JTI8mWO0I=,tag:2sGvpeB37FZv9I//yasm8g==,type:str]
-  pgp:
-    - created_at: "2026-02-08T12:50:10Z"
-      enc: |-
-        -----BEGIN PGP MESSAGE-----
-
-        hF4Dd4GlSl54jlASAQdAF47grQv2/hhNcyIHPy6M4Uvp1MR3aAuuIasSUp05FUcw
-        nUGo/89rWHJcxluJrPd3fxg6oeNM2qbvIpqnscAFjTyYhje4KcyAk4ZcOtdXXb05
-        0l4BzwoJAHkLuHeJdYs/h1NAKj5Roxz1Ce32GB5O7uF1qMS6EMjWbCARWWzjSTDT
-        46F1fb6HddP34zmu6rXFtuRgOwCtBzw02Yh0ZSyxWgemj7Y2z6YK6BC4wUEnozeP
-        =b/BE
-        -----END PGP MESSAGE-----
-      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
-    - created_at: "2026-02-08T12:50:10Z"
-      enc: |-
-        -----BEGIN PGP MESSAGE-----
-
-        hF4DJS3PlYN8TcgSAQdA8ppRBK+gAjSeOwkxmfy4zFhsVu9nKGF3qX+LlP7UKgIw
-        q5XsNHlZRsaQcAi508UEvLB2V45ISCSkDAC6jvFM5l2CGZzxKJ3u46CHTCR5NXrz
-        0l4BtIKdnfPDUqBKmbo2BiqI+YD/iZUlS7kwtHPVfrvDL+e4pWhyEgak+/eynyvf
-        F9hj+yZYsl1csOS9LxAvUi17tWN4j7oiZbw5MyQBcsu0O9WUXupTasyeORB43DUZ
-        =TtfY
-        -----END PGP MESSAGE-----
-      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
-  encrypted_regex: ^(data|stringData|Human)$
-  version: 3.11.0
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -143,6 +59,9 @@ spec:
     zitadel:
       masterkeySecretName: zitadel-masterkey
       configSecretName: zitadel-db-credentials
+      dbSslAdminCrtSecret: postgres-cert
+      dbSslCaCrtSecret: postgres-cert
+      dbSslUserCrtSecret: zitadel-cert
       configmapConfig:
         ExternalDomain: auth.castor.baeriswyl.local
         ExternalSecure: true
@@ -165,12 +84,12 @@ spec:
         FirstInstance:
           Org:
             Human:
-              UserName: ENC[AES256_GCM,data:hj88jvxaFzW5ow==,iv:6SrmQRe7ahnKnkozba8np0JrTqEgKdPxITsoAo5MCJU=,tag:LdacnyLo92CitlR3jXDRcA==,type:str]
-              FirstName: ENC[AES256_GCM,data:8zqajGLDYA==,iv:1YU7rSq7Ocoofzm6wl8+p22VKntw8q8r2UWbs9F22cM=,tag:3OH80Wy1DDQ5Pi8uh9t1XQ==,type:str]
-              LastName: ENC[AES256_GCM,data:F1RJqziVdcUW,iv:x7bH4E98tJK8j/ny6kkw1W7MEl6IRkdIXcNXTrklsb8=,tag:X16GtgS9oHhMmeLV8OS0Vw==,type:str]
-              Email: ENC[AES256_GCM,data:pyiY+E8jJgD9eGyeIju6vth0f15j,iv:lKMxmNEfwKvOviNJIVMfx7XqKb6WvOBFAZASdkpWOOc=,tag:EH1ntFY//CwvJSiGG+pMsw==,type:str]
-              Password: ENC[AES256_GCM,data:awaM0ferwQAKvk3evAzrYK0349TOr45B,iv:NKP/HX7vVBcqvtGj6Zz131e+TBFijCkxPzAdCU27TZA=,tag:2QC0CVGpNjSBLzJRnXG3mg==,type:str]
-              PasswordChangeRequired: ENC[AES256_GCM,data:v3PP2w==,iv:4rbuU/yGdPIiypEVMwGiypUIHfNRV5ypSyB7uAeVFBo=,tag:Y8Hhj85QKtA5KxSInj+ASQ==,type:bool]
+              UserName: nbaeriswyl
+              FirstName: Nicolas
+              LastName: Baeriswyl
+              Email: nicolas@baeriswyl.dev
+              Password: h7zyAzw%6C1E46AKsH27bqW@
+              PasswordChangeRequired: true
     ingress:
       enabled: true
       className: traefik
@@ -206,31 +125,3 @@ spec:
     podDisruptionBudget:
       enabled: true
       minAvailable: 1
-sops:
-  lastmodified: "2026-02-08T13:16:03Z"
-  mac: ENC[AES256_GCM,data:NWGx7b2oe6gOWWm2wy+b6VmuNPd5dOQO6YWZn/+QtID/+poGGl12NCqJVr+CIYX3FpsfN1xX2zM9dd+9L9rJcKBwo/l77p/n2r8MKJ6ydq2RkS0ZExegrw8TUbXaMhm7jQCotSZXzNIpcbg6GxAIxFr2aEs4Yb0QkMPa6Yod4vA=,iv:6OIZwAL8JDc2X2Lc1V1qk/VRtmBTDHyPt0JTI8mWO0I=,tag:2sGvpeB37FZv9I//yasm8g==,type:str]
-  pgp:
-    - created_at: "2026-02-08T12:50:10Z"
-      enc: |-
-        -----BEGIN PGP MESSAGE-----
-
-        hF4Dd4GlSl54jlASAQdAF47grQv2/hhNcyIHPy6M4Uvp1MR3aAuuIasSUp05FUcw
-        nUGo/89rWHJcxluJrPd3fxg6oeNM2qbvIpqnscAFjTyYhje4KcyAk4ZcOtdXXb05
-        0l4BzwoJAHkLuHeJdYs/h1NAKj5Roxz1Ce32GB5O7uF1qMS6EMjWbCARWWzjSTDT
-        46F1fb6HddP34zmu6rXFtuRgOwCtBzw02Yh0ZSyxWgemj7Y2z6YK6BC4wUEnozeP
-        =b/BE
-        -----END PGP MESSAGE-----
-      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
-    - created_at: "2026-02-08T12:50:10Z"
-      enc: |-
-        -----BEGIN PGP MESSAGE-----
-
-        hF4DJS3PlYN8TcgSAQdA8ppRBK+gAjSeOwkxmfy4zFhsVu9nKGF3qX+LlP7UKgIw
-        q5XsNHlZRsaQcAi508UEvLB2V45ISCSkDAC6jvFM5l2CGZzxKJ3u46CHTCR5NXrz
-        0l4BtIKdnfPDUqBKmbo2BiqI+YD/iZUlS7kwtHPVfrvDL+e4pWhyEgak+/eynyvf
-        F9hj+yZYsl1csOS9LxAvUi17tWN4j7oiZbw5MyQBcsu0O9WUXupTasyeORB43DUZ
-        =TtfY
-        -----END PGP MESSAGE-----
-      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
-  encrypted_regex: ^(data|stringData|Human)$
-  version: 3.11.0

@@ -1,0 +1,35 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: bitnami
+  namespace: zitadel
+spec:
+  url: https://charts.bitnami.com/bitnami
+  interval: 1h0m0s
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: postgres
+  namespace: zitadel
+spec:
+  interval: 10m0s
+  chart:
+    spec:
+      chart: postgresql
+      version: "15.3.0"  # pick a stable version
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: zitadel
+  values:
+    auth:
+      existingSecret: zitadel-db-credentials 
+    persistence:
+      enabled: true
+      size: 10Gi
+    tls:
+      enabled: true
+      certificatesSecret: postgres-cert
+      certFilename: "tls.crt"
+      certKeyFilename: "tls.key"
