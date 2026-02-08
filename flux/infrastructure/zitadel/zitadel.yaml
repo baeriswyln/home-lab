@@ -54,7 +54,7 @@ spec:
           Enabled: false
         Database:
           Postgres:
-            Host: postgres.database.svc.cluster.local
+            Host: postgres-postgresql
             Port: 5432
             Database: zitadel
             User:
