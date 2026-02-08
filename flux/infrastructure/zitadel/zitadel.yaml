@@ -73,7 +73,7 @@ spec:
               LastName: Baeriswyl
               Email: nicolas@baeriswyl.dev
               Password: h7zyAzw%6C1E46AKsH27bqW@
-              PasswordChangeRequired: true
+              PasswordChangeRequired: false
     ingress:
       enabled: true
       className: traefik
