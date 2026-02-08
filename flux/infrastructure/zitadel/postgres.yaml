@@ -4,7 +4,8 @@ metadata:
   name: bitnami
   namespace: zitadel
 spec:
-  url: https://charts.bitnami.com/bitnami
+  type: oci
+  url: oci://registry-1.docker.io/bitnamicharts
   interval: 1h0m0s
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -17,14 +18,16 @@ spec:
   chart:
     spec:
       chart: postgresql
-      version: "15.3.0"  # pick a stable version
       sourceRef:
         kind: HelmRepository
         name: bitnami
         namespace: zitadel
   values:
     auth:
-      existingSecret: zitadel-db-credentials 
+      existingSecret: zitadel-db-credentials
+      secretKeys:
+        adminPasswordKey: Database.Postgres.Admin
+        userPasswordKey: Database.Postgres.User
     persistence:
       enabled: true
       size: 10Gi
