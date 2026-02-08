@@ -51,10 +51,10 @@ spec:
 
                 # Write the secret
                 kubectl create secret generic headlamp-oidc \
-                  -n zitadel \
+                  -n headlamp \
                   --from-literal=clientID="$CLIENT_ID" \
                   --from-literal=clientSecret="$CLIENT_SECRET" \
-                  --from-literal=issuer="https://auth.castor.baeriswyl.local" \
+                  --from-literal=issuerURL="https://auth.castor.baeriswyl.local" \
                   --dry-run=client -o yaml | kubectl apply -f -
               else
                 echo "OIDC client already exists, skipping creation."

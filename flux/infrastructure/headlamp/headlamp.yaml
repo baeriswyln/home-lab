@@ -42,6 +42,10 @@ spec:
     replicaCount: 1
     config:
       pluginsDir: /build/plugins
+      oidc:
+        secret:
+          create: false
+          name: headlamp-oidc
     initContainers:
       - command:
           - /bin/sh
