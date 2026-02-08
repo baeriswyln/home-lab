@@ -7,7 +7,7 @@ creation_rules:
       CBB77C32B08ADF26FBF2624638B8C929AD0DFC51,
       3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
   - path_regex: infrastructure/.*\.yaml
-    encrypted_regex: ^(data|stringData)$
+    encrypted_regex: ^(data|stringData|Human)$
     pgp: >-
       CBB77C32B08ADF26FBF2624638B8C929AD0DFC51,
       3E82F2055C052B96DB314DF4D3EF8EFEAA87F564

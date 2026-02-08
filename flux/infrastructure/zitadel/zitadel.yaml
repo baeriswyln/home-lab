@@ -1,0 +1,236 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: zitadel
+  namespace: zitadel
+spec:
+  interval: 15m
+  url: https://charts.zitadel.com/
+sops:
+  lastmodified: "2026-02-08T12:01:20Z"
+  mac: ENC[AES256_GCM,data:R693jaiRp/XYxaU014ngcg5VwH58GiUUaohBv2rzy3Zio+pV9m5h8HnMyqtWk+v1M77CgcuzusEi8SjoCVBTXCwoyWGTqxhZQJoyvKiVvUfHjbkbkloDytWK4q6DywDgoP4wuXf/8+pMGjYxV+BqBmrncsXj29CpjhRZR8auMhw=,iv:dHOGPo2UhI6pR2++jVqEy+NvsVTIogIV4xG4e+b0kOM=,tag:GYwlZFwg637lCV0XpJeOMw==,type:str]
+  pgp:
+    - created_at: "2026-02-08T12:01:20Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAzSEt9WBMi0uzGOD40S6gioYnaF8Fwqybwvt3gIqMwi4w
+        n11iWdeYaVpdb34RjId1OfAvdJ5e58hhfXXx3zjhV9+En8qsBkYdNtR3Zmj2wVXZ
+        0lwBFmXGt9r5r29WqCOgWmTJhkFvBt32mh/vyrGd6bQZZWhi7c+WrcOsYHCTId6q
+        vyh4GVmO+dRDFcXE2vksoT+wn6I3Ac7E8oChkkG8SNisDjrZu4XmFxxJjTGNkg==
+        =e++/
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-08T12:01:20Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdAUb8KL+Tfr1ghq6vkMONG6vrko7CqPa6BvUJlyHKIiE0w
+        HkoISP2+YooRRG4gjqfIQgEY7ywuy4wAshHc9pWLXhq/lHfCsuYBrioqKf7EyFRk
+        0lwBgfZ9YvpXp9AhM1VnAGYKctXzHy59pMedllbMYLfiTYX3p73/kkxfzPGhcp6j
+        lQ520rCrXWc4mR2zZGo5PWuxLvhTCDdIkMBpnAiWgzZNEyylovB1Mxuj+ntzWg==
+        =v6sv
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|Human)$
+  version: 3.11.0
+---
+apiVersion: v1
+data:
+  config.yaml: ENC[AES256_GCM,data:k3cpIc+0038wmMzLAiWuZWXNZkQVWx3/5bU9tXzdROeSX9maF+/gI3gKTAnOIciBEfukOaf/oq6F8qPtPIp0r+ukKR5TPSK0MZZFSbignDJYhlk1sQ16rfWjRXnHi/sLo3y6H4W2/F5CxasXnOacOgaXqEP5gWfoOitAGaXp1SFK+ry6l0zkBng50x1iHMbUbYdmus8B7/4jQR8IzHtOow==,iv:W2L3TyGxdRtt9m56NULDVoH/ciTtZsxaK4nDWj+S6eE=,tag:M33ENULhT70V0lhHtvFiYQ==,type:str]
+kind: Secret
+metadata:
+  name: zitadel-db-credentials
+  namespace: zitadel
+sops:
+  lastmodified: "2026-02-08T12:01:20Z"
+  mac: ENC[AES256_GCM,data:R693jaiRp/XYxaU014ngcg5VwH58GiUUaohBv2rzy3Zio+pV9m5h8HnMyqtWk+v1M77CgcuzusEi8SjoCVBTXCwoyWGTqxhZQJoyvKiVvUfHjbkbkloDytWK4q6DywDgoP4wuXf/8+pMGjYxV+BqBmrncsXj29CpjhRZR8auMhw=,iv:dHOGPo2UhI6pR2++jVqEy+NvsVTIogIV4xG4e+b0kOM=,tag:GYwlZFwg637lCV0XpJeOMw==,type:str]
+  pgp:
+    - created_at: "2026-02-08T12:01:20Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAzSEt9WBMi0uzGOD40S6gioYnaF8Fwqybwvt3gIqMwi4w
+        n11iWdeYaVpdb34RjId1OfAvdJ5e58hhfXXx3zjhV9+En8qsBkYdNtR3Zmj2wVXZ
+        0lwBFmXGt9r5r29WqCOgWmTJhkFvBt32mh/vyrGd6bQZZWhi7c+WrcOsYHCTId6q
+        vyh4GVmO+dRDFcXE2vksoT+wn6I3Ac7E8oChkkG8SNisDjrZu4XmFxxJjTGNkg==
+        =e++/
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-08T12:01:20Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdAUb8KL+Tfr1ghq6vkMONG6vrko7CqPa6BvUJlyHKIiE0w
+        HkoISP2+YooRRG4gjqfIQgEY7ywuy4wAshHc9pWLXhq/lHfCsuYBrioqKf7EyFRk
+        0lwBgfZ9YvpXp9AhM1VnAGYKctXzHy59pMedllbMYLfiTYX3p73/kkxfzPGhcp6j
+        lQ520rCrXWc4mR2zZGo5PWuxLvhTCDdIkMBpnAiWgzZNEyylovB1Mxuj+ntzWg==
+        =v6sv
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|Human)$
+  version: 3.11.0
+---
+apiVersion: v1
+data:
+  masterkey: ENC[AES256_GCM,data:anNOJHWl27OdYNFVs/kzzXKL5PkKCw98UHzmpL1odtYEWYIpww6k0BWlaoI=,iv:IQSAr2F0CKb2ydEHZK8A8PK2WZ6bQzGPCxzdDXLgbD0=,tag:E5vXSDa8YCPTp8608RsAZQ==,type:str]
+kind: Secret
+metadata:
+  name: zitadel-masterkey
+  namespace: zitadel
+sops:
+  lastmodified: "2026-02-08T12:01:20Z"
+  mac: ENC[AES256_GCM,data:R693jaiRp/XYxaU014ngcg5VwH58GiUUaohBv2rzy3Zio+pV9m5h8HnMyqtWk+v1M77CgcuzusEi8SjoCVBTXCwoyWGTqxhZQJoyvKiVvUfHjbkbkloDytWK4q6DywDgoP4wuXf/8+pMGjYxV+BqBmrncsXj29CpjhRZR8auMhw=,iv:dHOGPo2UhI6pR2++jVqEy+NvsVTIogIV4xG4e+b0kOM=,tag:GYwlZFwg637lCV0XpJeOMw==,type:str]
+  pgp:
+    - created_at: "2026-02-08T12:01:20Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAzSEt9WBMi0uzGOD40S6gioYnaF8Fwqybwvt3gIqMwi4w
+        n11iWdeYaVpdb34RjId1OfAvdJ5e58hhfXXx3zjhV9+En8qsBkYdNtR3Zmj2wVXZ
+        0lwBFmXGt9r5r29WqCOgWmTJhkFvBt32mh/vyrGd6bQZZWhi7c+WrcOsYHCTId6q
+        vyh4GVmO+dRDFcXE2vksoT+wn6I3Ac7E8oChkkG8SNisDjrZu4XmFxxJjTGNkg==
+        =e++/
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-08T12:01:20Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdAUb8KL+Tfr1ghq6vkMONG6vrko7CqPa6BvUJlyHKIiE0w
+        HkoISP2+YooRRG4gjqfIQgEY7ywuy4wAshHc9pWLXhq/lHfCsuYBrioqKf7EyFRk
+        0lwBgfZ9YvpXp9AhM1VnAGYKctXzHy59pMedllbMYLfiTYX3p73/kkxfzPGhcp6j
+        lQ520rCrXWc4mR2zZGo5PWuxLvhTCDdIkMBpnAiWgzZNEyylovB1Mxuj+ntzWg==
+        =v6sv
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|Human)$
+  version: 3.11.0
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: zitadel
+  namespace: zitadel
+spec:
+  interval: 15m
+  timeout: 5m
+  chart:
+    spec:
+      chart: zitadel
+      sourceRef:
+        kind: HelmRepository
+        name: zitadel
+      interval: 5m
+  releaseName: zitadel
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  test:
+    enable: true
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths:
+          - /spec/replicas
+        target:
+          kind: Deployment
+  values:
+    replicaCount: 2
+    zitadel:
+      masterkeySecretName: zitadel-masterkey
+      configSecretName: zitadel-db-credentials
+      configmapConfig:
+        ExternalDomain: auth.castor.baeriswyl.local
+        ExternalSecure: true
+        ExternalPort: 443
+        TLS:
+          Enabled: false
+        Database:
+          Postgres:
+            Host: postgres.database.svc.cluster.local
+            Port: 5432
+            Database: zitadel
+            User:
+              Username: zitadel
+              SSL:
+                Mode: verify-full
+            Admin:
+              Username: postgres
+              SSL:
+                Mode: verify-full
+        FirstInstance:
+          Org:
+            Human:
+              UserName: ENC[AES256_GCM,data:EEBH0zf5WyATtw==,iv:I+IlJq9IPB3hh6DgmVrNykTfu6kNys+WehqjdmTDUzM=,tag:S93V8IZbhZBO9rlvWvXXGg==,type:str]
+              FirstName: ENC[AES256_GCM,data:iprTNJGdDQ==,iv:jwY3LgMsovHvnPrXzo357t6pVVR1+YlOKTwh5uU3yDE=,tag:JL7rY3CLotvii31ajwuXPQ==,type:str]
+              LastName: ENC[AES256_GCM,data:z7aM/izpsCVu,iv:bfy2NoUOOnIdWxd2pfnpBlgLaGG+XYtfJ9oEXaQF/uY=,tag:7JWja+20BLuBDMlxLUc8Rg==,type:str]
+              Email: ENC[AES256_GCM,data:e0AW30SSPgM2NuYXYdfVNaFKkLcT,iv:s6AG2yS/ujVZyzBh3KKr51Q014ps+sgKPFcPjJC9YTI=,tag:KZe64GbXDZYVePH+0g6oAw==,type:str]
+              Password: ENC[AES256_GCM,data:vp38GvueemHxX0b/Sh4cnAckg8Bt6J0h,iv:c2sMnepRfP+xK7IXj6bka9pjLL02eIQgOOS67m7rCb4=,tag:Y8QrlSzrRRv1j5Ir72tkfQ==,type:str]
+              PasswordChangeRequired: ENC[AES256_GCM,data:ZliwEw==,iv:IVDAQGQQT+ZUz1/ynfO36UYuVCK7jj3iToqAYup3Zdw=,tag:hW+ykI9hzTsMHgdc54U1kQ==,type:bool]
+    ingress:
+      enabled: true
+      className: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
+      hosts:
+        - host: auth.castor.baeriswyl.local
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - secretName: zitadel-tls
+          hosts:
+            - auth.castor.baeriswyl.local
+    login:
+      ingress:
+        enabled: true
+        className: traefik
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.tls: "true"
+        hosts:
+          - host: auth.castor.baeriswyl.local
+            paths:
+              - path: /ui/v2/login
+                pathType: Prefix
+        tls:
+          - secretName: zitadel-tls
+            hosts:
+              - auth.castor.baeriswyl.local
+    podDisruptionBudget:
+      enabled: true
+      minAvailable: 1
+sops:
+  lastmodified: "2026-02-08T12:01:20Z"
+  mac: ENC[AES256_GCM,data:R693jaiRp/XYxaU014ngcg5VwH58GiUUaohBv2rzy3Zio+pV9m5h8HnMyqtWk+v1M77CgcuzusEi8SjoCVBTXCwoyWGTqxhZQJoyvKiVvUfHjbkbkloDytWK4q6DywDgoP4wuXf/8+pMGjYxV+BqBmrncsXj29CpjhRZR8auMhw=,iv:dHOGPo2UhI6pR2++jVqEy+NvsVTIogIV4xG4e+b0kOM=,tag:GYwlZFwg637lCV0XpJeOMw==,type:str]
+  pgp:
+    - created_at: "2026-02-08T12:01:20Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAzSEt9WBMi0uzGOD40S6gioYnaF8Fwqybwvt3gIqMwi4w
+        n11iWdeYaVpdb34RjId1OfAvdJ5e58hhfXXx3zjhV9+En8qsBkYdNtR3Zmj2wVXZ
+        0lwBFmXGt9r5r29WqCOgWmTJhkFvBt32mh/vyrGd6bQZZWhi7c+WrcOsYHCTId6q
+        vyh4GVmO+dRDFcXE2vksoT+wn6I3Ac7E8oChkkG8SNisDjrZu4XmFxxJjTGNkg==
+        =e++/
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-08T12:01:20Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdAUb8KL+Tfr1ghq6vkMONG6vrko7CqPa6BvUJlyHKIiE0w
+        HkoISP2+YooRRG4gjqfIQgEY7ywuy4wAshHc9pWLXhq/lHfCsuYBrioqKf7EyFRk
+        0lwBgfZ9YvpXp9AhM1VnAGYKctXzHy59pMedllbMYLfiTYX3p73/kkxfzPGhcp6j
+        lQ520rCrXWc4mR2zZGo5PWuxLvhTCDdIkMBpnAiWgzZNEyylovB1Mxuj+ntzWg==
+        =v6sv
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|Human)$
+  version: 3.11.0

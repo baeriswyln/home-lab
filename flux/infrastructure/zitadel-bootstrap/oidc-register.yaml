@@ -1,0 +1,61 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: zitadel-headlamp-oidc-bootstrap
+  namespace: zitadel
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: bootstrap
+          image: curlimages/curl:8.2.1
+          env:
+            - name: ZITADEL_ADMIN_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: zitadel-admin
+                  key: username
+            - name: ZITADEL_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: zitadel-admin
+                  key: password
+            - name: HEADLAMP_CLIENT_SECRET
+              value: "headlamp-secret-placeholder" # optional pre-generated
+          command: ["/bin/sh"]
+          args:
+            - "-c"
+            - |
+              set -e
+              # Check if the OIDC client already exists
+              CLIENT=$(curl -s -u "$ZITADEL_ADMIN_USERNAME:$ZITADEL_ADMIN_PASSWORD" \
+                  https://auth.castor.baeriswyl.local/api/v1/apps?filter=name:headlamp \
+                  | jq -r '.result[0].id // empty')
+
+              if [ -z "$CLIENT" ]; then
+                echo "Creating OIDC client for Headlamp..."
+                RESPONSE=$(curl -s -X POST -u "$ZITADEL_ADMIN_USERNAME:$ZITADEL_ADMIN_PASSWORD" \
+                  -H "Content-Type: application/json" \
+                  -d '{
+                        "name": "headlamp",
+                        "redirect_uris": ["https://headlamp.castor.baeriswyl.local/oidc/callback"],
+                        "grant_types": ["authorization_code"],
+                        "response_types": ["code"]
+                      }' \
+                  https://auth.castor.baeriswyl.local/api/v1/apps/oidc)
+
+                CLIENT_ID=$(echo "$RESPONSE" | jq -r '.client_id')
+                CLIENT_SECRET=$(echo "$RESPONSE" | jq -r '.client_secret')
+
+                # Write the secret
+                kubectl create secret generic headlamp-oidc \
+                  -n zitadel \
+                  --from-literal=clientID="$CLIENT_ID" \
+                  --from-literal=clientSecret="$CLIENT_SECRET" \
+                  --from-literal=issuer="https://auth.castor.baeriswyl.local" \
+                  --dry-run=client -o yaml | kubectl apply -f -
+              else
+                echo "OIDC client already exists, skipping creation."
+              fi

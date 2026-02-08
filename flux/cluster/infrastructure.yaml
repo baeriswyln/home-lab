@@ -88,7 +88,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: longhorn
+    - name: zitadel-bootstrap
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
@@ -96,6 +96,54 @@ spec:
       namespace: headlamp
   interval: 10m
   path: ./flux/infrastructure/headlamp
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: zitadel
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: longhorn
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: zitadel
+      namespace: zitadel
+  interval: 10m
+  path: ./flux/infrastructure/zitadel
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: zitadel-bootstrap
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: zitadel
+  healthChecks:
+    - apiVersion: batch/v1
+      kind: Job
+      name: zitadel-headlamp-oidc-bootstrap
+      namespace: zitadel
+  interval: 10m
+  path: ./flux/infrastructure/zitadel-bootstrap
   prune: true
   sourceRef:
     kind: GitRepository

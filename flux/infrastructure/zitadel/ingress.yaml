@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: zitadel-ingress
+  namespace: zitadel
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`auth.castor.baeriswyl.local`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: zitadel
+          port: 80
+          scheme: http
