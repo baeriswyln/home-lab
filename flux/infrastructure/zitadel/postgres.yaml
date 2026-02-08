@@ -26,8 +26,8 @@ spec:
     auth:
       existingSecret: zitadel-db-credentials
       secretKeys:
-        adminPasswordKey: Database.Postgres.Admin
-        userPasswordKey: Database.Postgres.User
+        adminPasswordKey: ADMIN_PASSWORD
+        userPasswordKey: USER_PASSWORD
     persistence:
       enabled: true
       size: 10Gi
