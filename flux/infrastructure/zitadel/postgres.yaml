@@ -24,7 +24,9 @@ spec:
         namespace: zitadel
   values:
     image:
-      tag: 17.6.0
+      registry: public.ecr.aws
+      repository: bitnami/postgresql
+      tag: 17
     auth:
       existingSecret: zitadel-db-credentials
       secretKeys:
