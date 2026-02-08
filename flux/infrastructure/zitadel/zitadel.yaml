@@ -7,8 +7,8 @@ spec:
   interval: 15m
   url: https://charts.zitadel.com/
 sops:
-  lastmodified: "2026-02-08T12:50:10Z"
-  mac: ENC[AES256_GCM,data:M39mcIwhCt6l4XiqS5jRu+9Ci/upYgfcuanYhuhslSaFeN3wy9c/6fYiaQK9xE19TGhk31PveqJOoxte8mpbEa/F7uI605S///rCkWehTKXOf8KA/rxJbI4g1Hk9rG+1UEWVKx5lOzcxb7aFaMfO9aI3e4mf77NdStFvyPNvTDE=,iv:A4p8CFGLijcPczyFM+3P5mvYWxGOFe9TYMt+MB5XyPA=,tag:8o8EdiaAy1sOiPCJl3OsCw==,type:str]
+  lastmodified: "2026-02-08T13:16:03Z"
+  mac: ENC[AES256_GCM,data:NWGx7b2oe6gOWWm2wy+b6VmuNPd5dOQO6YWZn/+QtID/+poGGl12NCqJVr+CIYX3FpsfN1xX2zM9dd+9L9rJcKBwo/l77p/n2r8MKJ6ydq2RkS0ZExegrw8TUbXaMhm7jQCotSZXzNIpcbg6GxAIxFr2aEs4Yb0QkMPa6Yod4vA=,iv:6OIZwAL8JDc2X2Lc1V1qk/VRtmBTDHyPt0JTI8mWO0I=,tag:2sGvpeB37FZv9I//yasm8g==,type:str]
   pgp:
     - created_at: "2026-02-08T12:50:10Z"
       enc: |-
@@ -37,14 +37,14 @@ sops:
 ---
 apiVersion: v1
 data:
-  config.yaml: ENC[AES256_GCM,data:s6Kc+KwJ6HpZJbKU/6nKnpRGbeAdiFY2jMuU2SJD/Nt+ky1mcUl0ZqwqQT/yKEjdo3oQ3/Q62PaqqkfVDZronpQJsQWLlr6DycyGi0CRfLSgMVBn0uRyxZyFFTg/stPiUA72DWetuQGhycg/yL75wHU5O/8b2F59A2N9MJDxcUaPr3EBCqtprk+SMJhn5SEl/c3S6tYLTs2R9UFdwlJwjA==,iv:iXj/l6ZEz5D6BEhTMKNRlDzJ9DtMMBRTFwJ8z7j/CqE=,tag:uCg0oAuUBvDQTzQDdv2C6w==,type:str]
+  config-yaml: ENC[AES256_GCM,data:U5xBUU75pZQd1lRO/ojQpNLNzNNtoZy0Wscrj+ui3DIiBhhIAaqfGpzEA85ChBeD8yAVsyiXlKcTaiZd7E7gtestLVgDNNI4zkPJNnVIYQNiCoNxPkNZ0re/H74zc/l4k9aFfyQuw0uqQBhWsQqI1kdCBJ6pRiHxWOej0T8D+yQjOZCf7YaMHYqji7jkZwZS8SB+k1Zr6kLzHEzUjcJTZQ==,iv:6GBvqde3X9iSWe56XqxbFB0Y0YURQlC4MgSY4F/NFMc=,tag:O7E88/EinDzRro1udmjh1g==,type:str]
 kind: Secret
 metadata:
   name: zitadel-db-credentials
   namespace: zitadel
 sops:
-  lastmodified: "2026-02-08T12:50:10Z"
-  mac: ENC[AES256_GCM,data:M39mcIwhCt6l4XiqS5jRu+9Ci/upYgfcuanYhuhslSaFeN3wy9c/6fYiaQK9xE19TGhk31PveqJOoxte8mpbEa/F7uI605S///rCkWehTKXOf8KA/rxJbI4g1Hk9rG+1UEWVKx5lOzcxb7aFaMfO9aI3e4mf77NdStFvyPNvTDE=,iv:A4p8CFGLijcPczyFM+3P5mvYWxGOFe9TYMt+MB5XyPA=,tag:8o8EdiaAy1sOiPCJl3OsCw==,type:str]
+  lastmodified: "2026-02-08T13:16:03Z"
+  mac: ENC[AES256_GCM,data:NWGx7b2oe6gOWWm2wy+b6VmuNPd5dOQO6YWZn/+QtID/+poGGl12NCqJVr+CIYX3FpsfN1xX2zM9dd+9L9rJcKBwo/l77p/n2r8MKJ6ydq2RkS0ZExegrw8TUbXaMhm7jQCotSZXzNIpcbg6GxAIxFr2aEs4Yb0QkMPa6Yod4vA=,iv:6OIZwAL8JDc2X2Lc1V1qk/VRtmBTDHyPt0JTI8mWO0I=,tag:2sGvpeB37FZv9I//yasm8g==,type:str]
   pgp:
     - created_at: "2026-02-08T12:50:10Z"
       enc: |-
@@ -79,8 +79,8 @@ metadata:
   name: zitadel-masterkey
   namespace: zitadel
 sops:
-  lastmodified: "2026-02-08T12:50:10Z"
-  mac: ENC[AES256_GCM,data:M39mcIwhCt6l4XiqS5jRu+9Ci/upYgfcuanYhuhslSaFeN3wy9c/6fYiaQK9xE19TGhk31PveqJOoxte8mpbEa/F7uI605S///rCkWehTKXOf8KA/rxJbI4g1Hk9rG+1UEWVKx5lOzcxb7aFaMfO9aI3e4mf77NdStFvyPNvTDE=,iv:A4p8CFGLijcPczyFM+3P5mvYWxGOFe9TYMt+MB5XyPA=,tag:8o8EdiaAy1sOiPCJl3OsCw==,type:str]
+  lastmodified: "2026-02-08T13:16:03Z"
+  mac: ENC[AES256_GCM,data:NWGx7b2oe6gOWWm2wy+b6VmuNPd5dOQO6YWZn/+QtID/+poGGl12NCqJVr+CIYX3FpsfN1xX2zM9dd+9L9rJcKBwo/l77p/n2r8MKJ6ydq2RkS0ZExegrw8TUbXaMhm7jQCotSZXzNIpcbg6GxAIxFr2aEs4Yb0QkMPa6Yod4vA=,iv:6OIZwAL8JDc2X2Lc1V1qk/VRtmBTDHyPt0JTI8mWO0I=,tag:2sGvpeB37FZv9I//yasm8g==,type:str]
   pgp:
     - created_at: "2026-02-08T12:50:10Z"
       enc: |-
@@ -207,8 +207,8 @@ spec:
       enabled: true
       minAvailable: 1
 sops:
-  lastmodified: "2026-02-08T12:50:10Z"
-  mac: ENC[AES256_GCM,data:M39mcIwhCt6l4XiqS5jRu+9Ci/upYgfcuanYhuhslSaFeN3wy9c/6fYiaQK9xE19TGhk31PveqJOoxte8mpbEa/F7uI605S///rCkWehTKXOf8KA/rxJbI4g1Hk9rG+1UEWVKx5lOzcxb7aFaMfO9aI3e4mf77NdStFvyPNvTDE=,iv:A4p8CFGLijcPczyFM+3P5mvYWxGOFe9TYMt+MB5XyPA=,tag:8o8EdiaAy1sOiPCJl3OsCw==,type:str]
+  lastmodified: "2026-02-08T13:16:03Z"
+  mac: ENC[AES256_GCM,data:NWGx7b2oe6gOWWm2wy+b6VmuNPd5dOQO6YWZn/+QtID/+poGGl12NCqJVr+CIYX3FpsfN1xX2zM9dd+9L9rJcKBwo/l77p/n2r8MKJ6ydq2RkS0ZExegrw8TUbXaMhm7jQCotSZXzNIpcbg6GxAIxFr2aEs4Yb0QkMPa6Yod4vA=,iv:6OIZwAL8JDc2X2Lc1V1qk/VRtmBTDHyPt0JTI8mWO0I=,tag:2sGvpeB37FZv9I//yasm8g==,type:str]
   pgp:
     - created_at: "2026-02-08T12:50:10Z"
       enc: |-
