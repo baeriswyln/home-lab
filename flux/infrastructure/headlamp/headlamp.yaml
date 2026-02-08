@@ -7,8 +7,8 @@ spec:
   interval: 15m
   url: https://kubernetes-sigs.github.io/headlamp/
 sops:
-  lastmodified: "2026-02-08T19:03:11Z"
-  mac: ENC[AES256_GCM,data:sEIEY8Fqxm6OS29bc0vn5kjmdb+eyRAMusRfkAetmeo87/aA/NdL3IzoReOaGKvebTdxwFxmVhfKikD+gQyMzdVooVsJB7ehwox2Y9L1lHmjl+99oK+FcTXMCEFf7aaToHirNGq31DhzOOIzGdRO8Wc4dlHfmD8/FbxqYVzrSXY=,iv:Clvq/5fH8rwTOA5AT7AKxulgyNCsXY4V30KLKkbjDjQ=,tag:MiiH1zAltQc2V7Y3N6Hssg==,type:str]
+  lastmodified: "2026-02-08T19:07:27Z"
+  mac: ENC[AES256_GCM,data:9hP/CiT7VXWpSDj8O2uk5si2s56tgQiZEGAbPa5fncG0SDYZ3I6LFZYq60qpPXhIT4AAeeKA69f3UYkt5fdR04DqK+9ad75KcLCJsHVr2NmTzhCRKnuYGpktuQdGkZuZ/hpOPmVL8sdGWC2T5meSnGDMvZdFtGx2mTY5Jhy9Jkc=,iv:uYLnr65HEi1VmjyR1z2jAth75nKYXmjq3aKXVA5BHlc=,tag:VWLyHM45VdwTIgeMTv6xMQ==,type:str]
   pgp:
     - created_at: "2026-02-08T19:03:11Z"
       enc: |-
@@ -75,7 +75,7 @@ spec:
           create: true
         clientID: ENC[AES256_GCM,data:vdo+xQDsf0cMF1NhxouBEuwb,iv:J54dXo1AN5UtjPDm/PS5zK0JKNAj08QhLNA5gZzCqf4=,tag:X7hiuuj4pEWF5L72HSaqQQ==,type:str]
         clientSecret: ""
-        issuerURL: https://auth.cluster.baeriswyl.local
+        issuerURL: https://auth.castor.baeriswyl.local
     initContainers:
       - command:
           - /bin/sh
@@ -106,8 +106,8 @@ spec:
           # The name of the Helm release
           claimName: headlamp
 sops:
-  lastmodified: "2026-02-08T19:03:11Z"
-  mac: ENC[AES256_GCM,data:sEIEY8Fqxm6OS29bc0vn5kjmdb+eyRAMusRfkAetmeo87/aA/NdL3IzoReOaGKvebTdxwFxmVhfKikD+gQyMzdVooVsJB7ehwox2Y9L1lHmjl+99oK+FcTXMCEFf7aaToHirNGq31DhzOOIzGdRO8Wc4dlHfmD8/FbxqYVzrSXY=,iv:Clvq/5fH8rwTOA5AT7AKxulgyNCsXY4V30KLKkbjDjQ=,tag:MiiH1zAltQc2V7Y3N6Hssg==,type:str]
+  lastmodified: "2026-02-08T19:07:27Z"
+  mac: ENC[AES256_GCM,data:9hP/CiT7VXWpSDj8O2uk5si2s56tgQiZEGAbPa5fncG0SDYZ3I6LFZYq60qpPXhIT4AAeeKA69f3UYkt5fdR04DqK+9ad75KcLCJsHVr2NmTzhCRKnuYGpktuQdGkZuZ/hpOPmVL8sdGWC2T5meSnGDMvZdFtGx2mTY5Jhy9Jkc=,iv:uYLnr65HEi1VmjyR1z2jAth75nKYXmjq3aKXVA5BHlc=,tag:VWLyHM45VdwTIgeMTv6xMQ==,type:str]
   pgp:
     - created_at: "2026-02-08T19:03:11Z"
       enc: |-
