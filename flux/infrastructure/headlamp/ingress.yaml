@@ -8,7 +8,7 @@ spec:
     - web
     - websecure
   routes:
-    - match: Host(`headlamp.castor.baeriswyl.local`) && PathPrefix(`/`)
+    - match: Host(`headlamp.castor.baeriswyl.lan`) && PathPrefix(`/`)
       kind: Rule
       services:
         - name: headlamp

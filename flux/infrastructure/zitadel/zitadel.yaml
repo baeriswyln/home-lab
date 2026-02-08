@@ -47,7 +47,7 @@ spec:
       dbSslCaCrtSecret: postgres-cert
       dbSslUserCrtSecret: zitadel-cert
       configmapConfig:
-        ExternalDomain: auth.castor.baeriswyl.local
+        ExternalDomain: auth.castor.baeriswyl.lan
         ExternalSecure: true
         ExternalPort: 443
         TLS:
@@ -82,14 +82,14 @@ spec:
         traefik.ingress.kubernetes.io/router.tls: "true"
         traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
       hosts:
-        - host: auth.castor.baeriswyl.local
+        - host: auth.castor.baeriswyl.lan
           paths:
             - path: /
               pathType: Prefix
       tls:
         - secretName: zitadel-tls
           hosts:
-            - auth.castor.baeriswyl.local
+            - auth.castor.baeriswyl.lan
     login:
       ingress:
         enabled: true
@@ -98,14 +98,14 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.tls: "true"
         hosts:
-          - host: auth.castor.baeriswyl.local
+          - host: auth.castor.baeriswyl.lan
             paths:
               - path: /ui/v2/login
                 pathType: Prefix
         tls:
           - secretName: zitadel-tls
             hosts:
-              - auth.castor.baeriswyl.local
+              - auth.castor.baeriswyl.lan
     podDisruptionBudget:
       enabled: true
       minAvailable: 1
