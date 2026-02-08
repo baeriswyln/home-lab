@@ -10,7 +10,7 @@ spec:
       restartPolicy: OnFailure
       containers:
         - name: bootstrap
-          image: curlimages/curl:8.2.1
+          image: bitnami/kubectl:1.28
           env:
             - name: ZITADEL_ADMIN_USERNAME
               valueFrom:

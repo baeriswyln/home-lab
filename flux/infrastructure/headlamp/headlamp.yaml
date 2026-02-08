@@ -6,6 +6,34 @@ metadata:
 spec:
   interval: 15m
   url: https://kubernetes-sigs.github.io/headlamp/
+sops:
+  lastmodified: "2026-02-08T19:03:11Z"
+  mac: ENC[AES256_GCM,data:sEIEY8Fqxm6OS29bc0vn5kjmdb+eyRAMusRfkAetmeo87/aA/NdL3IzoReOaGKvebTdxwFxmVhfKikD+gQyMzdVooVsJB7ehwox2Y9L1lHmjl+99oK+FcTXMCEFf7aaToHirNGq31DhzOOIzGdRO8Wc4dlHfmD8/FbxqYVzrSXY=,iv:Clvq/5fH8rwTOA5AT7AKxulgyNCsXY4V30KLKkbjDjQ=,tag:MiiH1zAltQc2V7Y3N6Hssg==,type:str]
+  pgp:
+    - created_at: "2026-02-08T19:03:11Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAtL8PTyjBEt7ElbP6n265nGAia7SfqhsGDu3TNvjjWGEw
+        pSFZoZOG0fY5Il9/ie7ot2WnioTaUqz0rT0Ceze9e3t87k5oLr2R7QYVQYFu42QQ
+        0l4BKKeXgxT6m7nqeGjqIUBJC83rC1+6d5/Zjp8DP4VCKEFhTJQsaWvNmrSpVvmb
+        th5m54sPeqRluv61MaKqAdS+Ctxu93fOEIauQgvkKoWDiuGu9iakcSFtOWY3b9xL
+        =yp8N
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-08T19:03:11Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdAkDryS1tHfBwWoU1O93CjoDrJ52lPbH993ZNhB6adkXsw
+        VzUqc/uy3d7uJgnOPGCRy1M3C9RQzi8twYdBrriwMvPh27fy6fJQV8Au6GEPcv5q
+        0l4BuGdPqia/qFy4gzsC2UsV3eCmbMZCdDgmjBeOj9hWMx0pxvkPOng5kPDZQ6jp
+        fXaQDzV3ps5i208dHI7cmYqckmsIW5zbgup8jeds7T3YaUPJll7M62iDXacImFDK
+        =DdlN
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|Human|clientID|clientSecret)$
+  version: 3.11.0
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -44,8 +72,10 @@ spec:
       pluginsDir: /build/plugins
       oidc:
         secret:
-          create: false
-          name: headlamp-oidc
+          create: true
+        clientID: ENC[AES256_GCM,data:vdo+xQDsf0cMF1NhxouBEuwb,iv:J54dXo1AN5UtjPDm/PS5zK0JKNAj08QhLNA5gZzCqf4=,tag:X7hiuuj4pEWF5L72HSaqQQ==,type:str]
+        clientSecret: ""
+        issuerURL: https://auth.cluster.baeriswyl.local
     initContainers:
       - command:
           - /bin/sh
@@ -73,4 +103,33 @@ spec:
     volumes:
       - name: headlamp-plugins
         persistentVolumeClaim:
-          claimName: headlamp # The name of the Helm release
+          # The name of the Helm release
+          claimName: headlamp
+sops:
+  lastmodified: "2026-02-08T19:03:11Z"
+  mac: ENC[AES256_GCM,data:sEIEY8Fqxm6OS29bc0vn5kjmdb+eyRAMusRfkAetmeo87/aA/NdL3IzoReOaGKvebTdxwFxmVhfKikD+gQyMzdVooVsJB7ehwox2Y9L1lHmjl+99oK+FcTXMCEFf7aaToHirNGq31DhzOOIzGdRO8Wc4dlHfmD8/FbxqYVzrSXY=,iv:Clvq/5fH8rwTOA5AT7AKxulgyNCsXY4V30KLKkbjDjQ=,tag:MiiH1zAltQc2V7Y3N6Hssg==,type:str]
+  pgp:
+    - created_at: "2026-02-08T19:03:11Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAtL8PTyjBEt7ElbP6n265nGAia7SfqhsGDu3TNvjjWGEw
+        pSFZoZOG0fY5Il9/ie7ot2WnioTaUqz0rT0Ceze9e3t87k5oLr2R7QYVQYFu42QQ
+        0l4BKKeXgxT6m7nqeGjqIUBJC83rC1+6d5/Zjp8DP4VCKEFhTJQsaWvNmrSpVvmb
+        th5m54sPeqRluv61MaKqAdS+Ctxu93fOEIauQgvkKoWDiuGu9iakcSFtOWY3b9xL
+        =yp8N
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-08T19:03:11Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdAkDryS1tHfBwWoU1O93CjoDrJ52lPbH993ZNhB6adkXsw
+        VzUqc/uy3d7uJgnOPGCRy1M3C9RQzi8twYdBrriwMvPh27fy6fJQV8Au6GEPcv5q
+        0l4BuGdPqia/qFy4gzsC2UsV3eCmbMZCdDgmjBeOj9hWMx0pxvkPOng5kPDZQ6jp
+        fXaQDzV3ps5i208dHI7cmYqckmsIW5zbgup8jeds7T3YaUPJll7M62iDXacImFDK
+        =DdlN
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|Human|clientID|clientSecret)$
+  version: 3.11.0
