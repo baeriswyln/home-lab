@@ -54,7 +54,7 @@ spec:
           Enabled: false
         Database:
           Postgres:
-            Host: postgres-postgresql
+            Host: db-postgresql
             Port: 5432
             Database: zitadel
             User:
