@@ -23,6 +23,9 @@ spec:
         name: bitnami
         namespace: zitadel
   values:
+    global:
+      security:
+        allowInsecureImages: true
     image:
       registry: public.ecr.aws
       repository: bitnami/postgresql
