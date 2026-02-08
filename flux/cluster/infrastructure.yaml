@@ -112,7 +112,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: zitadel
+    - name: longhorn
   healthChecks:
     - apiVersion: v1
       kind: Secret
@@ -140,7 +140,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: longhorn
+    - name: zitadel-preflight
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
