@@ -25,7 +25,7 @@ spec:
     snapshotsEnabled: false
     deployNodeAgent: true
     credentials:
-      existingSecret: garage-credentials
+      existingSecret: velero-castor-credentials
     configuration:
       backupStorageLocation:
         - name: default
