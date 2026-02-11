@@ -87,6 +87,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: traefik
     - name: longhorn
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2

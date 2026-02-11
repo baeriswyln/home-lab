@@ -1,1 +1,1 @@
-# is in folder "traefik", otherwise we have a circular dependency.
+# is in folder "zitadel-preflight", otherwise we have a circular dependency.

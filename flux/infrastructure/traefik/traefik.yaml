@@ -86,16 +86,12 @@ spec:
       dashboard:
         enabled: true
         # Custom match rule with host domain
-        matchRule: Host(`traefik.castor.baeriswyl.dev`)
+        matchRule: Host(`traefik.castor.baeriswyl.local`)
         entryPoints:
           - websecure
         # Add custom middlewares : authentication and redirection
         middlewares:
           - name: traefik-dashboard-auth
-        tls:
-          certResolver: letsencrypt
-          domains: 
-          - main: "traefik.castor.baeriswyl.dev"
     # Create the custom middlewares used by the IngressRoute dashboard (can also be created in another way).
     # /!\ Yes, you need to replace "changeme" password with a better one. /!\
     extraObjects:

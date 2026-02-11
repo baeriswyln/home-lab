@@ -7,13 +7,9 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`longhorn.castor.baeriswyl.dev`) && PathPrefix(`/`)
+    - match: Host(`longhorn.castor.baeriswyl.local`) && PathPrefix(`/`)
       kind: Rule
       services:
         - name: longhorn-frontend
           port: 80
           scheme: http
-  tls:
-    certResolver: letsencrypt
-    domains:
-    - main: "longhorn.castor.baeriswyl.dev"
