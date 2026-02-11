@@ -16,5 +16,3 @@ spec:
           scheme: http
   tls:
     certResolver: letsencrypt
-    domains:
-    - main: "headlamp.castor.baeriswyl.dev"

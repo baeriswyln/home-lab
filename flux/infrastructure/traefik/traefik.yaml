@@ -7,8 +7,8 @@ spec:
   interval: 15m
   url: https://traefik.github.io/charts
 sops:
-  lastmodified: "2026-02-11T01:08:38Z"
-  mac: ENC[AES256_GCM,data:GhWDMAm9hW4oD7OUVnCZQ3UTSph/dlW1kd+Qaf312Uzm0too06xiEjoPpIENEMaa5Hj5hBtdgeDKQNSAKKLHOyALiMJ4YVBZStRnhh5ZdLkejTmsU9TKblwSH+sZj3NUNdokMBMZpYwPgSpbqLE7pT4dmVrHhdsfuGE6kRVKwF0=,iv:azhDQV2HIWSR8ONqUhOtKMKcbLMjrlVVjQIBIMEF8MY=,tag:33oYbMtL+u3BWlZNCoUvaA==,type:str]
+  lastmodified: "2026-02-11T09:21:09Z"
+  mac: ENC[AES256_GCM,data:8WUnom4B1ItedZkWSyWdKh4CBx119u/ehpZ3+x9DnROTqAJD8Ithrx9ACdD5g5mG8OAU1Kd/1IA1/EEgKBDBkETd5M2RN86De80VxAW4yFe0P5L/Fonkt6on8N8LPTQydzguk7/XCLG5r4tqaPBq2LDvFzeiwTGk+zLvejzeUhQ=,iv:51kGKdv89CAl6haRboHfiBJr3D0XNXvW7xRUh5eQu2w=,tag:ntbkJG/EEHVp8rSoaRBdPQ==,type:str]
   pgp:
     - created_at: "2026-02-11T01:08:38Z"
       enc: |-
@@ -110,39 +110,9 @@ spec:
         spec:
           basicAuth:
             secret: traefik-dashboard-auth-secret
-    certificatesResolvers:
-      letsencrypt:
-        acme:
-          email: nicolas@baeriswyl.dev
-          caserver: https://acme-v02.api.letsencrypt.org/directory
-          storage: /data/acme.json
-          dnschallenge:
-            provider: cloudflare
-            delaybeforecheck: 30
-    env:
-      - name: CF_API_EMAIL
-        valueFrom:
-          secretKeyRef:
-            name: cf-api
-            key: CF_API_EMAIL
-      - name: CF_DNS_API_TOKEN
-        valueFrom:
-          secretKeyRef:
-            name: cf-api
-            key: CF_DNS_API_TOKEN
-      - name: CF_ZONE_API_TOKEN
-        valueFrom:
-          secretKeyRef:
-            name: cf-api
-            key: CF_ZONE_API_TOKEN
-    persistence:
-      enabled: true
-      path: /data
-      size: 1Gi
-      accessMode: ReadWriteMany
 sops:
-  lastmodified: "2026-02-11T01:08:38Z"
-  mac: ENC[AES256_GCM,data:GhWDMAm9hW4oD7OUVnCZQ3UTSph/dlW1kd+Qaf312Uzm0too06xiEjoPpIENEMaa5Hj5hBtdgeDKQNSAKKLHOyALiMJ4YVBZStRnhh5ZdLkejTmsU9TKblwSH+sZj3NUNdokMBMZpYwPgSpbqLE7pT4dmVrHhdsfuGE6kRVKwF0=,iv:azhDQV2HIWSR8ONqUhOtKMKcbLMjrlVVjQIBIMEF8MY=,tag:33oYbMtL+u3BWlZNCoUvaA==,type:str]
+  lastmodified: "2026-02-11T09:21:09Z"
+  mac: ENC[AES256_GCM,data:8WUnom4B1ItedZkWSyWdKh4CBx119u/ehpZ3+x9DnROTqAJD8Ithrx9ACdD5g5mG8OAU1Kd/1IA1/EEgKBDBkETd5M2RN86De80VxAW4yFe0P5L/Fonkt6on8N8LPTQydzguk7/XCLG5r4tqaPBq2LDvFzeiwTGk+zLvejzeUhQ=,iv:51kGKdv89CAl6haRboHfiBJr3D0XNXvW7xRUh5eQu2w=,tag:ntbkJG/EEHVp8rSoaRBdPQ==,type:str]
   pgp:
     - created_at: "2026-02-11T01:08:38Z"
       enc: |-
