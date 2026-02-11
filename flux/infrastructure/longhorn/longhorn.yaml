@@ -45,4 +45,4 @@ spec:
       defaultLonghornStaticStorageClass: longhorn
     defaultBackupStore:
       backupTarget: s3://longhorn-bucket@garage/longhorn
-      backupTargetCredentialSecret: garage-secret
+      backupTargetCredentialSecret: garage-secret-longhorn-backup
