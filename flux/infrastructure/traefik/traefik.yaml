@@ -139,6 +139,7 @@ spec:
       enabled: true
       path: /data
       size: 1Gi
+      accessMode: ReadWriteMany
 sops:
   lastmodified: "2026-02-11T01:08:38Z"
   mac: ENC[AES256_GCM,data:GhWDMAm9hW4oD7OUVnCZQ3UTSph/dlW1kd+Qaf312Uzm0too06xiEjoPpIENEMaa5Hj5hBtdgeDKQNSAKKLHOyALiMJ4YVBZStRnhh5ZdLkejTmsU9TKblwSH+sZj3NUNdokMBMZpYwPgSpbqLE7pT4dmVrHhdsfuGE6kRVKwF0=,iv:azhDQV2HIWSR8ONqUhOtKMKcbLMjrlVVjQIBIMEF8MY=,tag:33oYbMtL+u3BWlZNCoUvaA==,type:str]
