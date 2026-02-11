@@ -8,9 +8,13 @@ spec:
     - web
     - websecure
   routes:
-    - match: Host(`headlamp.castor.baeriswyl.lan`) && PathPrefix(`/`)
+    - match: Host(`headlamp.castor.baeriswyl.dev`) && PathPrefix(`/`)
       kind: Rule
       services:
         - name: headlamp
           port: 80
           scheme: http
+  tls:
+    certResolver: letsencrypt
+    domains:
+    - main: "headlamp.castor.baeriswyl.dev"

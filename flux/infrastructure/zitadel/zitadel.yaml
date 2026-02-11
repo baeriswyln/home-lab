@@ -6,6 +6,34 @@ metadata:
 spec:
   interval: 15m
   url: https://charts.zitadel.com/
+sops:
+  lastmodified: "2026-02-11T00:31:11Z"
+  mac: ENC[AES256_GCM,data:avzPPMvkQ/y4YAF9PalQSJUehD0+AbS/YA4YOoEN1AvX4T0tl0PxIwAhxzl5LLRV1cwL60beF5lM6+F/i2+nAjiM4TLuqeiN7VjzqT/v6AgFcexgPEOIA8Eel4A3kmEKAPRkVM2vIEDxa67WiTbW5/DX3QK9LyUodmXZWKVVteE=,iv:IkChRgefpVahj8CFJPzVcRw1Fl6JUC+JD6vGrbEGIY8=,tag:cLrup1ruNulRqHq6GLEjVw==,type:str]
+  pgp:
+    - created_at: "2026-02-11T00:31:10Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAQjTTi5O3i8v3T0bcrSaVv0baW0OM/IRgMWB92UMFmGMw
+        x5sDeTRETVE+d8m4wLJCu8yfOe+mPsVGjSAHlat29RFeqDmp/bxsDDIyJhw6xXFc
+        0l4BmAxbjcxnn9QMB47B3o3Y9mZdtNw1pOm34MdtRQRgFPiyFdBXIwHp2eQkc6tu
+        zpDJrOh+BKk3PtcjNyEG91t06fnSAOB1piJ89vivivf3pLtzNUXLudXzDyr3HJtI
+        =w4Dd
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-11T00:31:10Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdAsh5NVX+KTLbMKdzhEfi2X/At4VZC+41xoF5BrVT4Qhkw
+        Ud5ewwYLpwb8ya7JK2z5/7MOP3hfVMNrU8m9NWTuHsAYKs6ShGRCTtCFC/WhBx8Z
+        0l4Br5k/URLwAwBH8gEdVsLwUrt8xezQML3gfjh0sWnktq7Inn0xyIiYgQV+dtR9
+        AbB7TR/HWLNcUF6XKzeGiXr+qfL2RIIcNDXYgkmo8otftRPY21nhMPkX8D5vVlq9
+        =RDt7
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|Human|clientID|clientSecret)$
+  version: 3.11.0
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -47,7 +75,7 @@ spec:
       dbSslCaCrtSecret: postgres-cert
       dbSslUserCrtSecret: zitadel-cert
       configmapConfig:
-        ExternalDomain: auth.castor.baeriswyl.lan
+        ExternalDomain: auth.castor.baeriswyl.dev
         ExternalSecure: true
         ExternalPort: 443
         TLS:
@@ -68,12 +96,12 @@ spec:
         FirstInstance:
           Org:
             Human:
-              UserName: nbaeriswyl
-              FirstName: Nicolas
-              LastName: Baeriswyl
-              Email: nicolas@baeriswyl.dev
-              Password: h7zyAzw%6C1E46AKsH27bqW@
-              PasswordChangeRequired: false
+              UserName: ENC[AES256_GCM,data:dTUR/sbJUbbUZKk=,iv:RhvDZYq7RLTLGZHF6FdVQ2yXOm7SDIE4norT99xKN/I=,tag:R0FSAmfQWurcy/6PW0Qudw==,type:str]
+              FirstName: ENC[AES256_GCM,data:bcIyag5fzg==,iv:6n6YM+MkD5MafyPH+dH2sdHG2ABgNuRYpOlV/L6+lzI=,tag:gTmNmc3U8p7cvYx4jitzDA==,type:str]
+              LastName: ENC[AES256_GCM,data:1MDWpHOweJHP,iv:Oz/a07VoTm8Z0NlX0lgYH1u5kBqTaVRzXNIMCojRteY=,tag:517nDuYX6V7Z82PAd9fqow==,type:str]
+              Email: ENC[AES256_GCM,data:5fkLf2jK1kUzpA3py/tTMh9NO1zr,iv:7+zmabm3QkVcYR9Hsot8Pcscfq6AgjG7ibvNyqKzNws=,tag:54gHpjNQvW2fF51AO0Ppiw==,type:str]
+              Password: ENC[AES256_GCM,data:mPShcfqrPFateuCqFWiFKd+QO02nIPI6,iv:RwGLiIxn1SY41rzjXdDhPe2BbLqs+jFT3pkOUvDu6Z4=,tag:lyXJbyvuNcnOM7vtOguAPw==,type:str]
+              PasswordChangeRequired: ENC[AES256_GCM,data:UF6Nm/c=,iv:c5M2ZX8jGdqyehAqnaHbnI1i4GpnleAiwgC88ijIK4A=,tag:hhyXQQL7E0xO2n6jKNBqig==,type:bool]
     ingress:
       enabled: true
       className: traefik
@@ -82,14 +110,14 @@ spec:
         traefik.ingress.kubernetes.io/router.tls: "true"
         traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
       hosts:
-        - host: auth.castor.baeriswyl.lan
+        - host: auth.castor.baeriswyl.dev
           paths:
             - path: /
               pathType: Prefix
       tls:
         - secretName: zitadel-tls
           hosts:
-            - auth.castor.baeriswyl.lan
+            - auth.castor.baeriswyl.dev
     login:
       ingress:
         enabled: true
@@ -98,14 +126,42 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.tls: "true"
         hosts:
-          - host: auth.castor.baeriswyl.lan
+          - host: auth.castor.baeriswyl.dev
             paths:
               - path: /ui/v2/login
                 pathType: Prefix
         tls:
           - secretName: zitadel-tls
             hosts:
-              - auth.castor.baeriswyl.lan
+              - auth.castor.baeriswyl.dev
     podDisruptionBudget:
       enabled: true
       minAvailable: 1
+sops:
+  lastmodified: "2026-02-11T00:31:11Z"
+  mac: ENC[AES256_GCM,data:avzPPMvkQ/y4YAF9PalQSJUehD0+AbS/YA4YOoEN1AvX4T0tl0PxIwAhxzl5LLRV1cwL60beF5lM6+F/i2+nAjiM4TLuqeiN7VjzqT/v6AgFcexgPEOIA8Eel4A3kmEKAPRkVM2vIEDxa67WiTbW5/DX3QK9LyUodmXZWKVVteE=,iv:IkChRgefpVahj8CFJPzVcRw1Fl6JUC+JD6vGrbEGIY8=,tag:cLrup1ruNulRqHq6GLEjVw==,type:str]
+  pgp:
+    - created_at: "2026-02-11T00:31:10Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAQjTTi5O3i8v3T0bcrSaVv0baW0OM/IRgMWB92UMFmGMw
+        x5sDeTRETVE+d8m4wLJCu8yfOe+mPsVGjSAHlat29RFeqDmp/bxsDDIyJhw6xXFc
+        0l4BmAxbjcxnn9QMB47B3o3Y9mZdtNw1pOm34MdtRQRgFPiyFdBXIwHp2eQkc6tu
+        zpDJrOh+BKk3PtcjNyEG91t06fnSAOB1piJ89vivivf3pLtzNUXLudXzDyr3HJtI
+        =w4Dd
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-11T00:31:10Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdAsh5NVX+KTLbMKdzhEfi2X/At4VZC+41xoF5BrVT4Qhkw
+        Ud5ewwYLpwb8ya7JK2z5/7MOP3hfVMNrU8m9NWTuHsAYKs6ShGRCTtCFC/WhBx8Z
+        0l4Br5k/URLwAwBH8gEdVsLwUrt8xezQML3gfjh0sWnktq7Inn0xyIiYgQV+dtR9
+        AbB7TR/HWLNcUF6XKzeGiXr+qfL2RIIcNDXYgkmo8otftRPY21nhMPkX8D5vVlq9
+        =RDt7
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|Human|clientID|clientSecret)$
+  version: 3.11.0

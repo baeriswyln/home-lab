@@ -7,32 +7,32 @@ spec:
   interval: 15m
   url: https://traefik.github.io/charts
 sops:
-  lastmodified: "2026-01-10T15:49:07Z"
-  mac: ENC[AES256_GCM,data:RWFMT2SqWFjZuuPixMqQPf/wAQXFtoXPy+pzucLFxohkAiym8mSXekHCX5x4925AQMamUCecxEihy6jNaPm6yFXkBKkqrWSoiB/LkfDjG+2br9I/B3Pq980iRECyAGNG0HpfX09vnYMI1ulqL3P/g/8cdUu7L2DJLeqRjAQBwFc=,iv:ZVr5zeV8BcPNROY3knge5ps0DV5e9xzZ9f1K07AXSRQ=,tag:MuuvazF6gJRJurr3VZOpng==,type:str]
+  lastmodified: "2026-02-11T01:08:38Z"
+  mac: ENC[AES256_GCM,data:GhWDMAm9hW4oD7OUVnCZQ3UTSph/dlW1kd+Qaf312Uzm0too06xiEjoPpIENEMaa5Hj5hBtdgeDKQNSAKKLHOyALiMJ4YVBZStRnhh5ZdLkejTmsU9TKblwSH+sZj3NUNdokMBMZpYwPgSpbqLE7pT4dmVrHhdsfuGE6kRVKwF0=,iv:azhDQV2HIWSR8ONqUhOtKMKcbLMjrlVVjQIBIMEF8MY=,tag:33oYbMtL+u3BWlZNCoUvaA==,type:str]
   pgp:
-    - created_at: "2026-01-10T15:49:07Z"
+    - created_at: "2026-02-11T01:08:38Z"
       enc: |-
         -----BEGIN PGP MESSAGE-----
 
-        hF4Dd4GlSl54jlASAQdAkdYo9eHr2JK7bUNb5DEVtYH3yelN5dOGHBHk6g1zgHow
-        2B/gDKDXSsToPvJ57m2cJ2JR+dHoayx5mpLhZGmhErf3vsB4wNX2+hmRTYS51iVy
-        0lwB4j6an3wLzieIsNJF8MdBJpk/IrzrYYNI3powSihPFTcHkTj/OuRW0WLMXilv
-        trsXtK0CsjZ3mwrLaXETgYUqnz6/n15yBG7h/n8C5DQf7WtprI4VB+nHIg2Ezg==
-        =OW+3
+        hF4Dd4GlSl54jlASAQdAtRgVfoJQ0vjxe0UFWF9f7tkvh+T4HKdZApVmJ+4wt0ww
+        ub4p0uXBzEP2mTkubtGd+kzy7UHgKN5VKkjIOeooXLbVN9kEt4k5WLG9h4eFqS+e
+        0l4B31olqL9TfRYdsucdcU3Q1WjzC62GLmjOKANqRj/6iMf/d1U9i7mtfJpdiBDe
+        xRXrT0LJYUFayAYQEqc/NDim1NEqwNl0kkdBkGfigJb1o7j1GHS6HHQcU/OS+rOC
+        =p5Qp
         -----END PGP MESSAGE-----
       fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
-    - created_at: "2026-01-10T15:49:07Z"
+    - created_at: "2026-02-11T01:08:38Z"
       enc: |-
         -----BEGIN PGP MESSAGE-----
 
-        hF4DJS3PlYN8TcgSAQdAPgHxNBFxJlBHEj0L/Hl3rnGiu1zd+YrtgVk2h+aFczow
-        bOC7JdIVUPlGqCcDGGhnCPtdC2H6LNsKGexll2ggNAzBO7Yug1v0AMub6NqzJQSh
-        0lwBLUEP3KiE3GSvBnzyuaNg1/3SijdJToTprOORafx7pjrPtBKpSnWdohXbjI2F
-        2NtRawiwpY0Nr/O4lSI7ecX8IJbMqyezI+QcB1cEwxsCMsCshimJ3wIJzVPRNQ==
-        =JYGE
+        hF4DJS3PlYN8TcgSAQdAm5RvmpekssWjltHsqEJeRCRbg2q+zHWSuiBK5GMS1lww
+        Sdpex+OX2SVvJnGIniDsNMFq8JmFS5wUx5nm7L5ZGCvIdK0U9FICF/wwBY5lW8b3
+        0l4BN9TP02jLiJx+mfo2dj+KoQrRC4z/4RpZG7KVqsz7vROYllWK3pSej0EOKraN
+        93s1TkC/fSzVYdamMYJtdxi2lFx2efBEnxGCDRIkeQOk9Sd09AYbBtP4Y/+3RKnh
+        =ShwE
         -----END PGP MESSAGE-----
       fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
-  encrypted_regex: ^(data|stringData)$
+  encrypted_regex: ^(data|stringData|Human|clientID|clientSecret)$
   version: 3.11.0
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
@@ -86,12 +86,16 @@ spec:
       dashboard:
         enabled: true
         # Custom match rule with host domain
-        matchRule: Host(`traefik.castor.baeriswyl.local`)
+        matchRule: Host(`traefik.castor.baeriswyl.dev`)
         entryPoints:
           - websecure
         # Add custom middlewares : authentication and redirection
         middlewares:
           - name: traefik-dashboard-auth
+        tls:
+          certResolver: letsencrypt
+          domains: 
+          - main: "traefik.castor.baeriswyl.dev"
     # Create the custom middlewares used by the IngressRoute dashboard (can also be created in another way).
     # /!\ Yes, you need to replace "changeme" password with a better one. /!\
     extraObjects:
@@ -101,8 +105,8 @@ spec:
           name: traefik-dashboard-auth-secret
         type: kubernetes.io/basic-auth
         stringData:
-          username: ENC[AES256_GCM,data:McHQFio=,iv:zH0eX8lPXZRl6JKu29WSempdFhbp/r8SFIhTdGd9wnM=,tag:n8Heb1nGC37qvV8MXU/NOA==,type:str]
-          password: ENC[AES256_GCM,data:Oj7ga11832CjYEnwDkwSlAA/5qM4gI7z,iv:tn8MVuGS4ns4BQWli5c3x2wXvKb7olKxbCh0QvoHq8o=,tag:U8aJ48lFEN+IjrVBeNaWsQ==,type:str]
+          username: ENC[AES256_GCM,data:Nq2l0dI=,iv:BYU51g3VGOanKSlPvc2w3Jz9aV9qEhS+yJIdvGjhcyQ=,tag:kOWzRHCmpABm/XLQHMYcCg==,type:str]
+          password: ENC[AES256_GCM,data:HXhzUX4vovKS3t/t3ID6Ra7P5G8WCcmO,iv:5YYc10JqtmiHckIuXQLC6q3rnCoH67VPD7JGxyzJacM=,tag:mjSMbgpnvpsmo5CrUJDeuw==,type:str]
       - apiVersion: traefik.io/v1alpha1
         kind: Middleware
         metadata:
@@ -110,31 +114,60 @@ spec:
         spec:
           basicAuth:
             secret: traefik-dashboard-auth-secret
+    certificatesResolvers:
+      letsencrypt:
+        acme:
+          email: nicolas@baeriswyl.dev
+          caserver: https://acme-v02.api.letsencrypt.org/directory
+          storage: /data/acme.json
+          dnschallenge:
+            provider: cloudflare
+            delaybeforecheck: 30
+    env:
+      - name: CF_API_EMAIL
+        valueFrom:
+          secretKeyRef:
+            name: cf-api
+            key: CF_API_EMAIL
+      - name: CF_DNS_API_TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: cf-api
+            key: CF_DNS_API_TOKEN
+      - name: CF_ZONE_API_TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: cf-api
+            key: CF_ZONE_API_TOKEN
+    persistence:
+      enabled: true
+      path: /data
+      size: 1Gi
 sops:
-  lastmodified: "2026-01-10T15:49:07Z"
-  mac: ENC[AES256_GCM,data:RWFMT2SqWFjZuuPixMqQPf/wAQXFtoXPy+pzucLFxohkAiym8mSXekHCX5x4925AQMamUCecxEihy6jNaPm6yFXkBKkqrWSoiB/LkfDjG+2br9I/B3Pq980iRECyAGNG0HpfX09vnYMI1ulqL3P/g/8cdUu7L2DJLeqRjAQBwFc=,iv:ZVr5zeV8BcPNROY3knge5ps0DV5e9xzZ9f1K07AXSRQ=,tag:MuuvazF6gJRJurr3VZOpng==,type:str]
+  lastmodified: "2026-02-11T01:08:38Z"
+  mac: ENC[AES256_GCM,data:GhWDMAm9hW4oD7OUVnCZQ3UTSph/dlW1kd+Qaf312Uzm0too06xiEjoPpIENEMaa5Hj5hBtdgeDKQNSAKKLHOyALiMJ4YVBZStRnhh5ZdLkejTmsU9TKblwSH+sZj3NUNdokMBMZpYwPgSpbqLE7pT4dmVrHhdsfuGE6kRVKwF0=,iv:azhDQV2HIWSR8ONqUhOtKMKcbLMjrlVVjQIBIMEF8MY=,tag:33oYbMtL+u3BWlZNCoUvaA==,type:str]
   pgp:
-    - created_at: "2026-01-10T15:49:07Z"
+    - created_at: "2026-02-11T01:08:38Z"
       enc: |-
         -----BEGIN PGP MESSAGE-----
 
-        hF4Dd4GlSl54jlASAQdAkdYo9eHr2JK7bUNb5DEVtYH3yelN5dOGHBHk6g1zgHow
-        2B/gDKDXSsToPvJ57m2cJ2JR+dHoayx5mpLhZGmhErf3vsB4wNX2+hmRTYS51iVy
-        0lwB4j6an3wLzieIsNJF8MdBJpk/IrzrYYNI3powSihPFTcHkTj/OuRW0WLMXilv
-        trsXtK0CsjZ3mwrLaXETgYUqnz6/n15yBG7h/n8C5DQf7WtprI4VB+nHIg2Ezg==
-        =OW+3
+        hF4Dd4GlSl54jlASAQdAtRgVfoJQ0vjxe0UFWF9f7tkvh+T4HKdZApVmJ+4wt0ww
+        ub4p0uXBzEP2mTkubtGd+kzy7UHgKN5VKkjIOeooXLbVN9kEt4k5WLG9h4eFqS+e
+        0l4B31olqL9TfRYdsucdcU3Q1WjzC62GLmjOKANqRj/6iMf/d1U9i7mtfJpdiBDe
+        xRXrT0LJYUFayAYQEqc/NDim1NEqwNl0kkdBkGfigJb1o7j1GHS6HHQcU/OS+rOC
+        =p5Qp
         -----END PGP MESSAGE-----
       fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
-    - created_at: "2026-01-10T15:49:07Z"
+    - created_at: "2026-02-11T01:08:38Z"
       enc: |-
         -----BEGIN PGP MESSAGE-----
 
-        hF4DJS3PlYN8TcgSAQdAPgHxNBFxJlBHEj0L/Hl3rnGiu1zd+YrtgVk2h+aFczow
-        bOC7JdIVUPlGqCcDGGhnCPtdC2H6LNsKGexll2ggNAzBO7Yug1v0AMub6NqzJQSh
-        0lwBLUEP3KiE3GSvBnzyuaNg1/3SijdJToTprOORafx7pjrPtBKpSnWdohXbjI2F
-        2NtRawiwpY0Nr/O4lSI7ecX8IJbMqyezI+QcB1cEwxsCMsCshimJ3wIJzVPRNQ==
-        =JYGE
+        hF4DJS3PlYN8TcgSAQdAm5RvmpekssWjltHsqEJeRCRbg2q+zHWSuiBK5GMS1lww
+        Sdpex+OX2SVvJnGIniDsNMFq8JmFS5wUx5nm7L5ZGCvIdK0U9FICF/wwBY5lW8b3
+        0l4BN9TP02jLiJx+mfo2dj+KoQrRC4z/4RpZG7KVqsz7vROYllWK3pSej0EOKraN
+        93s1TkC/fSzVYdamMYJtdxi2lFx2efBEnxGCDRIkeQOk9Sd09AYbBtP4Y/+3RKnh
+        =ShwE
         -----END PGP MESSAGE-----
       fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
-  encrypted_regex: ^(data|stringData)$
+  encrypted_regex: ^(data|stringData|Human|clientID|clientSecret)$
   version: 3.11.0
