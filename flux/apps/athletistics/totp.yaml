@@ -1,0 +1,241 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.portainer.kubernetes.application.name: totp-api
+    io.portainer.kubernetes.application.stack: backend
+  name: totp-api
+  namespace: athletistics
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: totp-api
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: totp-api
+        io.portainer.kubernetes.application.name: totp-api
+    spec:
+      containers:
+        - env:
+            - name: ENV
+              value: prod
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: DB_HOST
+                  name: totp-secret
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_DB
+                  name: totp-secret
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_PASSWORD
+                  name: totp-secret
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_USER
+                  name: totp-secret
+            - name: ZITADEL_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: ZITADEL_API_KEY
+                  name: totp-secret
+            - name: ZITADEL_INSTANCE
+              valueFrom:
+                secretKeyRef:
+                  key: ZITADEL_INSTANCE
+                  name: totp-secret
+            - name: ZITADEL_INSTANCE_GRPC
+              valueFrom:
+                secretKeyRef:
+                  key: ZITADEL_INSTANCE_GRPC
+                  name: totp-secret
+            - name: ZITADEL_KEY_PATH
+              valueFrom:
+                secretKeyRef:
+                  key: ZITADEL_KEY_PATH
+                  name: totp-secret
+            - name: ZITADEL_MGMT_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: ZITADEL_MGMT_API_KEY
+                  name: totp-secret
+          image: athletistics/micro-totp:stable
+          imagePullPolicy: Always
+          name: totp-api
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.portainer.kubernetes.application.name: totp-api
+    io.portainer.kubernetes.application.stack: backend
+  name: totp-api
+  namespace: athletistics
+spec:
+  ports:
+    - name: port-0
+      port: 3000
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    app: totp-api
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    io.portainer.kubernetes.application.name: totp-db
+    io.portainer.kubernetes.application.stack: backend
+  name: totp-db
+  namespace: athletistics
+spec:
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Retain
+    whenScaled: Retain
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: totp-db
+  serviceName: headless-totp-db
+  template:
+    metadata:
+      labels:
+        app: totp-db
+        io.portainer.kubernetes.application.name: totp-db
+    spec:
+      containers:
+        - env:
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_DB
+                  name: totp-db-secret
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_PASSWORD
+                  name: totp-db-secret
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_USER
+                  name: totp-db-secret
+          image: postgres:16.2-alpine3.19
+          imagePullPolicy: IfNotPresent
+          name: totp-db
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: totp-db-ee75914f-f6e4-47fa-a76d-f833a8f25e07
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: totp-db-ee75914f-f6e4-47fa-a76d-f833a8f25e07
+          persistentVolumeClaim:
+            claimName: totp-db-ee75914f-f6e4-47fa-a76d-f833a8f25e07
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        labels:
+          app: totp-db
+          io.portainer.kubernetes.application.name: totp-db
+        name: totp-db-ee75914f-f6e4-47fa-a76d-f833a8f25e07
+        namespace: athletistics
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10G
+        storageClassName: longhorn
+        volumeMode: Filesystem
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.portainer.kubernetes.application.name: totp-db
+    io.portainer.kubernetes.application.stack: backend
+  name: headless-totp-db
+  namespace: athletistics
+spec:
+  clusterIP: None
+  selector:
+    app: totp-db
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.portainer.kubernetes.application.name: totp-db
+    io.portainer.kubernetes.application.stack: backend
+  name: totp-db
+  namespace: athletistics
+spec:
+  ports:
+    - name: port-0
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+  selector:
+    app: totp-db
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    # cert-manager.io/cluster-issuer: letsencrypt-prod # certificate generated in frontend
+    spec.ingressClassName: traefik
+  labels:
+    io.portainer.kubernetes.application.kind: content
+    io.portainer.kubernetes.application.stack: "backend"
+  name: totp-tls-ingress
+  namespace: athletistics
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: app.athletistics.ch
+    http:
+      paths:
+      - backend:
+          service:
+            name: frontend
+            port:
+              number: 80
+        path: /api/v1/totp
+        pathType: Prefix
+  tls:
+  - hosts:
+    - app.athletistics.ch
+    secretName: athletistics-tls

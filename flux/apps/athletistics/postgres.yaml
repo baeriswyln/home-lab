@@ -1,0 +1,45 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: bitnami
+  namespace: athletistics
+spec:
+  type: oci
+  url: oci://registry-1.docker.io/bitnamicharts
+  interval: 1h0m0s
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: zitadel-db
+  namespace: athletistics
+spec:
+  interval: 10m0s
+  chart:
+    spec:
+      chart: postgresql
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: athletistics
+  values:
+    global:
+      security:
+        allowInsecureImages: true
+    image:
+      registry: public.ecr.aws
+      repository: bitnami/postgresql
+      tag: "16.2.0"
+    auth:
+      existingSecret: zitadel-db-credentials
+      secretKeys:
+        adminPasswordKey: ADMIN_PASSWORD
+        userPasswordKey: USER_PASSWORD
+    persistence:
+      enabled: true
+      size: 10Gi
+    tls:
+      enabled: true
+      certificatesSecret: postgres-cert
+      certFilename: "tls.crt"
+      certKeyFilename: "tls.key"
