@@ -5,3 +5,4 @@ resources:
 - docker-registry-secret.yaml
 - playwright-renderer.yaml
 - frieat.yaml
+- limesurvey.yaml

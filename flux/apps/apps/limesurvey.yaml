@@ -1,0 +1,126 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: martialblog
+  namespace: apps
+spec:
+  interval: 15m
+  url: https://martialblog.github.io/helm-charts
+sops:
+  lastmodified: "2026-02-12T12:59:15Z"
+  mac: ENC[AES256_GCM,data:4JMOOIxW+8LJIvZABVxx45LmwYY02agEF3DvOxIhyg93fWfdO+Uw6AFzDqZ76zKousQYceapLSoq2AqDfnctl5QoOFBg4nMyE2snAy3+IigfHn5urAKC6NWX5QF7nzzIw7kK6UCq3NO4tbaiRdMoIK1/ak4oZWEw4lH2RSQ9omM=,iv:JT1HobJmXNl+xYzYb34jVhsf4lojhg+j8EzHblfkVuA=,tag:PK765ldShMkMenpGLFGU8A==,type:str]
+  pgp:
+    - created_at: "2026-02-12T12:59:15Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAE8yDIXiAh2J/L+67RRWSoZrV4fKZygj+qJhz+Bt1iG8w
+        NHFxXELth1AjNxs49uZq6GA85bM8CCdTKnZ3hm/O2OtGfBYa/ZDlyKpXGnYvhZv4
+        0lwB8haNNm/6llbh78e78SoXS3Yoiwjksmkzy56rIrS5pnKh8yHrLwsu6Vt6RZ49
+        Dzie1eElwOW+cFv1hMehcrynlOfbq9xoUrvO0N68qHS6zzc+tnS9Eiij7K1/uQ==
+        =ni2l
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-12T12:59:15Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdA7lDG/5UFq5JtCVIFI6Cgkwhe996Ydrq4f0yeqIKSDBEw
+        rttKSg6KXN9rAeMAC1MgP5BmIEXJxHCtpVIO2vyz/q/IVvD5jox7qDzjWK45z16j
+        0lwBFgBm4os7fH4ZApozvSN93sD8qVLlFc1EBIQBFsszRzMnxc4kLnpKsdqClHK3
+        6ZmRzzWNMCxyfAJSlgmpT2FrAvnjFH/2iyrJA6xYv2t8xKsbDAWuqv/6pbrM1Q==
+        =YLBe
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth)$
+  version: 3.11.0
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: limesurvey
+  namespace: apps
+spec:
+  interval: 15m
+  timeout: 5m
+  chart:
+    spec:
+      chart: limesurvey
+      sourceRef:
+        kind: HelmRepository
+        name: martialblog
+      interval: 5m
+  releaseName: limesurvey
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  test:
+    enable: true
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths:
+          - /spec/replicas
+        target:
+          kind: Deployment
+  values:
+    ingress:
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+        spec.ingressClassName: traefik
+      className: traefik
+      enabled: true
+      hosts:
+        - host: limesurvey.baeriswyl.dev
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+      tls:
+        - hosts:
+            - limesurvey.baeriswyl.dev
+          secretName: limesurvey-tls
+    limesurvey:
+      admin:
+        email: nicolas.baeriswyl@rega-sense.ch
+        name: Nicolas
+        user: adm-nicolas
+    mariadb:
+      auth:
+        database: ENC[AES256_GCM,data:K+Kzgib9tOao7A==,iv:ORpB3LS2FnqOJ3F94PiWicDiwENbg1yDLMKhtV+netc=,tag:MSKf0l2e7iTw8s9m3elt4A==,type:str]
+        password: ENC[AES256_GCM,data:fD15WySElaeS+Oxlut6d3FtQkBs=,iv:K6tw7SF84m5CrWHNNtHH5TU4vojK3TkUUuBEvcSJ0sk=,tag:3avncHlj23CxnwNUqZOSZw==,type:str]
+        rootPassword: ENC[AES256_GCM,data:GpXIjwJRAcaZKLzFat4Yy3UVuHk=,iv:WpiVm2JVUUaH6MOwMxvJXAafWjbyB+G9L2tq0Sz0siI=,tag:VVfcVZeMwqAQRkV7KX3Png==,type:str]
+        username: ENC[AES256_GCM,data:kYKo5SjhJ9wKYw==,iv:qZV83Ffiy2vonzpj6mCdrc7rFptfH+1Xrhco/uyY4Nc=,tag:ceeBCIbxKbOxyXz7abzmvQ==,type:str]
+      enabled: true
+      image:
+        tag: latest
+sops:
+  lastmodified: "2026-02-12T12:59:15Z"
+  mac: ENC[AES256_GCM,data:4JMOOIxW+8LJIvZABVxx45LmwYY02agEF3DvOxIhyg93fWfdO+Uw6AFzDqZ76zKousQYceapLSoq2AqDfnctl5QoOFBg4nMyE2snAy3+IigfHn5urAKC6NWX5QF7nzzIw7kK6UCq3NO4tbaiRdMoIK1/ak4oZWEw4lH2RSQ9omM=,iv:JT1HobJmXNl+xYzYb34jVhsf4lojhg+j8EzHblfkVuA=,tag:PK765ldShMkMenpGLFGU8A==,type:str]
+  pgp:
+    - created_at: "2026-02-12T12:59:15Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAE8yDIXiAh2J/L+67RRWSoZrV4fKZygj+qJhz+Bt1iG8w
+        NHFxXELth1AjNxs49uZq6GA85bM8CCdTKnZ3hm/O2OtGfBYa/ZDlyKpXGnYvhZv4
+        0lwB8haNNm/6llbh78e78SoXS3Yoiwjksmkzy56rIrS5pnKh8yHrLwsu6Vt6RZ49
+        Dzie1eElwOW+cFv1hMehcrynlOfbq9xoUrvO0N68qHS6zzc+tnS9Eiij7K1/uQ==
+        =ni2l
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-12T12:59:15Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdA7lDG/5UFq5JtCVIFI6Cgkwhe996Ydrq4f0yeqIKSDBEw
+        rttKSg6KXN9rAeMAC1MgP5BmIEXJxHCtpVIO2vyz/q/IVvD5jox7qDzjWK45z16j
+        0lwBFgBm4os7fH4ZApozvSN93sD8qVLlFc1EBIQBFsszRzMnxc4kLnpKsdqClHK3
+        6ZmRzzWNMCxyfAJSlgmpT2FrAvnjFH/2iyrJA6xYv2t8xKsbDAWuqv/6pbrM1Q==
+        =YLBe
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth)$
+  version: 3.11.0
