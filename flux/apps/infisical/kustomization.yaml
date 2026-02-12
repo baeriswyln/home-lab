@@ -5,3 +5,4 @@ resources:
 - secret.yaml
 - infisical-db.yaml
 - infisical.yaml
+- infisical-secrets-op.yaml
