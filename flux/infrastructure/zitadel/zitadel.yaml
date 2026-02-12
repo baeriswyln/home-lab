@@ -7,8 +7,8 @@ spec:
   interval: 15m
   url: https://charts.zitadel.com/
 sops:
-  lastmodified: "2026-02-11T00:31:11Z"
-  mac: ENC[AES256_GCM,data:avzPPMvkQ/y4YAF9PalQSJUehD0+AbS/YA4YOoEN1AvX4T0tl0PxIwAhxzl5LLRV1cwL60beF5lM6+F/i2+nAjiM4TLuqeiN7VjzqT/v6AgFcexgPEOIA8Eel4A3kmEKAPRkVM2vIEDxa67WiTbW5/DX3QK9LyUodmXZWKVVteE=,iv:IkChRgefpVahj8CFJPzVcRw1Fl6JUC+JD6vGrbEGIY8=,tag:cLrup1ruNulRqHq6GLEjVw==,type:str]
+  lastmodified: "2026-02-12T22:58:52Z"
+  mac: ENC[AES256_GCM,data:gnun0ODea04otG6IOTfJxnWXx2etW3MPTchwiHeAFdelw5Tovzlo9hdzOgflRiuZq/xe8XvtdzLxYcut9eMATukAjH7jkI28KtzNnILvHhB7o9IiUkj9CwUpiLLIdMLSnohh7mwDb80vOt3xod9mzMn8aNNMisvJCbCOJKAOdtE=,iv:llPCMIufngjvOAiGnqnC/SroNwmNqfA9+s+OKvU5VjU=,tag:DTa8qX90q1aqCsxaiOePLg==,type:str]
   pgp:
     - created_at: "2026-02-11T00:31:10Z"
       enc: |-
@@ -53,10 +53,10 @@ spec:
   releaseName: zitadel
   install:
     remediation:
-      retries: 3
+      retries: -1
   upgrade:
     remediation:
-      retries: 3
+      retries: -1
   test:
     enable: true
   driftDetection:
@@ -138,8 +138,8 @@ spec:
       enabled: true
       minAvailable: 1
 sops:
-  lastmodified: "2026-02-11T00:31:11Z"
-  mac: ENC[AES256_GCM,data:avzPPMvkQ/y4YAF9PalQSJUehD0+AbS/YA4YOoEN1AvX4T0tl0PxIwAhxzl5LLRV1cwL60beF5lM6+F/i2+nAjiM4TLuqeiN7VjzqT/v6AgFcexgPEOIA8Eel4A3kmEKAPRkVM2vIEDxa67WiTbW5/DX3QK9LyUodmXZWKVVteE=,iv:IkChRgefpVahj8CFJPzVcRw1Fl6JUC+JD6vGrbEGIY8=,tag:cLrup1ruNulRqHq6GLEjVw==,type:str]
+  lastmodified: "2026-02-12T22:58:52Z"
+  mac: ENC[AES256_GCM,data:gnun0ODea04otG6IOTfJxnWXx2etW3MPTchwiHeAFdelw5Tovzlo9hdzOgflRiuZq/xe8XvtdzLxYcut9eMATukAjH7jkI28KtzNnILvHhB7o9IiUkj9CwUpiLLIdMLSnohh7mwDb80vOt3xod9mzMn8aNNMisvJCbCOJKAOdtE=,iv:llPCMIufngjvOAiGnqnC/SroNwmNqfA9+s+OKvU5VjU=,tag:DTa8qX90q1aqCsxaiOePLg==,type:str]
   pgp:
     - created_at: "2026-02-11T00:31:10Z"
       enc: |-
