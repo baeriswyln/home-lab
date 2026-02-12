@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.portainer.kubernetes.application.name: frieat
+    io.portainer.kubernetes.application.stack: frieat
+  name: frieat
+  namespace: apps
+  uid: 47b456ac-c23e-4a45-82bf-72ea7b1f1383
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: frieat
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 100%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: frieat
+        io.portainer.kubernetes.application.name: frieat
+    spec:
+      containers:
+        - env:
+            - name: PLAYWRIGHT
+              value: http://playwright-renderer.apps.svc.cluster.local:3000
+          image: docker.io/baeriswyln/frieat:latest
+          imagePullPolicy: Always
+          name: frieat
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.portainer.kubernetes.application.name: frieat
+    io.portainer.kubernetes.application.stack: frieat
+  name: frieat
+  namespace: apps
+spec:
+  ports:
+    - name: port-0
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: frieat
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    spec.ingressClassName: traefik
+  labels:
+    io.portainer.kubernetes.application.kind: content
+    io.portainer.kubernetes.application.stack: "frieat"
+  name: frieat-tls-ingress
+  namespace: apps
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: frieat.baeriswyl.dev
+    http:
+      paths:
+      - backend:
+          service:
+            name: frieat
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - frieat.baeriswyl.dev
+    secretName: frieat-tls
