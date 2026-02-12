@@ -1,0 +1,114 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: wordpress
+  namespace: apps
+spec:
+  type: oci
+  interval: 50m
+  url: oci://registry-1.docker.io/bitnamicharts/wordpress
+sops:
+  lastmodified: "2026-02-12T13:38:17Z"
+  mac: ENC[AES256_GCM,data:YR0R22XETCl0pHjfqG41xRqMy2AfaFRKrqsiM1o4MpbB/t/YQ0wowRQNWYtdYSTXbtyjFgY/arHa0ztV52vvGS3bvNxzPLebeF2Zs+AmZze0Z73sd2XRxRC/pTV2vDjPPw8uQcvaEJ88/BCuQGe0jRGJlneGVWzMIshaZHOUYW0=,iv:+CGwFrQ7R/C+YzwYCuwJ5f3/q4ojnJmgIZKNEeukyCw=,tag:Jp6yA7OTgZvU+7B8raTYSg==,type:str]
+  pgp:
+    - created_at: "2026-02-12T13:38:17Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAC5Y3k9fHI8UVEX9/vHgHwUG2pG+W0AUZw9TEkN6T9gUw
+        cumyAosrCGuRB6yPlR/y+Pw1f0slWNNfLvoB7w3SrfU3YeL1b6IzRsASVuWFN5zC
+        0l4BW6mJX1sIaOr167oLXzzSOQGpngtdOd+jL9ERmfqAIK6g+OeV5yV11hYXyxHE
+        DSfSnFMGxvVIfSV8koKr4q6dO0OyJ1TOtN6u1X3GUNtCqaV3+VgY8dK7ffi1IT3U
+        =q76T
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-12T13:38:17Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdAipccyprIVrtfwDTe5HEgNgcYDtmWinQP3jNaS0NsnAUw
+        JiTgVZP8NQzCw29DDuFMPe7Ts61iaELadFUKCSHb81Sje6tzpMlCUAcuZmkMtPUv
+        0l4B/UhBZFeIXuCPh0LXxTiVVEGmmoT5zFrdyEDnB5A5P8XF3tNcGuXmvnH1HTRJ
+        33NuCm+BNEXs5h02hYKyuucizwta7pfWdxhifPoGbYZC4n4CGkd6i2EeLUG5sw3Y
+        =n9MV
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
+  version: 3.11.0
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: wp--orgel-plaffeien
+  namespace: apps
+spec:
+  interval: 15m
+  timeout: 5m
+  chart:
+    spec:
+      chart: wordpress
+      sourceRef:
+        kind: HelmRepository
+        name: wordpress
+      interval: 5m
+  releaseName: wp--orgel-plaffeien
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  test:
+    enable: true
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths:
+          - /spec/replicas
+        target:
+          kind: Deployment
+  values:
+    mariadb:
+      auth:
+        database: ENC[AES256_GCM,data:pKEdZkl7o6D9qMYP69u+FFA=,iv:oiU8hFEvg68AiR0Sd3/aWqkK6UsXPZP+etHJs4fqvYU=,tag:QUrbPc0FZgEtN6d5pNWuCQ==,type:str]
+        password: ENC[AES256_GCM,data:ftZLThiarH4gOmoGk0L6dvw5gP4=,iv:JyUzZaBp0/8JB1QbiXD6quIfmrQMXRvlVGRrBbH8RFc=,tag:UjDKe7V6l1XRRgjQpEpHDw==,type:str]
+        rootPassword: ENC[AES256_GCM,data:W1Z3FJw61scKJhLdWvOCucK6HC0=,iv:dqQVychFKUi83ZGsKWlWaF9XjVYPdjiMtTz5NckEFXc=,tag:rvob9CcJJAP4n3Y0Lf+njw==,type:str]
+        username: ENC[AES256_GCM,data:baf0vsF+1HiRtI80Af8H6KcDrVeFTw==,iv:vHtjkPBV3ff0SDVTGpWJM3M5pJr/z8l2Gqxg86ek9OU=,tag:MPtLAuo8rBpvPQtZun9+1g==,type:str]
+      primary:
+        persistence:
+          size: 500Mi
+      resourcesPreset: none
+    persistence:
+      size: 1Gi
+    resourcesPreset: none
+    wordpressPassword: ENC[AES256_GCM,data:BVDGRcR367Kdn3q16Sdv9rcbOqU=,iv:U5oXQhZbchmYdhu2ilUFJ2ZKqeY4OmmTKMYuwqIZoCs=,tag:wleu3oM7OM7J3nLB4IrX7A==,type:str]
+    wordpressScheme: https
+    wordpressUsername: ENC[AES256_GCM,data:ydbKySO+8AfiqrCSO4g=,iv:Ffzs3Uc8mDt7gGIZobCgFhmm2SzuYHSuHKtnzLFl2Ok=,tag:I0lr+N3jcKqEJf8SseFKmg==,type:str]
+sops:
+  lastmodified: "2026-02-12T13:38:17Z"
+  mac: ENC[AES256_GCM,data:YR0R22XETCl0pHjfqG41xRqMy2AfaFRKrqsiM1o4MpbB/t/YQ0wowRQNWYtdYSTXbtyjFgY/arHa0ztV52vvGS3bvNxzPLebeF2Zs+AmZze0Z73sd2XRxRC/pTV2vDjPPw8uQcvaEJ88/BCuQGe0jRGJlneGVWzMIshaZHOUYW0=,iv:+CGwFrQ7R/C+YzwYCuwJ5f3/q4ojnJmgIZKNEeukyCw=,tag:Jp6yA7OTgZvU+7B8raTYSg==,type:str]
+  pgp:
+    - created_at: "2026-02-12T13:38:17Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAC5Y3k9fHI8UVEX9/vHgHwUG2pG+W0AUZw9TEkN6T9gUw
+        cumyAosrCGuRB6yPlR/y+Pw1f0slWNNfLvoB7w3SrfU3YeL1b6IzRsASVuWFN5zC
+        0l4BW6mJX1sIaOr167oLXzzSOQGpngtdOd+jL9ERmfqAIK6g+OeV5yV11hYXyxHE
+        DSfSnFMGxvVIfSV8koKr4q6dO0OyJ1TOtN6u1X3GUNtCqaV3+VgY8dK7ffi1IT3U
+        =q76T
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-12T13:38:17Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdAipccyprIVrtfwDTe5HEgNgcYDtmWinQP3jNaS0NsnAUw
+        JiTgVZP8NQzCw29DDuFMPe7Ts61iaELadFUKCSHb81Sje6tzpMlCUAcuZmkMtPUv
+        0l4B/UhBZFeIXuCPh0LXxTiVVEGmmoT5zFrdyEDnB5A5P8XF3tNcGuXmvnH1HTRJ
+        33NuCm+BNEXs5h02hYKyuucizwta7pfWdxhifPoGbYZC4n4CGkd6i2EeLUG5sw3Y
+        =n9MV
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
+  version: 3.11.0
