@@ -6,7 +6,6 @@ metadata:
     io.portainer.kubernetes.application.stack: frieat
   name: frieat
   namespace: apps
-  uid: 47b456ac-c23e-4a45-82bf-72ea7b1f1383
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
