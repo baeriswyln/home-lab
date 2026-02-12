@@ -1,0 +1,72 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: infisical-helm-charts
+  namespace: infisical
+spec:
+  interval: 15m
+  url: https://dl.cloudsmith.io/public/infisical/helm-charts/helm/charts/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: infisical
+  namespace: infisical
+spec:
+  interval: 15m
+  timeout: 5m
+  chart:
+    spec:
+      chart: infisical-standalone
+      sourceRef:
+        kind: HelmRepository
+        name: infisical-helm-charts
+      interval: 5m
+  releaseName: infisical
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  test:
+    enable: true
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths:
+          - /spec/replicas
+        target:
+          kind: Deployment
+  values:
+    infisical:
+      autoDatabaseSchemaMigration: true
+      deploymentAnnotations: {}
+      enabled: true
+      image:
+        pullPolicy: IfNotPresent
+        repository: infisical/infisical
+        tag: v0.155.1
+      kubeSecretRef: infisical-secret
+      name: infisical
+      podAnnotations: {}
+      replicaCount: 2
+      service:
+        annotations: {}
+        nodePort: ""
+        type: ClusterIP
+    ingress:
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+        kubernetes.io/ingress.class: traefik
+      enabled: true
+      hostName: infisical.baeriswyl.dev
+      ingressClassName: traefik
+      nginx:
+        enabled: false
+      tls:
+      - hosts:
+        - infisical.baeriswyl.dev
+        secretName: infisical-tls
+    postgresql:
+      enabled: false

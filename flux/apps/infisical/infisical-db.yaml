@@ -1,0 +1,36 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: bitnami
+  namespace: infisical
+spec:
+  type: oci
+  url: oci://registry-1.docker.io/bitnamicharts
+  interval: 1h0m0s
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: infisical-db
+  namespace: infisical
+spec:
+  interval: 10m0s
+  chart:
+    spec:
+      chart: postgresql
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: infisical
+  values:
+    global:
+      security:
+        allowInsecureImages: true
+    image:
+      registry: public.ecr.aws
+      repository: bitnami/postgresql
+      tag: "17"
+    auth:
+      existingSecret: infisical-secret
+      secretKeys:
+        adminPasswordKey: POSTGRES_PASSWORD
