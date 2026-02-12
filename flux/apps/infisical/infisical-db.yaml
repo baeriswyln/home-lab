@@ -29,7 +29,7 @@ spec:
     image:
       registry: public.ecr.aws
       repository: bitnami/postgresql
-      tag: "17"
+      tag: "16"
     auth:
       existingSecret: infisical-secret
       secretKeys:
