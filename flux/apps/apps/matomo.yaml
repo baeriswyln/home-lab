@@ -1,0 +1,524 @@
+# secret
+apiVersion: v1
+data:
+  MATOMO_DATABASE_DBNAME: ENC[AES256_GCM,data:kxBx28vMI14=,iv:LSz+TdqeTYO7EUyePWe05KjhTdS61gsEHmdudsa/BRw=,tag:831nqNg3ceJDLdyVbNcdoQ==,type:str]
+  MATOMO_DATABASE_PASSWORD: ENC[AES256_GCM,data:lYgbTBzcSevGwKFQs4vIu6gq9nuYkc0H,iv:dsNeqy3QgdcfymrwJpnYpaYgDQrel+TW+26rk6pD4/Y=,tag:pKS3SLv8R6Wb0JMrZNLlnA==,type:str]
+  MATOMO_DATABASE_USERNAME: ENC[AES256_GCM,data:jJakBmivYc2Q4TbnRYw8MnimnutV1W8h,iv:+UIwE0La3xpv0ibjpt6udgu+yjmeRrgirw9/JBSpKAA=,tag:TutGGKqNoXg8YCGDQZgs8g==,type:str]
+  MYSQL_DATABASE: ENC[AES256_GCM,data:la41EvLFJE8=,iv:KOw5YmMn1rXbh6KuMV5lcP41czvhll3rOyKn3T0Ard8=,tag:uVuzwbLt85GsYtwawKJkww==,type:str]
+  MYSQL_PASSWORD: ENC[AES256_GCM,data:gDvEpD7AMHiiWA/eAgMsNvnk1WgmKB2N,iv:YLihOFBJDjDq3NBeknWYA7slRsz0nsOS9bpqCDpLVs8=,tag:kdm937f9s15GPxoCRA4DQA==,type:str]
+  MYSQL_ROOT_PASSWORD: ENC[AES256_GCM,data:REfaig2a4G2iVT2VsQl3d1DzL8AvMUeJKtvE82lK8btaPS12/3B7EXPAvLc=,iv:R6pGloh7MGTivv04LcWFcNUqlN+xrA9SsXhOgyMZqcQ=,tag:A1TpsXjxarIx9o3ZVs907g==,type:str]
+  MYSQL_USER: ENC[AES256_GCM,data:YJAVKu/D2ONlXogmCRNitTqvNmNLznF7,iv:ef/fSpqsY3zXyVN6Yv5sps7lzCU+7QlZQYZXaTUsV9Y=,tag:89Otnu1WBD4W7FAgeIEFOQ==,type:str]
+kind: Secret
+metadata:
+  name: matomo
+  namespace: apps
+type: Opaque
+sops:
+  lastmodified: "2026-02-12T14:45:10Z"
+  mac: ENC[AES256_GCM,data:VmGdb11hi0shddFYbKdXcV9rAbuKkDV13sM2Tba337oexk/vqaHwQ+Ide4EoE1Ujr092dYGICIMENt13gcpgK96NQtzYsm2buYwbBxPSThbWg9erWtMlVP5PAljrA7sffMauF1n+SDA8glr16kKUpN92wsINgnqorZGbW+9FqHI=,iv:MxehVJsp0YKoiOH7SxWTEYJ8RgvNpc52RRLse4UbL5A=,tag:pkyYqXepWbthDDRslfQfRQ==,type:str]
+  pgp:
+    - created_at: "2026-02-12T14:14:23Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAJZvRHmhvRsxbYID9UjaXIWilw/5Ae6RhQ2WAZN+wBAww
+        z3TepKktt0INE5d0ZCXfVUQMPbYkbVehTC0tOhD9U0+xANC61791wbs/zOrauuea
+        0l4BRQ1jkAlrj7XupHOaE6pcMLbC4mxFkg1gmbEtfpoPwPuJW1h2uF/Ybu0cA1y5
+        X8qJnIgE2iM4PtQ96rWqX6Rs7O5yxTnPHiN7F1Hq8UDroABmp+uIb7rCCiuKAdyG
+        =olRB
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-12T14:14:23Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdACxvxqVBcUOYFgdlYsC9srC73+wLb682sV61EppFwjV4w
+        gjm0odf4Z9/NEtGYyfUi2vYjYB69UFIhOojg3zyt1GYSEh4s7CVn444Piv1zh5lO
+        0l4BqPRdOCgfG+JJPpiIOA/MZ6/kUZq8U6HveA+PQwVLxkTU+fGcT5N2cu5CDV+Y
+        GFzCgKCFXLkVKdrfMrjAgUW0G55e3XUJXPoMVTsyBIpCAz688LARmLas+XMYqnwW
+        =/diG
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
+  version: 3.11.0
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    spec.ingressClassName: traefik
+  labels:
+    io.portainer.kubernetes.application.kind: content
+    io.portainer.kubernetes.application.stack: matomo
+  name: matomo-tls-ingress
+  namespace: apps
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: matomo.baeriswyl.dev
+      http:
+        paths:
+          - backend:
+              service:
+                name: matomo
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - matomo.baeriswyl.dev
+      secretName: matomo-tls
+sops:
+  lastmodified: "2026-02-12T14:45:10Z"
+  mac: ENC[AES256_GCM,data:VmGdb11hi0shddFYbKdXcV9rAbuKkDV13sM2Tba337oexk/vqaHwQ+Ide4EoE1Ujr092dYGICIMENt13gcpgK96NQtzYsm2buYwbBxPSThbWg9erWtMlVP5PAljrA7sffMauF1n+SDA8glr16kKUpN92wsINgnqorZGbW+9FqHI=,iv:MxehVJsp0YKoiOH7SxWTEYJ8RgvNpc52RRLse4UbL5A=,tag:pkyYqXepWbthDDRslfQfRQ==,type:str]
+  pgp:
+    - created_at: "2026-02-12T14:14:23Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAJZvRHmhvRsxbYID9UjaXIWilw/5Ae6RhQ2WAZN+wBAww
+        z3TepKktt0INE5d0ZCXfVUQMPbYkbVehTC0tOhD9U0+xANC61791wbs/zOrauuea
+        0l4BRQ1jkAlrj7XupHOaE6pcMLbC4mxFkg1gmbEtfpoPwPuJW1h2uF/Ybu0cA1y5
+        X8qJnIgE2iM4PtQ96rWqX6Rs7O5yxTnPHiN7F1Hq8UDroABmp+uIb7rCCiuKAdyG
+        =olRB
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-12T14:14:23Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdACxvxqVBcUOYFgdlYsC9srC73+wLb682sV61EppFwjV4w
+        gjm0odf4Z9/NEtGYyfUi2vYjYB69UFIhOojg3zyt1GYSEh4s7CVn444Piv1zh5lO
+        0l4BqPRdOCgfG+JJPpiIOA/MZ6/kUZq8U6HveA+PQwVLxkTU+fGcT5N2cu5CDV+Y
+        GFzCgKCFXLkVKdrfMrjAgUW0G55e3XUJXPoMVTsyBIpCAz688LARmLas+XMYqnwW
+        =/diG
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
+  version: 3.11.0
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    io.portainer.kubernetes.application.name: matomo
+    io.portainer.kubernetes.application.stack: matomo
+  name: matomo
+  namespace: apps
+spec:
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Retain
+    whenScaled: Retain
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: matomo
+  serviceName: headless-matomo
+  template:
+    metadata:
+      labels:
+        app: matomo
+        io.portainer.kubernetes.application.name: matomo
+    spec:
+      containers:
+        - env:
+            - name: MATOMO_DATABASE_HOST
+              value: matomo-db
+            - name: MATOMO_DATABASE_TABLES_PREFIX
+              value: matomo_
+            - name: MATOMO_DATABASE_DBNAME
+              valueFrom:
+                secretKeyRef:
+                  key: MATOMO_DATABASE_DBNAME
+                  name: matomo
+            - name: MATOMO_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MATOMO_DATABASE_PASSWORD
+                  name: matomo
+            - name: MATOMO_DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: MATOMO_DATABASE_USERNAME
+                  name: matomo
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  key: MYSQL_DATABASE
+                  name: matomo
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MYSQL_PASSWORD
+                  name: matomo
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MYSQL_ROOT_PASSWORD
+                  name: matomo
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  key: MYSQL_USER
+                  name: matomo
+          image: docker.io/matomo:latest
+          imagePullPolicy: Always
+          name: matomo
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /var/www/html
+              name: matomo-4d8e61c6-7e95-4100-8f07-6fd1f5d3175b
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: registry-1
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: matomo-4d8e61c6-7e95-4100-8f07-6fd1f5d3175b
+          persistentVolumeClaim:
+            claimName: matomo-4d8e61c6-7e95-4100-8f07-6fd1f5d3175b
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        labels:
+          app: matomo
+          io.portainer.kubernetes.application.name: matomo
+        name: matomo-4d8e61c6-7e95-4100-8f07-6fd1f5d3175b
+        namespace: apps
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1G
+        storageClassName: longhorn
+        volumeMode: Filesystem
+sops:
+  lastmodified: "2026-02-12T14:45:10Z"
+  mac: ENC[AES256_GCM,data:VmGdb11hi0shddFYbKdXcV9rAbuKkDV13sM2Tba337oexk/vqaHwQ+Ide4EoE1Ujr092dYGICIMENt13gcpgK96NQtzYsm2buYwbBxPSThbWg9erWtMlVP5PAljrA7sffMauF1n+SDA8glr16kKUpN92wsINgnqorZGbW+9FqHI=,iv:MxehVJsp0YKoiOH7SxWTEYJ8RgvNpc52RRLse4UbL5A=,tag:pkyYqXepWbthDDRslfQfRQ==,type:str]
+  pgp:
+    - created_at: "2026-02-12T14:14:23Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAJZvRHmhvRsxbYID9UjaXIWilw/5Ae6RhQ2WAZN+wBAww
+        z3TepKktt0INE5d0ZCXfVUQMPbYkbVehTC0tOhD9U0+xANC61791wbs/zOrauuea
+        0l4BRQ1jkAlrj7XupHOaE6pcMLbC4mxFkg1gmbEtfpoPwPuJW1h2uF/Ybu0cA1y5
+        X8qJnIgE2iM4PtQ96rWqX6Rs7O5yxTnPHiN7F1Hq8UDroABmp+uIb7rCCiuKAdyG
+        =olRB
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-12T14:14:23Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdACxvxqVBcUOYFgdlYsC9srC73+wLb682sV61EppFwjV4w
+        gjm0odf4Z9/NEtGYyfUi2vYjYB69UFIhOojg3zyt1GYSEh4s7CVn444Piv1zh5lO
+        0l4BqPRdOCgfG+JJPpiIOA/MZ6/kUZq8U6HveA+PQwVLxkTU+fGcT5N2cu5CDV+Y
+        GFzCgKCFXLkVKdrfMrjAgUW0G55e3XUJXPoMVTsyBIpCAz688LARmLas+XMYqnwW
+        =/diG
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
+  version: 3.11.0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.portainer.kubernetes.application.name: matomo
+    io.portainer.kubernetes.application.stack: matomo
+  name: headless-matomo
+  namespace: apps
+spec:
+  clusterIP: None
+  selector:
+    app: matomo
+  type: ClusterIP
+sops:
+  lastmodified: "2026-02-12T14:45:10Z"
+  mac: ENC[AES256_GCM,data:VmGdb11hi0shddFYbKdXcV9rAbuKkDV13sM2Tba337oexk/vqaHwQ+Ide4EoE1Ujr092dYGICIMENt13gcpgK96NQtzYsm2buYwbBxPSThbWg9erWtMlVP5PAljrA7sffMauF1n+SDA8glr16kKUpN92wsINgnqorZGbW+9FqHI=,iv:MxehVJsp0YKoiOH7SxWTEYJ8RgvNpc52RRLse4UbL5A=,tag:pkyYqXepWbthDDRslfQfRQ==,type:str]
+  pgp:
+    - created_at: "2026-02-12T14:14:23Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAJZvRHmhvRsxbYID9UjaXIWilw/5Ae6RhQ2WAZN+wBAww
+        z3TepKktt0INE5d0ZCXfVUQMPbYkbVehTC0tOhD9U0+xANC61791wbs/zOrauuea
+        0l4BRQ1jkAlrj7XupHOaE6pcMLbC4mxFkg1gmbEtfpoPwPuJW1h2uF/Ybu0cA1y5
+        X8qJnIgE2iM4PtQ96rWqX6Rs7O5yxTnPHiN7F1Hq8UDroABmp+uIb7rCCiuKAdyG
+        =olRB
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-12T14:14:23Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdACxvxqVBcUOYFgdlYsC9srC73+wLb682sV61EppFwjV4w
+        gjm0odf4Z9/NEtGYyfUi2vYjYB69UFIhOojg3zyt1GYSEh4s7CVn444Piv1zh5lO
+        0l4BqPRdOCgfG+JJPpiIOA/MZ6/kUZq8U6HveA+PQwVLxkTU+fGcT5N2cu5CDV+Y
+        GFzCgKCFXLkVKdrfMrjAgUW0G55e3XUJXPoMVTsyBIpCAz688LARmLas+XMYqnwW
+        =/diG
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
+  version: 3.11.0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.portainer.kubernetes.application.name: matomo
+    io.portainer.kubernetes.application.stack: matomo
+  name: matomo
+  namespace: apps
+spec:
+  ports:
+    - name: port-0
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: matomo
+  type: ClusterIP
+# database config
+sops:
+  lastmodified: "2026-02-12T14:45:10Z"
+  mac: ENC[AES256_GCM,data:VmGdb11hi0shddFYbKdXcV9rAbuKkDV13sM2Tba337oexk/vqaHwQ+Ide4EoE1Ujr092dYGICIMENt13gcpgK96NQtzYsm2buYwbBxPSThbWg9erWtMlVP5PAljrA7sffMauF1n+SDA8glr16kKUpN92wsINgnqorZGbW+9FqHI=,iv:MxehVJsp0YKoiOH7SxWTEYJ8RgvNpc52RRLse4UbL5A=,tag:pkyYqXepWbthDDRslfQfRQ==,type:str]
+  pgp:
+    - created_at: "2026-02-12T14:14:23Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAJZvRHmhvRsxbYID9UjaXIWilw/5Ae6RhQ2WAZN+wBAww
+        z3TepKktt0INE5d0ZCXfVUQMPbYkbVehTC0tOhD9U0+xANC61791wbs/zOrauuea
+        0l4BRQ1jkAlrj7XupHOaE6pcMLbC4mxFkg1gmbEtfpoPwPuJW1h2uF/Ybu0cA1y5
+        X8qJnIgE2iM4PtQ96rWqX6Rs7O5yxTnPHiN7F1Hq8UDroABmp+uIb7rCCiuKAdyG
+        =olRB
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-12T14:14:23Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdACxvxqVBcUOYFgdlYsC9srC73+wLb682sV61EppFwjV4w
+        gjm0odf4Z9/NEtGYyfUi2vYjYB69UFIhOojg3zyt1GYSEh4s7CVn444Piv1zh5lO
+        0l4BqPRdOCgfG+JJPpiIOA/MZ6/kUZq8U6HveA+PQwVLxkTU+fGcT5N2cu5CDV+Y
+        GFzCgKCFXLkVKdrfMrjAgUW0G55e3XUJXPoMVTsyBIpCAz688LARmLas+XMYqnwW
+        =/diG
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
+  version: 3.11.0
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    io.portainer.kubernetes.application.name: matomo-db
+    io.portainer.kubernetes.application.stack: matomo
+  name: matomo-db
+  namespace: apps
+spec:
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Retain
+    whenScaled: Retain
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: matomo-db
+  serviceName: headless-matomo-db
+  template:
+    metadata:
+      labels:
+        app: matomo-db
+        io.portainer.kubernetes.application.name: matomo-db
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  key: MYSQL_DATABASE
+                  name: matomo
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MYSQL_PASSWORD
+                  name: matomo
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MYSQL_ROOT_PASSWORD
+                  name: matomo
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  key: MYSQL_USER
+                  name: matomo
+          image: docker.io/mysql:9.2
+          imagePullPolicy: Always
+          name: matomo-db
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: matomo-db-444e7934-8974-4ede-b4e6-cd4c85ef0857
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: registry-1
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: matomo-db-444e7934-8974-4ede-b4e6-cd4c85ef0857
+          persistentVolumeClaim:
+            claimName: matomo-db-444e7934-8974-4ede-b4e6-cd4c85ef0857
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        labels:
+          app: matomo-db
+          io.portainer.kubernetes.application.name: matomo-db
+        name: matomo-db-444e7934-8974-4ede-b4e6-cd4c85ef0857
+        namespace: apps
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1G
+        storageClassName: longhorn
+        volumeMode: Filesystem
+sops:
+  lastmodified: "2026-02-12T14:45:10Z"
+  mac: ENC[AES256_GCM,data:VmGdb11hi0shddFYbKdXcV9rAbuKkDV13sM2Tba337oexk/vqaHwQ+Ide4EoE1Ujr092dYGICIMENt13gcpgK96NQtzYsm2buYwbBxPSThbWg9erWtMlVP5PAljrA7sffMauF1n+SDA8glr16kKUpN92wsINgnqorZGbW+9FqHI=,iv:MxehVJsp0YKoiOH7SxWTEYJ8RgvNpc52RRLse4UbL5A=,tag:pkyYqXepWbthDDRslfQfRQ==,type:str]
+  pgp:
+    - created_at: "2026-02-12T14:14:23Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAJZvRHmhvRsxbYID9UjaXIWilw/5Ae6RhQ2WAZN+wBAww
+        z3TepKktt0INE5d0ZCXfVUQMPbYkbVehTC0tOhD9U0+xANC61791wbs/zOrauuea
+        0l4BRQ1jkAlrj7XupHOaE6pcMLbC4mxFkg1gmbEtfpoPwPuJW1h2uF/Ybu0cA1y5
+        X8qJnIgE2iM4PtQ96rWqX6Rs7O5yxTnPHiN7F1Hq8UDroABmp+uIb7rCCiuKAdyG
+        =olRB
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-12T14:14:23Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdACxvxqVBcUOYFgdlYsC9srC73+wLb682sV61EppFwjV4w
+        gjm0odf4Z9/NEtGYyfUi2vYjYB69UFIhOojg3zyt1GYSEh4s7CVn444Piv1zh5lO
+        0l4BqPRdOCgfG+JJPpiIOA/MZ6/kUZq8U6HveA+PQwVLxkTU+fGcT5N2cu5CDV+Y
+        GFzCgKCFXLkVKdrfMrjAgUW0G55e3XUJXPoMVTsyBIpCAz688LARmLas+XMYqnwW
+        =/diG
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
+  version: 3.11.0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.portainer.kubernetes.application.name: matomo-db
+    io.portainer.kubernetes.application.stack: matomo
+  name: headless-matomo-db
+  namespace: apps
+spec:
+  clusterIP: None
+  selector:
+    app: matomo-db
+  type: ClusterIP
+sops:
+  lastmodified: "2026-02-12T14:45:10Z"
+  mac: ENC[AES256_GCM,data:VmGdb11hi0shddFYbKdXcV9rAbuKkDV13sM2Tba337oexk/vqaHwQ+Ide4EoE1Ujr092dYGICIMENt13gcpgK96NQtzYsm2buYwbBxPSThbWg9erWtMlVP5PAljrA7sffMauF1n+SDA8glr16kKUpN92wsINgnqorZGbW+9FqHI=,iv:MxehVJsp0YKoiOH7SxWTEYJ8RgvNpc52RRLse4UbL5A=,tag:pkyYqXepWbthDDRslfQfRQ==,type:str]
+  pgp:
+    - created_at: "2026-02-12T14:14:23Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAJZvRHmhvRsxbYID9UjaXIWilw/5Ae6RhQ2WAZN+wBAww
+        z3TepKktt0INE5d0ZCXfVUQMPbYkbVehTC0tOhD9U0+xANC61791wbs/zOrauuea
+        0l4BRQ1jkAlrj7XupHOaE6pcMLbC4mxFkg1gmbEtfpoPwPuJW1h2uF/Ybu0cA1y5
+        X8qJnIgE2iM4PtQ96rWqX6Rs7O5yxTnPHiN7F1Hq8UDroABmp+uIb7rCCiuKAdyG
+        =olRB
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-12T14:14:23Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdACxvxqVBcUOYFgdlYsC9srC73+wLb682sV61EppFwjV4w
+        gjm0odf4Z9/NEtGYyfUi2vYjYB69UFIhOojg3zyt1GYSEh4s7CVn444Piv1zh5lO
+        0l4BqPRdOCgfG+JJPpiIOA/MZ6/kUZq8U6HveA+PQwVLxkTU+fGcT5N2cu5CDV+Y
+        GFzCgKCFXLkVKdrfMrjAgUW0G55e3XUJXPoMVTsyBIpCAz688LARmLas+XMYqnwW
+        =/diG
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
+  version: 3.11.0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.portainer.kubernetes.application.name: matomo-db
+    io.portainer.kubernetes.application.stack: matomo
+  name: matomo-db
+  namespace: apps
+spec:
+  ports:
+    - name: port-0
+      port: 3306
+      protocol: TCP
+      targetPort: 3306
+  selector:
+    app: matomo-db
+  type: ClusterIP
+sops:
+  lastmodified: "2026-02-12T14:45:10Z"
+  mac: ENC[AES256_GCM,data:VmGdb11hi0shddFYbKdXcV9rAbuKkDV13sM2Tba337oexk/vqaHwQ+Ide4EoE1Ujr092dYGICIMENt13gcpgK96NQtzYsm2buYwbBxPSThbWg9erWtMlVP5PAljrA7sffMauF1n+SDA8glr16kKUpN92wsINgnqorZGbW+9FqHI=,iv:MxehVJsp0YKoiOH7SxWTEYJ8RgvNpc52RRLse4UbL5A=,tag:pkyYqXepWbthDDRslfQfRQ==,type:str]
+  pgp:
+    - created_at: "2026-02-12T14:14:23Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAJZvRHmhvRsxbYID9UjaXIWilw/5Ae6RhQ2WAZN+wBAww
+        z3TepKktt0INE5d0ZCXfVUQMPbYkbVehTC0tOhD9U0+xANC61791wbs/zOrauuea
+        0l4BRQ1jkAlrj7XupHOaE6pcMLbC4mxFkg1gmbEtfpoPwPuJW1h2uF/Ybu0cA1y5
+        X8qJnIgE2iM4PtQ96rWqX6Rs7O5yxTnPHiN7F1Hq8UDroABmp+uIb7rCCiuKAdyG
+        =olRB
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-12T14:14:23Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdACxvxqVBcUOYFgdlYsC9srC73+wLb682sV61EppFwjV4w
+        gjm0odf4Z9/NEtGYyfUi2vYjYB69UFIhOojg3zyt1GYSEh4s7CVn444Piv1zh5lO
+        0l4BqPRdOCgfG+JJPpiIOA/MZ6/kUZq8U6HveA+PQwVLxkTU+fGcT5N2cu5CDV+Y
+        GFzCgKCFXLkVKdrfMrjAgUW0G55e3XUJXPoMVTsyBIpCAz688LARmLas+XMYqnwW
+        =/diG
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
+  version: 3.11.0
