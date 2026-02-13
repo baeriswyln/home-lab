@@ -6,3 +6,4 @@ resources:
 - core.yaml
 - totp.yaml
 - frontend.yaml
+- ingress.yaml

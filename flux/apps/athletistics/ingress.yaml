@@ -1,0 +1,43 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    spec.ingressClassName: traefik
+  labels:
+    io.portainer.kubernetes.application.kind: content
+    io.portainer.kubernetes.application.stack: "frontend"
+  name: frontend-tls-ingress
+  namespace: athletistics
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: app.athletistics.ch
+    http:
+      paths:
+      - backend:
+          service:
+            name: frontend
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+      - backend:
+          service:
+            name: totp-api
+            port:
+              number: 3000
+        path: /api/v1/totp
+        pathType: Prefix
+      - backend:
+          service:
+            name: core-api
+            port:
+              number: 3000
+        path: /api/v1
+        pathType: Prefix
+  tls:
+  - hosts:
+    - app.athletistics.ch
+    secretName: athletistics-tls

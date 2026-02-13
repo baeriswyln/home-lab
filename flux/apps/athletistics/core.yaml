@@ -204,32 +204,3 @@ spec:
   selector:
     app: core-db
   type: ClusterIP
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  annotations:
-    # cert-manager.io/cluster-issuer: letsencrypt-prod # issued in frontend
-    spec.ingressClassName: traefik
-  labels:
-    io.portainer.kubernetes.application.kind: content
-    io.portainer.kubernetes.application.stack: "backend"
-  name: core-tls-ingress
-  namespace: athletistics
-spec:
-  ingressClassName: traefik
-  rules:
-  - host: app.athletistics.ch
-    http:
-      paths:
-      - backend:
-          service:
-            name: core-api
-            port:
-              number: 80
-        path: /api/v1
-        pathType: Prefix
-  tls:
-  - hosts:
-    - app.athletistics.ch
-    secretName: athletistics-tls
