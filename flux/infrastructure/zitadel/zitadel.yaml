@@ -7,8 +7,8 @@ spec:
   interval: 15m
   url: https://charts.zitadel.com/
 sops:
-  lastmodified: "2026-02-12T22:58:52Z"
-  mac: ENC[AES256_GCM,data:gnun0ODea04otG6IOTfJxnWXx2etW3MPTchwiHeAFdelw5Tovzlo9hdzOgflRiuZq/xe8XvtdzLxYcut9eMATukAjH7jkI28KtzNnILvHhB7o9IiUkj9CwUpiLLIdMLSnohh7mwDb80vOt3xod9mzMn8aNNMisvJCbCOJKAOdtE=,iv:llPCMIufngjvOAiGnqnC/SroNwmNqfA9+s+OKvU5VjU=,tag:DTa8qX90q1aqCsxaiOePLg==,type:str]
+  lastmodified: "2026-02-13T12:34:06Z"
+  mac: ENC[AES256_GCM,data:zp1H5O/VAQxVGhBnPyL/RSAmD+iKTFgismSm7oSteiOsFPFc5hjGbEaeT1uK7+SYhbULEJSwVtBaTADThDUWMbNdvPjJTss5ctul8AhdVsxW03cb/wU1NvIYOFOl2nGBCpW8urjDuY0V1nx9CQ63ZM9hODa132aMREMJrjmI0Bo=,iv:iMzM+OPNsKtRaZcZZ5SVdf9zSfc5dOC7JueK8eDv+qs=,tag:4Lt8e/fjqkWPYUpx2+UQ3g==,type:str]
   pgp:
     - created_at: "2026-02-11T00:31:10Z"
       enc: |-
@@ -108,7 +108,7 @@ spec:
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
-        traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
+        cert-manager.io/cluster-issuer: letsencrypt-prod
       hosts:
         - host: auth.castor.baeriswyl.dev
           paths:
@@ -138,8 +138,8 @@ spec:
       enabled: true
       minAvailable: 1
 sops:
-  lastmodified: "2026-02-12T22:58:52Z"
-  mac: ENC[AES256_GCM,data:gnun0ODea04otG6IOTfJxnWXx2etW3MPTchwiHeAFdelw5Tovzlo9hdzOgflRiuZq/xe8XvtdzLxYcut9eMATukAjH7jkI28KtzNnILvHhB7o9IiUkj9CwUpiLLIdMLSnohh7mwDb80vOt3xod9mzMn8aNNMisvJCbCOJKAOdtE=,iv:llPCMIufngjvOAiGnqnC/SroNwmNqfA9+s+OKvU5VjU=,tag:DTa8qX90q1aqCsxaiOePLg==,type:str]
+  lastmodified: "2026-02-13T12:34:06Z"
+  mac: ENC[AES256_GCM,data:zp1H5O/VAQxVGhBnPyL/RSAmD+iKTFgismSm7oSteiOsFPFc5hjGbEaeT1uK7+SYhbULEJSwVtBaTADThDUWMbNdvPjJTss5ctul8AhdVsxW03cb/wU1NvIYOFOl2nGBCpW8urjDuY0V1nx9CQ63ZM9hODa132aMREMJrjmI0Bo=,iv:iMzM+OPNsKtRaZcZZ5SVdf9zSfc5dOC7JueK8eDv+qs=,tag:4Lt8e/fjqkWPYUpx2+UQ3g==,type:str]
   pgp:
     - created_at: "2026-02-11T00:31:10Z"
       enc: |-
