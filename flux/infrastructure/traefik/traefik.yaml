@@ -7,8 +7,8 @@ spec:
   interval: 15m
   url: https://traefik.github.io/charts
 sops:
-  lastmodified: "2026-02-11T09:21:09Z"
-  mac: ENC[AES256_GCM,data:8WUnom4B1ItedZkWSyWdKh4CBx119u/ehpZ3+x9DnROTqAJD8Ithrx9ACdD5g5mG8OAU1Kd/1IA1/EEgKBDBkETd5M2RN86De80VxAW4yFe0P5L/Fonkt6on8N8LPTQydzguk7/XCLG5r4tqaPBq2LDvFzeiwTGk+zLvejzeUhQ=,iv:51kGKdv89CAl6haRboHfiBJr3D0XNXvW7xRUh5eQu2w=,tag:ntbkJG/EEHVp8rSoaRBdPQ==,type:str]
+  lastmodified: "2026-02-13T13:17:31Z"
+  mac: ENC[AES256_GCM,data:R0rbr25jBbseLQcilivPghTEFfSqqUzFIDywR+qkhATqHBP3N4xvM2xd2V5yKarShokYtvZPgUXsUdsqdvlWVy+oWSOVmrW2cdkTvdDgk6D3lYJlzXt7/mknUaH7HjlQir7ySM3ab5st/584xeeyxj4loKP5qbOwl7aCKYayju0=,iv:arNW45/6oc+NBjuPzTJvAUl98aKEK11w8izsY/Dpb6A=,tag:IMfib3Fg6rNjaW/K4VUkVw==,type:str]
   pgp:
     - created_at: "2026-02-11T01:08:38Z"
       enc: |-
@@ -53,10 +53,10 @@ spec:
   releaseName: traefik
   install:
     remediation:
-      retries: 3
+      retries: -1
   upgrade:
     remediation:
-      retries: 3
+      retries: -1
   test:
     enable: true
   driftDetection:
@@ -111,8 +111,8 @@ spec:
           basicAuth:
             secret: traefik-dashboard-auth-secret
 sops:
-  lastmodified: "2026-02-11T09:21:09Z"
-  mac: ENC[AES256_GCM,data:8WUnom4B1ItedZkWSyWdKh4CBx119u/ehpZ3+x9DnROTqAJD8Ithrx9ACdD5g5mG8OAU1Kd/1IA1/EEgKBDBkETd5M2RN86De80VxAW4yFe0P5L/Fonkt6on8N8LPTQydzguk7/XCLG5r4tqaPBq2LDvFzeiwTGk+zLvejzeUhQ=,iv:51kGKdv89CAl6haRboHfiBJr3D0XNXvW7xRUh5eQu2w=,tag:ntbkJG/EEHVp8rSoaRBdPQ==,type:str]
+  lastmodified: "2026-02-13T13:17:31Z"
+  mac: ENC[AES256_GCM,data:R0rbr25jBbseLQcilivPghTEFfSqqUzFIDywR+qkhATqHBP3N4xvM2xd2V5yKarShokYtvZPgUXsUdsqdvlWVy+oWSOVmrW2cdkTvdDgk6D3lYJlzXt7/mknUaH7HjlQir7ySM3ab5st/584xeeyxj4loKP5qbOwl7aCKYayju0=,iv:arNW45/6oc+NBjuPzTJvAUl98aKEK11w8izsY/Dpb6A=,tag:IMfib3Fg6rNjaW/K4VUkVw==,type:str]
   pgp:
     - created_at: "2026-02-11T01:08:38Z"
       enc: |-
