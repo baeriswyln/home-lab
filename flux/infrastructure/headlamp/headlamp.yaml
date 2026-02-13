@@ -75,7 +75,7 @@ spec:
           create: true
         clientID: ENC[AES256_GCM,data:7k1thoIAXKuTv8nX5nSepx0/,iv:q+SEF1ebeMBYZ1EkPMYwKocMu9nYHgBy2lWpIDuynPo=,tag:uo2+d9jQHck5jFZjVQSAmA==,type:str]
         clientSecret: ""
-        issuerURL: https://auth.castor.baeriswyl.lan
+        issuerURL: https://auth.castor.baeriswyl.dev
     initContainers:
       - command:
           - /bin/sh
