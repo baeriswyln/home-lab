@@ -7,8 +7,8 @@ spec:
   interval: 15m
   url: https://kubernetes-sigs.github.io/headlamp/
 sops:
-  lastmodified: "2026-02-08T21:43:16Z"
-  mac: ENC[AES256_GCM,data:C+dFCFi68gOpFpJSCnuuW6G7EeNHpJkKTU0hjh1y9TCPS75VWRZryhcl3Q795/RUC8IqU7zdKZ8rhbMP/Z2tZQmi8ltxtxdQMGHVc8llOuvgSqPdsgfIu1MpyM0NIlEFyFGxbyeF7VDvd9geVAX9svEroHhKXi4kvWuXJS2G23w=,iv:/g/80gCx+u11Ev2k/NIq1ECEy20VKGMGVeDoSBcJjuM=,tag:hdEv1e66FWLjsqvQuk3IhQ==,type:str]
+  lastmodified: "2026-02-13T14:04:39Z"
+  mac: ENC[AES256_GCM,data:BPbmsl8FlCwlEQDQYXOAqs6PId1S5zkpkE2kUiGvjARFxqkKRoeBdfXlEPH4nhmK4F3kjIITtNdZ+S0SqrVx87zLqETCH3c4hDAqX9b1Sa1E7Iprw+OAmdIpip15ENcLZJYWxBheLb5wNq6G/jPVhxEDDwr1rPP0HX0W2oQjoHE=,iv:HMi8UOtA59k9FdbsWHFPXSEEmYs/xWkc5SVahakWAOw=,tag:62YNyxt98mK7mpLlg9Fx0A==,type:str]
   pgp:
     - created_at: "2026-02-08T19:03:11Z"
       enc: |-
@@ -73,7 +73,7 @@ spec:
       oidc:
         secret:
           create: true
-        clientID: ENC[AES256_GCM,data:ZU9dZ7wWRlGSYh0jIBH5ZdMU,iv:/YvDJYa5KWNpFGAZhVojO8rq5izZDsLSLs1VDwNeO1c=,tag:30Lsjn+E1+uOFT+ryi8HdQ==,type:str]
+        clientID: ENC[AES256_GCM,data:7k1thoIAXKuTv8nX5nSepx0/,iv:q+SEF1ebeMBYZ1EkPMYwKocMu9nYHgBy2lWpIDuynPo=,tag:uo2+d9jQHck5jFZjVQSAmA==,type:str]
         clientSecret: ""
         issuerURL: https://auth.castor.baeriswyl.lan
     initContainers:
@@ -106,8 +106,8 @@ spec:
           # The name of the Helm release
           claimName: headlamp
 sops:
-  lastmodified: "2026-02-08T21:43:16Z"
-  mac: ENC[AES256_GCM,data:C+dFCFi68gOpFpJSCnuuW6G7EeNHpJkKTU0hjh1y9TCPS75VWRZryhcl3Q795/RUC8IqU7zdKZ8rhbMP/Z2tZQmi8ltxtxdQMGHVc8llOuvgSqPdsgfIu1MpyM0NIlEFyFGxbyeF7VDvd9geVAX9svEroHhKXi4kvWuXJS2G23w=,iv:/g/80gCx+u11Ev2k/NIq1ECEy20VKGMGVeDoSBcJjuM=,tag:hdEv1e66FWLjsqvQuk3IhQ==,type:str]
+  lastmodified: "2026-02-13T14:04:39Z"
+  mac: ENC[AES256_GCM,data:BPbmsl8FlCwlEQDQYXOAqs6PId1S5zkpkE2kUiGvjARFxqkKRoeBdfXlEPH4nhmK4F3kjIITtNdZ+S0SqrVx87zLqETCH3c4hDAqX9b1Sa1E7Iprw+OAmdIpip15ENcLZJYWxBheLb5wNq6G/jPVhxEDDwr1rPP0HX0W2oQjoHE=,iv:HMi8UOtA59k9FdbsWHFPXSEEmYs/xWkc5SVahakWAOw=,tag:62YNyxt98mK7mpLlg9Fx0A==,type:str]
   pgp:
     - created_at: "2026-02-08T19:03:11Z"
       enc: |-
