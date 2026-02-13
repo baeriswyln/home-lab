@@ -43,6 +43,9 @@ spec:
     defaultSettings:
       defaultDataPath: "/var/mnt/longhorn"
       defaultLonghornStaticStorageClass: longhorn
+      storageOverProvisioningPercentage: 200
+      storageMinimalAvailablePercentage: 10
+      storageReservedPercentageForDefaultDisk: 
     defaultBackupStore:
       backupTarget: s3://longhorn-bucket@garage/longhorn
       backupTargetCredentialSecret: garage-secret-longhorn-backup
