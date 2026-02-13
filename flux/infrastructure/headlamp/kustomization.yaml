@@ -5,3 +5,4 @@ resources:
   - namespace.yaml
   - headlamp.yaml
   - ingress.yaml
+  - users.yaml

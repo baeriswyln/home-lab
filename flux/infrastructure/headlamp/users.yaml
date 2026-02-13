@@ -1,0 +1,40 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user-clusterrolebinding
+subjects:
+  - kind: ENC[AES256_GCM,data:AsOnVA==,iv:MfA9URB5TjlROheFUTSEeWm/g95nPqeg/3Gb273wmiQ=,tag:NNeIjbENg5RxcpmBPFAWeA==,type:str]
+    name: ENC[AES256_GCM,data:WgO8zjCBlam3K8ml1xwz61eZbgwi,iv:nj8NhtiMtNC7HN0tx9gXFiTQHx+edcZFe2EZtRdnED8=,tag:rzfxWb57AxxfZEsd+/TKeQ==,type:str]
+    apiGroup: ENC[AES256_GCM,data:cNHAooPapekouLtsG4izpoztELTJ/xmhlA==,iv:i+Bwm6Zo6g+r1Vwal/1WVwJXrCobJ5sfNZ0357spB7U=,tag:Ko8K6W57EWMccbQMIHKULQ==,type:str]
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+sops:
+  lastmodified: "2026-02-13T17:26:40Z"
+  mac: ENC[AES256_GCM,data:rPh6jG37acgqW+yfq88xFHXPw63IEPqSS+BfPaBELvxbnZ9x7+/BVEC507RikY2DZ7Uc8GtgL1Ctlbg9OBjgI068rAhiKw9TEVBRHNs1FlYN0T4540GweeSZxQxnH7ivMZJR6F2TD49Vy0mnCsrNwJ+OZaMYRb7nj05p1OGYtvs=,iv:QNjUg+U97kBaAPYkRIS6F5ZqWxhrxjITLXENyaNrHkA=,tag:RjuGQ9unWOsptJ0yJIJDrQ==,type:str]
+  pgp:
+    - created_at: "2026-02-13T17:26:40Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAALTqpYdIHWbzM6BMYVdkIBSboVAL+gOsmw4Ynv8naW4w
+        bSOnIcKhxZSSKds7K1srTTVmqXFgoNJlYKSxmxp+oOdl1jFQMitxC3+9iomb0JNd
+        0l4BOHMSeLOrid6qiF3flzkWe5rdrcUjo+Bi5+RZfPW4p8EmMfAsshNZuzDBgCfu
+        xmMiT+4+bVdtlMGtSs6RRUVviS8JGc7/gjj7qsn0M5BKJthLI9GhKOCszbHNlP1+
+        =Amcc
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-13T17:26:40Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdANCryeileLZeglJqVMfdPaPIenRQ8FFsZVOO1gGGhK2cw
+        Tq9GaJ6N03ynoQz37wGqPpwfTJuu95CXJL8jlEAUZUYAZcPHAyq1e5vsrmMwPxrq
+        0l4BbpGgB4fcEJ3Bph2c+Uyn3kpdAm3S4EKYYLWMG6XMh1TiS5zfaY67WD7esGjl
+        OEgyaVVhHlTZdHx1JeHslPh8Vj3RdfWWa6YNFz9R+VysVNF/EQ3nZ4NkqnvwuFHH
+        =2HTG
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername|subjects)$
+  version: 3.11.0
