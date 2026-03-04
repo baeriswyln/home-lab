@@ -1,3 +1,40 @@
+# kcfinder-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kcfinder-config
+  namespace: apps
+data:
+  config.php: ENC[AES256_GCM,data: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,iv:nw8+uxjAdGK2nLR4zLgLSQbyx75Fi5xoSTE0xkFFIlg=,tag:NMF6ygXmeX9A7fOt2I5BPQ==,type:str]
+sops:
+  lastmodified: "2026-03-04T15:40:06Z"
+  mac: ENC[AES256_GCM,data:WrHSnM0UPXsqcvNSSBuxkDJqRC3hWvSGpB5i05Z89S6IIt972uQYI7i+pUOJbTnIocnREIdrsS7oLXJPNVr98wd5AxUSevOXP7EaWGLBjhsWTo+A7YOpR7tI4jJN+Hi4ahOCKH9eFZYfgvRHZbfoQoFDlbuIY0M06YrJIryjVmM=,iv:zh78dFctfRHa/mCQSvbftBTOWj/qCPT9OwipWNGRtfA=,tag:chdYF4ZUXJu4o35zoDvLHw==,type:str]
+  pgp:
+    - created_at: "2026-02-12T12:59:15Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAE8yDIXiAh2J/L+67RRWSoZrV4fKZygj+qJhz+Bt1iG8w
+        NHFxXELth1AjNxs49uZq6GA85bM8CCdTKnZ3hm/O2OtGfBYa/ZDlyKpXGnYvhZv4
+        0lwB8haNNm/6llbh78e78SoXS3Yoiwjksmkzy56rIrS5pnKh8yHrLwsu6Vt6RZ49
+        Dzie1eElwOW+cFv1hMehcrynlOfbq9xoUrvO0N68qHS6zzc+tnS9Eiij7K1/uQ==
+        =ni2l
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-12T12:59:15Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdA7lDG/5UFq5JtCVIFI6Cgkwhe996Ydrq4f0yeqIKSDBEw
+        rttKSg6KXN9rAeMAC1MgP5BmIEXJxHCtpVIO2vyz/q/IVvD5jox7qDzjWK45z16j
+        0lwBFgBm4os7fH4ZApozvSN93sD8qVLlFc1EBIQBFsszRzMnxc4kLnpKsdqClHK3
+        6ZmRzzWNMCxyfAJSlgmpT2FrAvnjFH/2iyrJA6xYv2t8xKsbDAWuqv/6pbrM1Q==
+        =YLBe
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth)$
+  version: 3.11.0
+---
 # apache-config.yaml
 apiVersion: v1
 kind: ConfigMap
@@ -7,8 +44,8 @@ metadata:
 data:
   servername.conf: ENC[AES256_GCM,data:F8mCQjQyJ5wQ27ziTMlgdBoFyS6znJsCkiejyiwv61f6dBC7,iv:QNGyHxa0ufMjyZVAH9DulQLBrxfFzt1XS4+MEeWUqMY=,tag:hLsim8GqOOAX9288CpSpBg==,type:str]
 sops:
-  lastmodified: "2026-03-04T14:52:48Z"
-  mac: ENC[AES256_GCM,data:laL20HEzlGhgLfIQC8ErD2wheyrqjtO662AO9S0pqyBxjTKP29+GRkjvmH8RWpyOr/U2YMA+B4jh2d5ZXrp/VZf0PAMgiT5zr7qFl46iPkp1QkK8V5gPK75NNguQpdgTtwW8uh7Rp3fSMeqDzM0siDpROXoM4gVJtLestewJ+lw=,iv:+DHcplk6mVHDKA0DvcBB8coS2x1okCoFHPt+TETv7D4=,tag:Kes5ct3pyi8Q8hxWgHKuag==,type:str]
+  lastmodified: "2026-03-04T15:40:06Z"
+  mac: ENC[AES256_GCM,data:WrHSnM0UPXsqcvNSSBuxkDJqRC3hWvSGpB5i05Z89S6IIt972uQYI7i+pUOJbTnIocnREIdrsS7oLXJPNVr98wd5AxUSevOXP7EaWGLBjhsWTo+A7YOpR7tI4jJN+Hi4ahOCKH9eFZYfgvRHZbfoQoFDlbuIY0M06YrJIryjVmM=,iv:zh78dFctfRHa/mCQSvbftBTOWj/qCPT9OwipWNGRtfA=,tag:chdYF4ZUXJu4o35zoDvLHw==,type:str]
   pgp:
     - created_at: "2026-02-12T12:59:15Z"
       enc: |-
@@ -47,8 +84,8 @@ spec:
     hostsProxyHeaders:
       - X-Forwarded-Host
 sops:
-  lastmodified: "2026-03-04T14:52:48Z"
-  mac: ENC[AES256_GCM,data:laL20HEzlGhgLfIQC8ErD2wheyrqjtO662AO9S0pqyBxjTKP29+GRkjvmH8RWpyOr/U2YMA+B4jh2d5ZXrp/VZf0PAMgiT5zr7qFl46iPkp1QkK8V5gPK75NNguQpdgTtwW8uh7Rp3fSMeqDzM0siDpROXoM4gVJtLestewJ+lw=,iv:+DHcplk6mVHDKA0DvcBB8coS2x1okCoFHPt+TETv7D4=,tag:Kes5ct3pyi8Q8hxWgHKuag==,type:str]
+  lastmodified: "2026-03-04T15:40:06Z"
+  mac: ENC[AES256_GCM,data:WrHSnM0UPXsqcvNSSBuxkDJqRC3hWvSGpB5i05Z89S6IIt972uQYI7i+pUOJbTnIocnREIdrsS7oLXJPNVr98wd5AxUSevOXP7EaWGLBjhsWTo+A7YOpR7tI4jJN+Hi4ahOCKH9eFZYfgvRHZbfoQoFDlbuIY0M06YrJIryjVmM=,iv:zh78dFctfRHa/mCQSvbftBTOWj/qCPT9OwipWNGRtfA=,tag:chdYF4ZUXJu4o35zoDvLHw==,type:str]
   pgp:
     - created_at: "2026-02-12T12:59:15Z"
       enc: |-
@@ -84,8 +121,8 @@ spec:
   interval: 15m
   url: https://martialblog.github.io/helm-charts
 sops:
-  lastmodified: "2026-03-04T14:52:48Z"
-  mac: ENC[AES256_GCM,data:laL20HEzlGhgLfIQC8ErD2wheyrqjtO662AO9S0pqyBxjTKP29+GRkjvmH8RWpyOr/U2YMA+B4jh2d5ZXrp/VZf0PAMgiT5zr7qFl46iPkp1QkK8V5gPK75NNguQpdgTtwW8uh7Rp3fSMeqDzM0siDpROXoM4gVJtLestewJ+lw=,iv:+DHcplk6mVHDKA0DvcBB8coS2x1okCoFHPt+TETv7D4=,tag:Kes5ct3pyi8Q8hxWgHKuag==,type:str]
+  lastmodified: "2026-03-04T15:40:06Z"
+  mac: ENC[AES256_GCM,data:WrHSnM0UPXsqcvNSSBuxkDJqRC3hWvSGpB5i05Z89S6IIt972uQYI7i+pUOJbTnIocnREIdrsS7oLXJPNVr98wd5AxUSevOXP7EaWGLBjhsWTo+A7YOpR7tI4jJN+Hi4ahOCKH9eFZYfgvRHZbfoQoFDlbuIY0M06YrJIryjVmM=,iv:zh78dFctfRHa/mCQSvbftBTOWj/qCPT9OwipWNGRtfA=,tag:chdYF4ZUXJu4o35zoDvLHw==,type:str]
   pgp:
     - created_at: "2026-02-12T12:59:15Z"
       enc: |-
@@ -186,9 +223,13 @@ spec:
         mountPath: /etc/apache2/conf-enabled/servername.conf
         subPath: servername.conf
         configMap: apache-servername-config
+      - name: kcfinder
+        mountPath: /var/www/html/vendor/kcfinder/conf/config.php
+        subPath: config.php
+        configMap: kcfinder-config
 sops:
-  lastmodified: "2026-03-04T14:52:48Z"
-  mac: ENC[AES256_GCM,data:laL20HEzlGhgLfIQC8ErD2wheyrqjtO662AO9S0pqyBxjTKP29+GRkjvmH8RWpyOr/U2YMA+B4jh2d5ZXrp/VZf0PAMgiT5zr7qFl46iPkp1QkK8V5gPK75NNguQpdgTtwW8uh7Rp3fSMeqDzM0siDpROXoM4gVJtLestewJ+lw=,iv:+DHcplk6mVHDKA0DvcBB8coS2x1okCoFHPt+TETv7D4=,tag:Kes5ct3pyi8Q8hxWgHKuag==,type:str]
+  lastmodified: "2026-03-04T15:40:06Z"
+  mac: ENC[AES256_GCM,data:WrHSnM0UPXsqcvNSSBuxkDJqRC3hWvSGpB5i05Z89S6IIt972uQYI7i+pUOJbTnIocnREIdrsS7oLXJPNVr98wd5AxUSevOXP7EaWGLBjhsWTo+A7YOpR7tI4jJN+Hi4ahOCKH9eFZYfgvRHZbfoQoFDlbuIY0M06YrJIryjVmM=,iv:zh78dFctfRHa/mCQSvbftBTOWj/qCPT9OwipWNGRtfA=,tag:chdYF4ZUXJu4o35zoDvLHw==,type:str]
   pgp:
     - created_at: "2026-02-12T12:59:15Z"
       enc: |-
