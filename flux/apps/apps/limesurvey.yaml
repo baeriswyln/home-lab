@@ -1,3 +1,43 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: limesurvey-headers
+  namespace: apps
+spec:
+  headers:
+    customRequestHeaders:
+      X-Forwarded-Proto: https
+    hostsProxyHeaders:
+      - X-Forwarded-Host
+sops:
+  lastmodified: "2026-03-04T14:33:38Z"
+  mac: ENC[AES256_GCM,data:HtFdZPPpffSp1EHElJHMWHHeKzCEcR8iQOlpLKZit+gTjvuONQvQo/voyGj/XDU/q1hIa0+FxWpL4FSDi2dvPsM1SJHf2Gp2XIHir3hScTtUucwG03HnIRrRgLeKd+P7CovCEUxKZm9bZf+XJYsaU3zktI4BoBUH4LJh4YrCPKM=,iv:rtEG9favNNlAfyFTTLNw2go22W0rHbTNhMLexo8Em+E=,tag:eH+7LqehQ6MqxJwH8iw1mA==,type:str]
+  pgp:
+    - created_at: "2026-02-12T12:59:15Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAE8yDIXiAh2J/L+67RRWSoZrV4fKZygj+qJhz+Bt1iG8w
+        NHFxXELth1AjNxs49uZq6GA85bM8CCdTKnZ3hm/O2OtGfBYa/ZDlyKpXGnYvhZv4
+        0lwB8haNNm/6llbh78e78SoXS3Yoiwjksmkzy56rIrS5pnKh8yHrLwsu6Vt6RZ49
+        Dzie1eElwOW+cFv1hMehcrynlOfbq9xoUrvO0N68qHS6zzc+tnS9Eiij7K1/uQ==
+        =ni2l
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-12T12:59:15Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdA7lDG/5UFq5JtCVIFI6Cgkwhe996Ydrq4f0yeqIKSDBEw
+        rttKSg6KXN9rAeMAC1MgP5BmIEXJxHCtpVIO2vyz/q/IVvD5jox7qDzjWK45z16j
+        0lwBFgBm4os7fH4ZApozvSN93sD8qVLlFc1EBIQBFsszRzMnxc4kLnpKsdqClHK3
+        6ZmRzzWNMCxyfAJSlgmpT2FrAvnjFH/2iyrJA6xYv2t8xKsbDAWuqv/6pbrM1Q==
+        =YLBe
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth)$
+  version: 3.11.0
+---
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
@@ -7,8 +47,8 @@ spec:
   interval: 15m
   url: https://martialblog.github.io/helm-charts
 sops:
-  lastmodified: "2026-03-04T13:30:24Z"
-  mac: ENC[AES256_GCM,data:lbnxmiCZ+pfXuEUk54l8oiYyTDzCYKwI3ZZKLv/VkkLhAE2jWNICuj9lGa08raZ55Oimh1V++avqGIjQ+fHGL5mcpUkq3C7o/m6MReOdTuexTgX3PUOkgPTHeIBRWt9+0y/ejNDQH87tXE0gKKse8R0jTjJQJpr39Q2ACK+ggSE=,iv:bCV1cA01Uqf8MayPJ57Z1o3bqvu0xDSwYu0QKL8xihU=,tag:oAbBxayguIGK71LqGnUCsw==,type:str]
+  lastmodified: "2026-03-04T14:33:38Z"
+  mac: ENC[AES256_GCM,data:HtFdZPPpffSp1EHElJHMWHHeKzCEcR8iQOlpLKZit+gTjvuONQvQo/voyGj/XDU/q1hIa0+FxWpL4FSDi2dvPsM1SJHf2Gp2XIHir3hScTtUucwG03HnIRrRgLeKd+P7CovCEUxKZm9bZf+XJYsaU3zktI4BoBUH4LJh4YrCPKM=,iv:rtEG9favNNlAfyFTTLNw2go22W0rHbTNhMLexo8Em+E=,tag:eH+7LqehQ6MqxJwH8iw1mA==,type:str]
   pgp:
     - created_at: "2026-02-12T12:59:15Z"
       enc: |-
@@ -72,6 +112,7 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         spec.ingressClassName: traefik
         traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.middlewares: apps-limesurvey-headers@kubernetescrd
       className: traefik
       enabled: true
       hosts:
@@ -102,8 +143,8 @@ spec:
     updateStrategy:
       type: Recreate
 sops:
-  lastmodified: "2026-03-04T13:30:24Z"
-  mac: ENC[AES256_GCM,data:lbnxmiCZ+pfXuEUk54l8oiYyTDzCYKwI3ZZKLv/VkkLhAE2jWNICuj9lGa08raZ55Oimh1V++avqGIjQ+fHGL5mcpUkq3C7o/m6MReOdTuexTgX3PUOkgPTHeIBRWt9+0y/ejNDQH87tXE0gKKse8R0jTjJQJpr39Q2ACK+ggSE=,iv:bCV1cA01Uqf8MayPJ57Z1o3bqvu0xDSwYu0QKL8xihU=,tag:oAbBxayguIGK71LqGnUCsw==,type:str]
+  lastmodified: "2026-03-04T14:33:38Z"
+  mac: ENC[AES256_GCM,data:HtFdZPPpffSp1EHElJHMWHHeKzCEcR8iQOlpLKZit+gTjvuONQvQo/voyGj/XDU/q1hIa0+FxWpL4FSDi2dvPsM1SJHf2Gp2XIHir3hScTtUucwG03HnIRrRgLeKd+P7CovCEUxKZm9bZf+XJYsaU3zktI4BoBUH4LJh4YrCPKM=,iv:rtEG9favNNlAfyFTTLNw2go22W0rHbTNhMLexo8Em+E=,tag:eH+7LqehQ6MqxJwH8iw1mA==,type:str]
   pgp:
     - created_at: "2026-02-12T12:59:15Z"
       enc: |-
