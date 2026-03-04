@@ -85,6 +85,7 @@ spec:
           secretName: limesurvey-tls
     limesurvey:
       publicUrl: https://limesurvey.baeriswyl.dev
+      baseUrl: https://limesurvey.baeriswyl.dev
       admin:
         email: nicolas.baeriswyl@rega-sense.ch
         name: Nicolas
