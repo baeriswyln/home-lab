@@ -1,3 +1,40 @@
+# apache-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apache-servername-config
+  namespace: apps
+data:
+  servername.conf: ENC[AES256_GCM,data:F8mCQjQyJ5wQ27ziTMlgdBoFyS6znJsCkiejyiwv61f6dBC7,iv:QNGyHxa0ufMjyZVAH9DulQLBrxfFzt1XS4+MEeWUqMY=,tag:hLsim8GqOOAX9288CpSpBg==,type:str]
+sops:
+  lastmodified: "2026-03-04T14:52:48Z"
+  mac: ENC[AES256_GCM,data:laL20HEzlGhgLfIQC8ErD2wheyrqjtO662AO9S0pqyBxjTKP29+GRkjvmH8RWpyOr/U2YMA+B4jh2d5ZXrp/VZf0PAMgiT5zr7qFl46iPkp1QkK8V5gPK75NNguQpdgTtwW8uh7Rp3fSMeqDzM0siDpROXoM4gVJtLestewJ+lw=,iv:+DHcplk6mVHDKA0DvcBB8coS2x1okCoFHPt+TETv7D4=,tag:Kes5ct3pyi8Q8hxWgHKuag==,type:str]
+  pgp:
+    - created_at: "2026-02-12T12:59:15Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdAE8yDIXiAh2J/L+67RRWSoZrV4fKZygj+qJhz+Bt1iG8w
+        NHFxXELth1AjNxs49uZq6GA85bM8CCdTKnZ3hm/O2OtGfBYa/ZDlyKpXGnYvhZv4
+        0lwB8haNNm/6llbh78e78SoXS3Yoiwjksmkzy56rIrS5pnKh8yHrLwsu6Vt6RZ49
+        Dzie1eElwOW+cFv1hMehcrynlOfbq9xoUrvO0N68qHS6zzc+tnS9Eiij7K1/uQ==
+        =ni2l
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-02-12T12:59:15Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdA7lDG/5UFq5JtCVIFI6Cgkwhe996Ydrq4f0yeqIKSDBEw
+        rttKSg6KXN9rAeMAC1MgP5BmIEXJxHCtpVIO2vyz/q/IVvD5jox7qDzjWK45z16j
+        0lwBFgBm4os7fH4ZApozvSN93sD8qVLlFc1EBIQBFsszRzMnxc4kLnpKsdqClHK3
+        6ZmRzzWNMCxyfAJSlgmpT2FrAvnjFH/2iyrJA6xYv2t8xKsbDAWuqv/6pbrM1Q==
+        =YLBe
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth)$
+  version: 3.11.0
+---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
@@ -10,8 +47,8 @@ spec:
     hostsProxyHeaders:
       - X-Forwarded-Host
 sops:
-  lastmodified: "2026-03-04T14:33:38Z"
-  mac: ENC[AES256_GCM,data:HtFdZPPpffSp1EHElJHMWHHeKzCEcR8iQOlpLKZit+gTjvuONQvQo/voyGj/XDU/q1hIa0+FxWpL4FSDi2dvPsM1SJHf2Gp2XIHir3hScTtUucwG03HnIRrRgLeKd+P7CovCEUxKZm9bZf+XJYsaU3zktI4BoBUH4LJh4YrCPKM=,iv:rtEG9favNNlAfyFTTLNw2go22W0rHbTNhMLexo8Em+E=,tag:eH+7LqehQ6MqxJwH8iw1mA==,type:str]
+  lastmodified: "2026-03-04T14:52:48Z"
+  mac: ENC[AES256_GCM,data:laL20HEzlGhgLfIQC8ErD2wheyrqjtO662AO9S0pqyBxjTKP29+GRkjvmH8RWpyOr/U2YMA+B4jh2d5ZXrp/VZf0PAMgiT5zr7qFl46iPkp1QkK8V5gPK75NNguQpdgTtwW8uh7Rp3fSMeqDzM0siDpROXoM4gVJtLestewJ+lw=,iv:+DHcplk6mVHDKA0DvcBB8coS2x1okCoFHPt+TETv7D4=,tag:Kes5ct3pyi8Q8hxWgHKuag==,type:str]
   pgp:
     - created_at: "2026-02-12T12:59:15Z"
       enc: |-
@@ -47,8 +84,8 @@ spec:
   interval: 15m
   url: https://martialblog.github.io/helm-charts
 sops:
-  lastmodified: "2026-03-04T14:33:38Z"
-  mac: ENC[AES256_GCM,data:HtFdZPPpffSp1EHElJHMWHHeKzCEcR8iQOlpLKZit+gTjvuONQvQo/voyGj/XDU/q1hIa0+FxWpL4FSDi2dvPsM1SJHf2Gp2XIHir3hScTtUucwG03HnIRrRgLeKd+P7CovCEUxKZm9bZf+XJYsaU3zktI4BoBUH4LJh4YrCPKM=,iv:rtEG9favNNlAfyFTTLNw2go22W0rHbTNhMLexo8Em+E=,tag:eH+7LqehQ6MqxJwH8iw1mA==,type:str]
+  lastmodified: "2026-03-04T14:52:48Z"
+  mac: ENC[AES256_GCM,data:laL20HEzlGhgLfIQC8ErD2wheyrqjtO662AO9S0pqyBxjTKP29+GRkjvmH8RWpyOr/U2YMA+B4jh2d5ZXrp/VZf0PAMgiT5zr7qFl46iPkp1QkK8V5gPK75NNguQpdgTtwW8uh7Rp3fSMeqDzM0siDpROXoM4gVJtLestewJ+lw=,iv:+DHcplk6mVHDKA0DvcBB8coS2x1okCoFHPt+TETv7D4=,tag:Kes5ct3pyi8Q8hxWgHKuag==,type:str]
   pgp:
     - created_at: "2026-02-12T12:59:15Z"
       enc: |-
@@ -142,9 +179,17 @@ spec:
         tag: latest
     updateStrategy:
       type: Recreate
+    extraVolumes:
+      - name: apache-servername
+        configMap:
+          name: apache-servername-config
+    extraVolumeMounts:
+      - name: apache-servername
+        mountPath: /etc/apache2/conf-enabled/servername.conf
+        subPath: servername.conf
 sops:
-  lastmodified: "2026-03-04T14:33:38Z"
-  mac: ENC[AES256_GCM,data:HtFdZPPpffSp1EHElJHMWHHeKzCEcR8iQOlpLKZit+gTjvuONQvQo/voyGj/XDU/q1hIa0+FxWpL4FSDi2dvPsM1SJHf2Gp2XIHir3hScTtUucwG03HnIRrRgLeKd+P7CovCEUxKZm9bZf+XJYsaU3zktI4BoBUH4LJh4YrCPKM=,iv:rtEG9favNNlAfyFTTLNw2go22W0rHbTNhMLexo8Em+E=,tag:eH+7LqehQ6MqxJwH8iw1mA==,type:str]
+  lastmodified: "2026-03-04T14:52:48Z"
+  mac: ENC[AES256_GCM,data:laL20HEzlGhgLfIQC8ErD2wheyrqjtO662AO9S0pqyBxjTKP29+GRkjvmH8RWpyOr/U2YMA+B4jh2d5ZXrp/VZf0PAMgiT5zr7qFl46iPkp1QkK8V5gPK75NNguQpdgTtwW8uh7Rp3fSMeqDzM0siDpROXoM4gVJtLestewJ+lw=,iv:+DHcplk6mVHDKA0DvcBB8coS2x1okCoFHPt+TETv7D4=,tag:Kes5ct3pyi8Q8hxWgHKuag==,type:str]
   pgp:
     - created_at: "2026-02-12T12:59:15Z"
       enc: |-
