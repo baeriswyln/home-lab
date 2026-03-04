@@ -181,12 +181,11 @@ spec:
       type: Recreate
     extraVolumes:
       - name: apache-servername
-        configMap:
-          name: apache-servername-config
     extraVolumeMounts:
       - name: apache-servername
         mountPath: /etc/apache2/conf-enabled/servername.conf
         subPath: servername.conf
+        configMap: apache-servername-config
 sops:
   lastmodified: "2026-03-04T14:52:48Z"
   mac: ENC[AES256_GCM,data:laL20HEzlGhgLfIQC8ErD2wheyrqjtO662AO9S0pqyBxjTKP29+GRkjvmH8RWpyOr/U2YMA+B4jh2d5ZXrp/VZf0PAMgiT5zr7qFl46iPkp1QkK8V5gPK75NNguQpdgTtwW8uh7Rp3fSMeqDzM0siDpROXoM4gVJtLestewJ+lw=,iv:+DHcplk6mVHDKA0DvcBB8coS2x1okCoFHPt+TETv7D4=,tag:Kes5ct3pyi8Q8hxWgHKuag==,type:str]
