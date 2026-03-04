@@ -71,6 +71,7 @@ spec:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         spec.ingressClassName: traefik
+        traefik.ingress.kubernetes.io/router.tls: "true"
       className: traefik
       enabled: true
       hosts:
@@ -83,7 +84,7 @@ spec:
             - limesurvey.baeriswyl.dev
           secretName: limesurvey-tls
     limesurvey:
-      publicUrl: limesurvey.baeriswyl.dev
+      publicUrl: https://limesurvey.baeriswyl.dev
       admin:
         email: nicolas.baeriswyl@rega-sense.ch
         name: Nicolas
@@ -97,6 +98,8 @@ spec:
       enabled: true
       image:
         tag: latest
+    updateStrategy:
+      type: Recreate
 sops:
   lastmodified: "2026-03-04T13:30:24Z"
   mac: ENC[AES256_GCM,data:lbnxmiCZ+pfXuEUk54l8oiYyTDzCYKwI3ZZKLv/VkkLhAE2jWNICuj9lGa08raZ55Oimh1V++avqGIjQ+fHGL5mcpUkq3C7o/m6MReOdTuexTgX3PUOkgPTHeIBRWt9+0y/ejNDQH87tXE0gKKse8R0jTjJQJpr39Q2ACK+ggSE=,iv:bCV1cA01Uqf8MayPJ57Z1o3bqvu0xDSwYu0QKL8xihU=,tag:oAbBxayguIGK71LqGnUCsw==,type:str]
