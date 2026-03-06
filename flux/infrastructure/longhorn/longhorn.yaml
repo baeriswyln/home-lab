@@ -45,7 +45,58 @@ spec:
       defaultLonghornStaticStorageClass: longhorn
       storageOverProvisioningPercentage: 200
       storageMinimalAvailablePercentage: 10
-      storageReservedPercentageForDefaultDisk: 
+      storageReservedPercentageForDefaultDisk: 10
+      snapshotMaxCount: 10
     defaultBackupStore:
       backupTarget: s3://longhorn-bucket@garage/longhorn
       backupTargetCredentialSecret: garage-secret-longhorn-backup
+---
+# Daily backup to S3 — kept for 4 days
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: daily-backup
+  namespace: longhorn-system
+spec:
+  cron: "0 2 * * *"          # 02:00 UTC every day
+  task: backup
+  groups:
+    - default
+  retain: 4
+  concurrency: 2
+  labels:
+    frequency: daily
+
+---
+# Hourly local snapshot — kept for 24 hours (fast recovery)
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: hourly-snapshot
+  namespace: longhorn-system
+spec:
+  cron: "0 * * * *"          # top of every hour
+  task: snapshot
+  groups:
+    - default
+  retain: 24
+  concurrency: 3
+  labels:
+    frequency: hourly
+
+---
+# Weekly backup — kept for 3 weeks (long-term retention)
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: weekly-backup
+  namespace: longhorn-system
+spec:
+  cron: "0 3 * * 0"          # 03:00 UTC every Sunday
+  task: backup
+  groups:
+    - default
+  retain: 3
+  concurrency: 1
+  labels:
+    frequency: weekly

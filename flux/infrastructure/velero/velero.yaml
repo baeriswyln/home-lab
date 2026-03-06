@@ -50,19 +50,32 @@ spec:
       image:
         repository: public.ecr.aws/bitnami/kubectl
     schedules:
-      mainbackup:
+      daily-backup:
         disabled: false
-        labels:
-          myenv: foo
-        annotations:
-          myenv: foo
         schedule: "0 0 * * *"
         useOwnerReferencesInBackup: false
-        paused: false
-        skipImmediately: false
         template:
-          ttl: "240h"
+          ttl: "50h"
           storageLocation: default
+          snapshotVolumes: false
+          excludeNamespaces:
+          - cert-manager
+          - headlamp
+          - longhorn
+          - metallb-system
+          - traefik
+          excludedNamespaceScopedResources:
+          - persistentVolumeClaims
+          excludedClusterScopedResources:
+          - "*"
+      weekly-full-backup:
+        disabled: false
+        schedule: "0 4 * * 0"
+        useOwnerReferencesInBackup: false
+        template:
+          ttl: 720h                      # 30 days
+          storageLocation: default
+          snapshotVolumes: false
           excludeNamespaces:
           - cert-manager
           - headlamp
