@@ -36,11 +36,11 @@ module "talos-cluster" {
 
   nodes = {
     "controller01" = {
-      target_node  = "hp-node-01"
+      target_node  = "hp-node-02"
       id           = 0
       schematic_id = local.schematic_id_amd64
       vmodel       = "virtio"
-      hdd_capacity = ["10G"]
+      hdd_capacity = ["40G"]
       iso_name     = "local:iso/talos-metal-amd64.iso"
       vmid         = 101
       vnetwork     = "vmbr0"
@@ -49,24 +49,24 @@ module "talos-cluster" {
       ip_addr      = "172.16.11.1/16"
     },
     "controller02" = {
-      target_node  = "hp-node-01"
+      target_node  = "hp-node-06"
       id           = 0
       schematic_id = local.schematic_id_amd64
       vmodel       = "virtio"
-      hdd_capacity = ["10G"]
+      hdd_capacity = ["40G"]
       iso_name     = "local:iso/talos-metal-amd64.iso"
       vmid         = 102
       vnetwork     = "vmbr0"
       vcores       = 4
-      vram         = 6144
+      vram         = 4096
       ip_addr      = "172.16.11.2/16"
     },
     "controller03" = {
-      target_node  = "hp-node-01"
+      target_node  = "hp-node-04"
       id           = 0
       schematic_id = local.schematic_id_amd64
       vmodel       = "virtio"
-      hdd_capacity = ["10G"]
+      hdd_capacity = ["40G"]
       iso_name     = "local:iso/talos-metal-amd64.iso"
       vmid         = 103
       vnetwork     = "vmbr0"
@@ -75,16 +75,16 @@ module "talos-cluster" {
       ip_addr      = "172.16.11.3/16"
     },
     "workerStorage01" = {
-      target_node  = "hp-node-02"
+      target_node  = "hp-node-06"
       id           = 0
       schematic_id = local.schematic_id_amd64
       vmodel       = "virtio"
-      hdd_capacity = ["10G", "400G"]
+      hdd_capacity = ["40G", "400G"]
       iso_name     = "local:iso/talos-metal-amd64.iso"
       vmid         = 111
       vnetwork     = "vmbr0"
       vcores       = 3
-      vram         = 16384
+      vram         = 12288
       ip_addr      = "172.16.11.11/16"
     },
     "workerStorage02" = {
@@ -92,25 +92,25 @@ module "talos-cluster" {
       id           = 0
       schematic_id = local.schematic_id_amd64
       vmodel       = "virtio"
-      hdd_capacity = ["10G", "400G"]
+      hdd_capacity = ["40G", "400G"]
       iso_name     = "local:iso/talos-metal-amd64.iso"
       vmid         = 112
       vnetwork     = "vmbr0"
-      vcores       = 2
-      vram         = 3076
+      vcores       = 4
+      vram         = 28672
       ip_addr      = "172.16.11.12/16"
     },
     "workerStorage03" = {
-      target_node  = "hp-node-03"
+      target_node  = "hp-node-05"
       id           = 0
       schematic_id = local.schematic_id_amd64
       vmodel       = "virtio"
-      hdd_capacity = ["10G", "400G"]
+      hdd_capacity = ["40G", "400G"]
       iso_name     = "local:iso/talos-metal-amd64.iso"
       vmid         = 113
       vnetwork     = "vmbr0"
-      vcores       = 2
-      vram         = 3076
+      vcores       = 4
+      vram         = 12288
       ip_addr      = "172.16.11.13/16"
     }
   }

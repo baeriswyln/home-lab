@@ -19,13 +19,13 @@ resource "proxmox_vm_qemu" "talos_nodes" {
   }
 
   disks {
-    ide {
-      ide0 {
-        cdrom {
-          iso = each.value.iso_name
-        }
-      }
-    }
+    # ide {
+    #   ide0 {
+    #     cdrom {
+    #       iso = each.value.iso_name
+    #     }
+    #   }
+    # }
     scsi {
       scsi0 {
         disk {
