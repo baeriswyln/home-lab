@@ -4,15 +4,15 @@ metadata:
   name: admin-user-clusterrolebinding
 subjects:
   - kind: ENC[AES256_GCM,data:AsOnVA==,iv:MfA9URB5TjlROheFUTSEeWm/g95nPqeg/3Gb273wmiQ=,tag:NNeIjbENg5RxcpmBPFAWeA==,type:str]
-    name: ENC[AES256_GCM,data:wT+USobo+VB/ggZYe0YJK9hGG03qWVBv77XugiI=,iv:AyNFSCRnfvy0YLkQP1rKP+TIipEdaBedHwekmOecnSY=,tag:TXsY7lz6BHd7ebshT4uQSA==,type:str]
+    name: ENC[AES256_GCM,data:xaxHgJReZF7CvsZU8HK73RBLUmyq0V3ZoZ53hYgf64bzBQ==,iv:lPQeUbiSZd4bGj8J9zK8JBaBkz2cbwuHl1dom6EKlkE=,tag:J8PC04K+qWUrmJsta5jrkg==,type:str]
     apiGroup: ENC[AES256_GCM,data:cNHAooPapekouLtsG4izpoztELTJ/xmhlA==,iv:i+Bwm6Zo6g+r1Vwal/1WVwJXrCobJ5sfNZ0357spB7U=,tag:Ko8K6W57EWMccbQMIHKULQ==,type:str]
 roleRef:
   kind: ClusterRole
   name: cluster-admin
   apiGroup: rbac.authorization.k8s.io
 sops:
-  lastmodified: "2026-02-13T17:33:07Z"
-  mac: ENC[AES256_GCM,data:WPkUJ0snOBf9JSEkm6YhyGMv/4yF39Ko1VmnUIXMncg59W7bCbSoozuAnFl9snt78EoU6t98dsCgPg4WqKgPJveMOs//TWUiPvJoUfoTpgAhuBA6cFYzfm8JMrnf3xdT46Oh+jzOFG2pGUArFIA4bEKoEFylRygm6N8Azb/QS/8=,iv:vCwKJ+b8rqD9DKejAUS2Kv/1LXxwZN34awgocgunyuc=,tag:BWnFSiK3ZKNoRA51NkD+/A==,type:str]
+  lastmodified: "2026-03-07T14:28:32Z"
+  mac: ENC[AES256_GCM,data:Q4UTXcClJBFKRVOkan9x+b+N1ePOINrg0/jscGkyd6OZuu6+W1q2NNuIiLBXeaUcapguexQsw/FeRzUv/z+i9N5sODwE4Q/VgLIYXvR1XLjoK7NxZ5XvjOC1Hi7iytAAi9JRp8RMl3fiIqS43CiJJqfY1OvUc5L09A052XCM6F4=,iv:JTSWX9TLvsXeb7jeTeY01TK1pR4BA+ggsqD27lNfI4Y=,tag:Xbbm9V5uCB1ffF/0IJSUwg==,type:str]
   pgp:
     - created_at: "2026-02-13T17:26:40Z"
       enc: |-
