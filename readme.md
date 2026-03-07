@@ -61,6 +61,29 @@ Once ready, headlamp is accessible using a token generated with the following co
 kubectl create token headlamp -n headlamp
 ```
 
+Alternatively, Zitadel can be used for OIDC authentication. If the cluster is newly created, this requires some additional setup. 
+
+1. Create a new organization for the cluster
+2. Create a new project for all admin tasks
+3. Create a new application with the following properties.
+   1. Type: Web
+   2. Authentication Method: PKCE
+   3. Redirect URIs: https://<headlamp-domain>/oidc-callback
+4. Copy the Client ID and paste it into the headlamp values configuration.
+5. Create a user on zitadel, and update the credentials in `flux/infrastructure/headlamp/users.yaml`
+6. Patch talos with the command `talosctl patch machineconfig --nodes <controller-node-ip> --patch @oidc-patch.yaml` on all controllers, using the following template as a patch.
+
+```yaml
+cluster:
+  apiServer:
+    extraArgs:
+      oidc-issuer-url: "<zitadel domain>"
+      oidc-client-id: "<client id>"
+      oidc-username-claim: "email"
+      oidc-username-prefix: "oidc:"
+      oidc-groups-claim: "groups"
+      oidc-groups-prefix: "oidc:"
+```
 
 ## Maintenance
 
@@ -81,13 +104,10 @@ $ talosctl upgrade --nodes 10.20.30.40 \
   --image ghcr.io/siderolabs/installer:v1.12.2
 ```
 
+## Disaster recovery
 
-# todo
-
-
-- figure out how fluxcd sees all deployments as a single thing, and not just "infrastructure" and add an order in teployment
-- metrics-server
-- zitadel as a global oicd
-  - configure oicd for headlamp
-- backup
-- update kubeconfig, talosconfig, secrets.yaml
+1. Configure all required secrets
+2. Make sure to halt flux Kustomizations for the `apps` kustomization, as well as all `zitadel` related (in other words everything that was backed up). Otherwise, new PVCs will be created.
+3. Spin up the cluster
+4. Manually restore all longhorn volumes
+5. Create velero restore resources: `velero restore create --from-backup <backup name>`
