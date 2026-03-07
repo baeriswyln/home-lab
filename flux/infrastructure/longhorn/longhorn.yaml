@@ -100,3 +100,15 @@ spec:
   concurrency: 1
   labels:
     frequency: weekly
+
+---
+# additional storage class for non-replicated data
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: longhorn-replica-1
+provisioner: driver.longhorn.io
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+parameters:
+  numberOfReplicas: "1"

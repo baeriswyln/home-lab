@@ -1,0 +1,47 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: victoriametrics
+  namespace: monitoring
+spec:
+  interval: 15m
+  url: https://victoriametrics.github.io/helm-charts/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: vm-op
+  namespace: monitoring
+spec:
+  interval: 15m
+  timeout: 5m
+  chart:
+    spec:
+      chart: victoria-metrics-operator
+      sourceRef:
+        kind: HelmRepository
+        name: victoriametrics
+      interval: 5m
+  releaseName: vm-op
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    remediation:
+      retries: -1
+  test:
+    enable: true
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths:
+          - /spec/replicas
+        target:
+          kind: Deployment
+  values:
+    crds:
+      enabled: true
+      plain: false
+    admissionWebhooks:
+      certManager:
+        enabled: true

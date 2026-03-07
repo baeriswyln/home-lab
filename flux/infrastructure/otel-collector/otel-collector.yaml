@@ -1,0 +1,25 @@
+apiVersion: opentelemetry.io/v1beta1
+kind: OpenTelemetryCollector
+metadata:
+  name: kubernetes-events-receiver
+  namespace: opentelemetry-operator-system
+spec:
+  image: otel/opentelemetry-collector-contrib:0.147.0
+  config:
+    receivers:
+      k8s_events:
+        namespaces: 
+    exporters: # https://stackoverflow.com/a/77920152
+      otlphttp/vlogs0:
+        logs_endpoint: http://victoria-logs-single-server-0.victoria-logs-single-server.monitoring-victoria-logs.svc.cluster.local:9428/insert/opentelemetry/v1/logs
+        tls:
+          insecure: true
+      otlphttp/vlogs1: 
+        logs_endpoint: http://victoria-logs-single-server-1.victoria-logs-single-server.monitoring-victoria-logs.svc.cluster.local:9428/insert/opentelemetry/v1/logs
+        tls:
+          insecure: true
+    service:
+      pipelines:
+        logs:
+          receivers: [k8s_events]
+          exporters: [otlphttp/vlogs0, otlphttp/vlogs1]

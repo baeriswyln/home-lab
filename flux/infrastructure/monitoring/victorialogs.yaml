@@ -1,0 +1,62 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: victoria-logs-single
+  namespace: monitoring
+spec:
+  interval: 15m
+  timeout: 5m
+  chart:
+    spec:
+      chart: victoria-logs-single
+      sourceRef:
+        kind: HelmRepository
+        name: victoriametrics
+      interval: 5m
+  releaseName: victoria-logs-single
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    remediation:
+      retries: -1
+  test:
+    enable: true
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths:
+          - /spec/replicas
+        target:
+          kind: Deployment
+  values:
+    server:
+      enabled: true
+      replicaCount: 2
+      persistentVolume:
+        enabled: true
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: longhorn-replica-1
+        mountPath: /storage
+        subPath: ""
+        size: 40Gi
+
+      ingress:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-prod
+          kubernetes.io/ingress.class: traefik
+        hosts:
+          - name: logs.castor.baeriswyl.dev
+            path:
+              - /
+            port: http
+        tls: 
+          - secretName: logs-ingress-tls
+            hosts:
+              - logs.castor.baeriswyl.dev
+        ingressClassName: "traefik"
+
+    vector:
+      enabled: true
