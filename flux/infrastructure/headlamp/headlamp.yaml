@@ -7,8 +7,8 @@ spec:
   interval: 15m
   url: https://kubernetes-sigs.github.io/headlamp/
 sops:
-  lastmodified: "2026-02-13T17:07:35Z"
-  mac: ENC[AES256_GCM,data:7hHhFAtG/IDr3+aVAOIDx2GpyQ1g5iA68cLD5IJVd+A6E3g1EwGQMSnXzNN2N7u3LMgQsvwTvNtpJHOsSVu6Pv6MffrVo5gCUN1vhMVjkEOuxx+WoF0yUOQBG1KYU/AU0Kw1YoaNCH073qmygtKdIc6myREfwBsjPriCY9Fdliw=,iv:EAyy7RiFCfPiiQ9Tf2lLgquKiE480swlp4nxrI+/PGA=,tag:KHEHFHmYUZsp7W5smnm0Qg==,type:str]
+  lastmodified: "2026-03-07T14:42:42Z"
+  mac: ENC[AES256_GCM,data:spJlnvMFUkjBYYeIjU+urjpD3m3LPz0EEC3yRvU3xqy/jUK+NyeII+g4yXnqCs4TsqJOdC5sG5PRKRiKnj34tCZWu3PjIz7XpWchruKnCtMfSrugWIsMJgPvbnJF7+27Y0+mPV+OWXsVEO9vjvNYTVNV1PQH937yxcKH0HN/oLQ=,iv:KYqavTc2+UGrv5G7vKVWD1rPSMSOJDYHMV1PTOgABGM=,tag:wHBUJPDtjXWtDCT0LKtr3w==,type:str]
   pgp:
     - created_at: "2026-02-08T19:03:11Z"
       enc: |-
@@ -76,8 +76,7 @@ spec:
         clientID: ENC[AES256_GCM,data:7k1thoIAXKuTv8nX5nSepx0/,iv:q+SEF1ebeMBYZ1EkPMYwKocMu9nYHgBy2lWpIDuynPo=,tag:uo2+d9jQHck5jFZjVQSAmA==,type:str]
         clientSecret: ""
         issuerURL: https://auth.castor.baeriswyl.dev
-        useAccessToken: true
-        scopes: "openid,email,profile"
+        scopes: openid email profile groups
     initContainers:
       - command:
           - /bin/sh
@@ -108,8 +107,8 @@ spec:
           # The name of the Helm release
           claimName: headlamp
 sops:
-  lastmodified: "2026-02-13T17:07:35Z"
-  mac: ENC[AES256_GCM,data:7hHhFAtG/IDr3+aVAOIDx2GpyQ1g5iA68cLD5IJVd+A6E3g1EwGQMSnXzNN2N7u3LMgQsvwTvNtpJHOsSVu6Pv6MffrVo5gCUN1vhMVjkEOuxx+WoF0yUOQBG1KYU/AU0Kw1YoaNCH073qmygtKdIc6myREfwBsjPriCY9Fdliw=,iv:EAyy7RiFCfPiiQ9Tf2lLgquKiE480swlp4nxrI+/PGA=,tag:KHEHFHmYUZsp7W5smnm0Qg==,type:str]
+  lastmodified: "2026-03-07T14:42:42Z"
+  mac: ENC[AES256_GCM,data:spJlnvMFUkjBYYeIjU+urjpD3m3LPz0EEC3yRvU3xqy/jUK+NyeII+g4yXnqCs4TsqJOdC5sG5PRKRiKnj34tCZWu3PjIz7XpWchruKnCtMfSrugWIsMJgPvbnJF7+27Y0+mPV+OWXsVEO9vjvNYTVNV1PQH937yxcKH0HN/oLQ=,iv:KYqavTc2+UGrv5G7vKVWD1rPSMSOJDYHMV1PTOgABGM=,tag:wHBUJPDtjXWtDCT0LKtr3w==,type:str]
   pgp:
     - created_at: "2026-02-08T19:03:11Z"
       enc: |-
