@@ -8,8 +8,8 @@ spec:
   interval: 50m
   url: oci://registry-1.docker.io/bitnamicharts
 sops:
-  lastmodified: "2026-02-12T13:51:07Z"
-  mac: ENC[AES256_GCM,data:FcS/Yh4OUOfSVE8UkGZ5ebmXZWp56jjxqRAoZ19GWPsPtQM43uDTQMlsIfjMMj/JD+5b5HtJ+e3+gLi6+PDkzuFDqRanpPGh9vlHMxEuitCPJ4H7aGBpXQHyWasROEvPiHmUqksqswliOSsNsgyNy/IBC3JUxFXcgNgAm1RvcoI=,iv:k/KN1yl86ewfkcSJHptx5NRTWpd63uce7yFKzfu9hWE=,tag:8QqctrUfxJSAxFnmZruNig==,type:str]
+  lastmodified: "2026-03-06T18:14:20Z"
+  mac: ENC[AES256_GCM,data:CGNP93iFC/nNUHSqAcM30WKpTmyovc/lViQuhAKejncEQm5CuC6GY949CW8M8Fiq0hAWRvWb5VZ3TtzuHJtkTood/0OelEZHzLYqoESjp/d0ZewOlm/BtwxOSjxvcizGzgxusABlW7lDyqhBUKLGGypzcPoBb15M+Bt3xQbYZmw=,iv:KrUZChCpUkq5O3iUNLsXuOqKIp3Gbx6jR55Paf9ITiU=,tag:/cbre3I5ZcWxJubZU5l9Og==,type:str]
   pgp:
     - created_at: "2026-02-12T13:51:07Z"
       enc: |-
@@ -84,9 +84,11 @@ spec:
     wordpressPassword: ENC[AES256_GCM,data:eNNZkCFrAbY2t8IrzIAY6EkG/As=,iv:3SN/oPFNAXnEhKlfdFQVKx/ty8roNdco+FiJVBEA41I=,tag:ulZsx8AHhb/ASt58xcxlWg==,type:str]
     wordpressScheme: https
     wordpressUsername: ENC[AES256_GCM,data:gUtY/GpuRuAKa7+4eZY=,iv:JkBjF8s+OM8VxpoBe68oa9YITZ5tG0VPBbofnoFfLtE=,tag:MyUJIAQVv8jfCXUmJGcFHA==,type:str]
+    updateStrategy:
+      type: Recreate
 sops:
-  lastmodified: "2026-02-12T13:51:07Z"
-  mac: ENC[AES256_GCM,data:FcS/Yh4OUOfSVE8UkGZ5ebmXZWp56jjxqRAoZ19GWPsPtQM43uDTQMlsIfjMMj/JD+5b5HtJ+e3+gLi6+PDkzuFDqRanpPGh9vlHMxEuitCPJ4H7aGBpXQHyWasROEvPiHmUqksqswliOSsNsgyNy/IBC3JUxFXcgNgAm1RvcoI=,iv:k/KN1yl86ewfkcSJHptx5NRTWpd63uce7yFKzfu9hWE=,tag:8QqctrUfxJSAxFnmZruNig==,type:str]
+  lastmodified: "2026-03-06T18:14:20Z"
+  mac: ENC[AES256_GCM,data:CGNP93iFC/nNUHSqAcM30WKpTmyovc/lViQuhAKejncEQm5CuC6GY949CW8M8Fiq0hAWRvWb5VZ3TtzuHJtkTood/0OelEZHzLYqoESjp/d0ZewOlm/BtwxOSjxvcizGzgxusABlW7lDyqhBUKLGGypzcPoBb15M+Bt3xQbYZmw=,iv:KrUZChCpUkq5O3iUNLsXuOqKIp3Gbx6jR55Paf9ITiU=,tag:/cbre3I5ZcWxJubZU5l9Og==,type:str]
   pgp:
     - created_at: "2026-02-12T13:51:07Z"
       enc: |-
@@ -139,8 +141,8 @@ spec:
         - orgel-plaffeien.baeriswyl.dev
       secretName: wp--orgel-plaffeien-tls
 sops:
-  lastmodified: "2026-02-12T13:51:07Z"
-  mac: ENC[AES256_GCM,data:FcS/Yh4OUOfSVE8UkGZ5ebmXZWp56jjxqRAoZ19GWPsPtQM43uDTQMlsIfjMMj/JD+5b5HtJ+e3+gLi6+PDkzuFDqRanpPGh9vlHMxEuitCPJ4H7aGBpXQHyWasROEvPiHmUqksqswliOSsNsgyNy/IBC3JUxFXcgNgAm1RvcoI=,iv:k/KN1yl86ewfkcSJHptx5NRTWpd63uce7yFKzfu9hWE=,tag:8QqctrUfxJSAxFnmZruNig==,type:str]
+  lastmodified: "2026-03-06T18:14:20Z"
+  mac: ENC[AES256_GCM,data:CGNP93iFC/nNUHSqAcM30WKpTmyovc/lViQuhAKejncEQm5CuC6GY949CW8M8Fiq0hAWRvWb5VZ3TtzuHJtkTood/0OelEZHzLYqoESjp/d0ZewOlm/BtwxOSjxvcizGzgxusABlW7lDyqhBUKLGGypzcPoBb15M+Bt3xQbYZmw=,iv:KrUZChCpUkq5O3iUNLsXuOqKIp3Gbx6jR55Paf9ITiU=,tag:/cbre3I5ZcWxJubZU5l9Og==,type:str]
   pgp:
     - created_at: "2026-02-12T13:51:07Z"
       enc: |-
