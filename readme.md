@@ -111,3 +111,11 @@ $ talosctl upgrade --nodes 10.20.30.40 \
 3. Spin up the cluster
 4. Manually restore all longhorn volumes
 5. Create velero restore resources: `velero restore create --from-backup <backup name>`
+
+## Misc
+
+Some deployments receive `rollout restart` requests from github actions. In case the deployment is rebuilt, some secrets may be regenerated. These can be extracted as a kubeconfig with the following command.
+
+```shell
+./kubeconfig_github_reader.sh <namespace> <secret name>
+```
