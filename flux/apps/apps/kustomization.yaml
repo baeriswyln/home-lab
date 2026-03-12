@@ -9,3 +9,4 @@ resources:
 - orgel-plaffeien.yaml
 - matomo.yaml
 - baeriswyl-dev.yaml
+- github-deployer.yaml
