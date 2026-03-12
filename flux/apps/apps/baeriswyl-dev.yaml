@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: baeriswyl-dev
+  namespace: apps
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: baeriswyl-dev
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 100%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: baeriswyl-dev
+        io.portainer.kubernetes.application.name: baeriswyl-dev
+    spec:
+      imagePullSecrets:
+        - name: registry-1
+      containers:
+        - image: docker.io/baeriswyln/baeriswyl-dev:latest
+          imagePullPolicy: Always
+          name: baeriswyl-dev
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: baeriswyl-dev
+  namespace: apps
+spec:
+  ports:
+    - name: port-0
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: baeriswyl-dev
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    spec.ingressClassName: traefik
+  name: baeriswyl-dev-tls-ingress
+  namespace: apps
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: baeriswyl.dev
+    http:
+      paths:
+      - backend:
+          service:
+            name: baeriswyl-dev
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - baeriswyl.dev
+    secretName: baeriswyl-dev-tls
