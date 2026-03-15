@@ -10,3 +10,4 @@ resources:
 - matomo.yaml
 - baeriswyl-dev.yaml
 - github-deployer.yaml
+- tournament-maker.yaml

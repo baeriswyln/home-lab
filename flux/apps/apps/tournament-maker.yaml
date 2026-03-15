@@ -1,0 +1,413 @@
+# Secrets
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tournament-maker-secret
+  namespace: apps
+type: Opaque
+stringData:
+  POSTGRES_USER: ENC[AES256_GCM,data:F/IBnAU4mGY=,iv:zu8uNC874JKmjylQWaieGqaDeSX3fnwTiC063CN6J6k=,tag:aA+6BI7DgMLY1Uko/gx2+A==,type:str]
+  POSTGRES_PASSWORD: ENC[AES256_GCM,data:VnU+Mr4rp/gfKBLXn84afjWu,iv:p53qap3gSfRc9iGy9hGZMxJfBaKhlrseV6kFsctiyqc=,tag:wKac61GOe38XOVcYHLlydQ==,type:str]
+  DB_CONNECTION_PATH: ENC[AES256_GCM,data:6hY5X1Jjx6MGvLD0RfZb+ADpsYpUTcZfNTOHuAJ1uNprut6or1wfwd2ZoRyI97Zcfh2wWYynSxvnjYobS2iLfq+80BaA5kOT9TOvy5wUEvNxZVm3jQ==,iv:6PnPV4n/VA1oxIdy93UaooBG2WyiXAdlU0NLiE2AH9Q=,tag:NBcrH74RrA1poNZYmnKOIA==,type:str]
+  JWT_EXPIRY_MINUTES: ENC[AES256_GCM,data:qTU=,iv:hxtIDftPxdswQZ/R9lhV9zmdfJUHjNFqUqoJP7roNAY=,tag:zfNvKJEPClzx1EUfEAwImg==,type:str]
+  JWT_ACCESS_SECRET: ENC[AES256_GCM,data:6xWXvzOAjO+xuwts8mefHNeJ/Z9BdLO6V+152b4cxDY=,iv:o7t1JjgGJsyLglAiyEjwBTA8Xt5fp9yLYVyQt0AW5/k=,tag:HA3XYJ+oZRtCv7mS415k6A==,type:str]
+  JWT_REFRESH_SECRET: ENC[AES256_GCM,data:lg3QeWOcE5xownpni2WNezM9yD5UPDouNB4oQNtfbak=,iv:reSw/n+eVaruKZa5hHNxK5aC0i5r9oWHFF5RC8PirlQ=,tag:HbRCzbX8xiHK3S96Dbt7qQ==,type:str]
+# Frontend
+sops:
+  lastmodified: "2026-03-15T18:11:42Z"
+  mac: ENC[AES256_GCM,data:wKNYnoQvMxWHQnvO0exTV8h4SmdHwltwhYjXCC7CoXox+rwYsyquiGM4iY5//GPoKWRD/CJQQm3Q586lcLBce2lWrYmJVArbeTXnGkKBVY61KlQ2BaIxbVSwWPdA/GVqxSYZ46XOzsaaTa6Ot9wRJSnvvn8XZWt9QEVwhKXIceM=,iv:s1FdScjbeohldT4EA+ILaVEWNPNiZeaesgHWIQ2SuzE=,tag:k7Ut2UI7xbjizO6whcENHA==,type:str]
+  pgp:
+    - created_at: "2026-03-15T18:11:42Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdALHawgHK5vdbWfA3or87QTn36SNDWQ/vx0oexCctBN08w
+        u5jslYzrU6D1d47+QaENSwc/Sun36DZz20l8KNk968PkoO8YsLRO+b7eZ56tgizT
+        0l4B4pLzaPpIF0HJkzgtjTwfPULTr1RHzlh/LbTMSKe2n1MyiIIPtiugo/V/O7Vv
+        zcEiJ3iQIsPQ6asrzmAioAvMwM0rm4Jv+NviWCY2h5SNZ0Rx5nn2PBNFUDewMgQA
+        =z9wl
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-03-15T18:11:42Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdArEkaoPEcKPK88K95ASJWhuM2rA2j3AWBaW50bhaD41cw
+        XMMWhXBblkuFYRP3aTJGJHvoIXp7j99Hb/Dr8k3ciHge3h8KZCA0x/BBTQ/V8Nj5
+        0l4Bg3HIVuBCw/aN5g0NAEYcUTGbzSqbIH3F6aPHbpxRNwplJ1/rhFZ/8XtlG2Ho
+        X2+deKkUHcZAv8ySCdU+QuzFEn017D+BxXHlIBhdqhyazQ9SbTvg3ZGZqf4YJT8+
+        =KBnt
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
+  version: 3.11.0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tournament-maker-frontend
+  namespace: apps
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: tournament-maker-frontend
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: tournament-maker-frontend
+    spec:
+      containers:
+        - image: baeriswyln/tournament-maker-frontend:latest
+          imagePullPolicy: Always
+          name: tournament-maker-frontend
+          resources: {}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+sops:
+  lastmodified: "2026-03-15T18:11:42Z"
+  mac: ENC[AES256_GCM,data:wKNYnoQvMxWHQnvO0exTV8h4SmdHwltwhYjXCC7CoXox+rwYsyquiGM4iY5//GPoKWRD/CJQQm3Q586lcLBce2lWrYmJVArbeTXnGkKBVY61KlQ2BaIxbVSwWPdA/GVqxSYZ46XOzsaaTa6Ot9wRJSnvvn8XZWt9QEVwhKXIceM=,iv:s1FdScjbeohldT4EA+ILaVEWNPNiZeaesgHWIQ2SuzE=,tag:k7Ut2UI7xbjizO6whcENHA==,type:str]
+  pgp:
+    - created_at: "2026-03-15T18:11:42Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdALHawgHK5vdbWfA3or87QTn36SNDWQ/vx0oexCctBN08w
+        u5jslYzrU6D1d47+QaENSwc/Sun36DZz20l8KNk968PkoO8YsLRO+b7eZ56tgizT
+        0l4B4pLzaPpIF0HJkzgtjTwfPULTr1RHzlh/LbTMSKe2n1MyiIIPtiugo/V/O7Vv
+        zcEiJ3iQIsPQ6asrzmAioAvMwM0rm4Jv+NviWCY2h5SNZ0Rx5nn2PBNFUDewMgQA
+        =z9wl
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-03-15T18:11:42Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdArEkaoPEcKPK88K95ASJWhuM2rA2j3AWBaW50bhaD41cw
+        XMMWhXBblkuFYRP3aTJGJHvoIXp7j99Hb/Dr8k3ciHge3h8KZCA0x/BBTQ/V8Nj5
+        0l4Bg3HIVuBCw/aN5g0NAEYcUTGbzSqbIH3F6aPHbpxRNwplJ1/rhFZ/8XtlG2Ho
+        X2+deKkUHcZAv8ySCdU+QuzFEn017D+BxXHlIBhdqhyazQ9SbTvg3ZGZqf4YJT8+
+        =KBnt
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
+  version: 3.11.0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tournament-maker-frontend
+  namespace: apps
+spec:
+  ports:
+    - name: port-0
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: tournament-maker-frontend
+  type: ClusterIP
+# Backend
+sops:
+  lastmodified: "2026-03-15T18:11:42Z"
+  mac: ENC[AES256_GCM,data:wKNYnoQvMxWHQnvO0exTV8h4SmdHwltwhYjXCC7CoXox+rwYsyquiGM4iY5//GPoKWRD/CJQQm3Q586lcLBce2lWrYmJVArbeTXnGkKBVY61KlQ2BaIxbVSwWPdA/GVqxSYZ46XOzsaaTa6Ot9wRJSnvvn8XZWt9QEVwhKXIceM=,iv:s1FdScjbeohldT4EA+ILaVEWNPNiZeaesgHWIQ2SuzE=,tag:k7Ut2UI7xbjizO6whcENHA==,type:str]
+  pgp:
+    - created_at: "2026-03-15T18:11:42Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdALHawgHK5vdbWfA3or87QTn36SNDWQ/vx0oexCctBN08w
+        u5jslYzrU6D1d47+QaENSwc/Sun36DZz20l8KNk968PkoO8YsLRO+b7eZ56tgizT
+        0l4B4pLzaPpIF0HJkzgtjTwfPULTr1RHzlh/LbTMSKe2n1MyiIIPtiugo/V/O7Vv
+        zcEiJ3iQIsPQ6asrzmAioAvMwM0rm4Jv+NviWCY2h5SNZ0Rx5nn2PBNFUDewMgQA
+        =z9wl
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-03-15T18:11:42Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdArEkaoPEcKPK88K95ASJWhuM2rA2j3AWBaW50bhaD41cw
+        XMMWhXBblkuFYRP3aTJGJHvoIXp7j99Hb/Dr8k3ciHge3h8KZCA0x/BBTQ/V8Nj5
+        0l4Bg3HIVuBCw/aN5g0NAEYcUTGbzSqbIH3F6aPHbpxRNwplJ1/rhFZ/8XtlG2Ho
+        X2+deKkUHcZAv8ySCdU+QuzFEn017D+BxXHlIBhdqhyazQ9SbTvg3ZGZqf4YJT8+
+        =KBnt
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
+  version: 3.11.0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tournament-maker-api
+  namespace: apps
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: tournament-maker-api
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: tournament-maker-api
+    spec:
+      containers:
+        - image: baeriswyln/tournament-maker-api:latest
+          imagePullPolicy: Always
+          name: tournament-maker-api
+          envFrom:
+            - secretRef:
+                name: tournament-maker-secret
+          resources: {}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+sops:
+  lastmodified: "2026-03-15T18:11:42Z"
+  mac: ENC[AES256_GCM,data:wKNYnoQvMxWHQnvO0exTV8h4SmdHwltwhYjXCC7CoXox+rwYsyquiGM4iY5//GPoKWRD/CJQQm3Q586lcLBce2lWrYmJVArbeTXnGkKBVY61KlQ2BaIxbVSwWPdA/GVqxSYZ46XOzsaaTa6Ot9wRJSnvvn8XZWt9QEVwhKXIceM=,iv:s1FdScjbeohldT4EA+ILaVEWNPNiZeaesgHWIQ2SuzE=,tag:k7Ut2UI7xbjizO6whcENHA==,type:str]
+  pgp:
+    - created_at: "2026-03-15T18:11:42Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdALHawgHK5vdbWfA3or87QTn36SNDWQ/vx0oexCctBN08w
+        u5jslYzrU6D1d47+QaENSwc/Sun36DZz20l8KNk968PkoO8YsLRO+b7eZ56tgizT
+        0l4B4pLzaPpIF0HJkzgtjTwfPULTr1RHzlh/LbTMSKe2n1MyiIIPtiugo/V/O7Vv
+        zcEiJ3iQIsPQ6asrzmAioAvMwM0rm4Jv+NviWCY2h5SNZ0Rx5nn2PBNFUDewMgQA
+        =z9wl
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-03-15T18:11:42Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdArEkaoPEcKPK88K95ASJWhuM2rA2j3AWBaW50bhaD41cw
+        XMMWhXBblkuFYRP3aTJGJHvoIXp7j99Hb/Dr8k3ciHge3h8KZCA0x/BBTQ/V8Nj5
+        0l4Bg3HIVuBCw/aN5g0NAEYcUTGbzSqbIH3F6aPHbpxRNwplJ1/rhFZ/8XtlG2Ho
+        X2+deKkUHcZAv8ySCdU+QuzFEn017D+BxXHlIBhdqhyazQ9SbTvg3ZGZqf4YJT8+
+        =KBnt
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
+  version: 3.11.0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tournament-maker-api
+  namespace: apps
+spec:
+  ports:
+    - name: port-0
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: tournament-maker-api
+  type: ClusterIP
+# Database
+sops:
+  lastmodified: "2026-03-15T18:11:42Z"
+  mac: ENC[AES256_GCM,data:wKNYnoQvMxWHQnvO0exTV8h4SmdHwltwhYjXCC7CoXox+rwYsyquiGM4iY5//GPoKWRD/CJQQm3Q586lcLBce2lWrYmJVArbeTXnGkKBVY61KlQ2BaIxbVSwWPdA/GVqxSYZ46XOzsaaTa6Ot9wRJSnvvn8XZWt9QEVwhKXIceM=,iv:s1FdScjbeohldT4EA+ILaVEWNPNiZeaesgHWIQ2SuzE=,tag:k7Ut2UI7xbjizO6whcENHA==,type:str]
+  pgp:
+    - created_at: "2026-03-15T18:11:42Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdALHawgHK5vdbWfA3or87QTn36SNDWQ/vx0oexCctBN08w
+        u5jslYzrU6D1d47+QaENSwc/Sun36DZz20l8KNk968PkoO8YsLRO+b7eZ56tgizT
+        0l4B4pLzaPpIF0HJkzgtjTwfPULTr1RHzlh/LbTMSKe2n1MyiIIPtiugo/V/O7Vv
+        zcEiJ3iQIsPQ6asrzmAioAvMwM0rm4Jv+NviWCY2h5SNZ0Rx5nn2PBNFUDewMgQA
+        =z9wl
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-03-15T18:11:42Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdArEkaoPEcKPK88K95ASJWhuM2rA2j3AWBaW50bhaD41cw
+        XMMWhXBblkuFYRP3aTJGJHvoIXp7j99Hb/Dr8k3ciHge3h8KZCA0x/BBTQ/V8Nj5
+        0l4Bg3HIVuBCw/aN5g0NAEYcUTGbzSqbIH3F6aPHbpxRNwplJ1/rhFZ/8XtlG2Ho
+        X2+deKkUHcZAv8ySCdU+QuzFEn017D+BxXHlIBhdqhyazQ9SbTvg3ZGZqf4YJT8+
+        =KBnt
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
+  version: 3.11.0
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: bitnami
+  namespace: apps
+spec:
+  type: oci
+  url: oci://registry-1.docker.io/bitnamicharts
+  interval: 1h0m0s
+sops:
+  lastmodified: "2026-03-15T18:11:42Z"
+  mac: ENC[AES256_GCM,data:wKNYnoQvMxWHQnvO0exTV8h4SmdHwltwhYjXCC7CoXox+rwYsyquiGM4iY5//GPoKWRD/CJQQm3Q586lcLBce2lWrYmJVArbeTXnGkKBVY61KlQ2BaIxbVSwWPdA/GVqxSYZ46XOzsaaTa6Ot9wRJSnvvn8XZWt9QEVwhKXIceM=,iv:s1FdScjbeohldT4EA+ILaVEWNPNiZeaesgHWIQ2SuzE=,tag:k7Ut2UI7xbjizO6whcENHA==,type:str]
+  pgp:
+    - created_at: "2026-03-15T18:11:42Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdALHawgHK5vdbWfA3or87QTn36SNDWQ/vx0oexCctBN08w
+        u5jslYzrU6D1d47+QaENSwc/Sun36DZz20l8KNk968PkoO8YsLRO+b7eZ56tgizT
+        0l4B4pLzaPpIF0HJkzgtjTwfPULTr1RHzlh/LbTMSKe2n1MyiIIPtiugo/V/O7Vv
+        zcEiJ3iQIsPQ6asrzmAioAvMwM0rm4Jv+NviWCY2h5SNZ0Rx5nn2PBNFUDewMgQA
+        =z9wl
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-03-15T18:11:42Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdArEkaoPEcKPK88K95ASJWhuM2rA2j3AWBaW50bhaD41cw
+        XMMWhXBblkuFYRP3aTJGJHvoIXp7j99Hb/Dr8k3ciHge3h8KZCA0x/BBTQ/V8Nj5
+        0l4Bg3HIVuBCw/aN5g0NAEYcUTGbzSqbIH3F6aPHbpxRNwplJ1/rhFZ/8XtlG2Ho
+        X2+deKkUHcZAv8ySCdU+QuzFEn017D+BxXHlIBhdqhyazQ9SbTvg3ZGZqf4YJT8+
+        =KBnt
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
+  version: 3.11.0
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: tournament-maker-db
+  namespace: apps
+spec:
+  interval: 10m0s
+  chart:
+    spec:
+      chart: postgresql
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: apps
+  values:
+    global:
+      security:
+        allowInsecureImages: true
+    image:
+      registry: public.ecr.aws
+      repository: bitnami/postgresql
+      tag: "18"
+    auth:
+      existingSecret: ENC[AES256_GCM,data:KotoLn1fVAKcun7GtL8Z+nUc2N2PV8o=,iv:9YvyUK9OvAYxQDi+a9hkbZLsV+Wo6mamR4BjX50dvss=,tag:gPv30moM1wJzUrs+dKBKCw==,type:str]
+      secretKeys:
+        adminPasswordKey: ENC[AES256_GCM,data:EU6gDIPke8xkh5Gal0+CumI=,iv:NgWuNdvfeNxjpc9w21PK7CcfrZ/SLlGt9+2MH7hQjNg=,tag:VsGtpqb1xCPB11MQCvdTMg==,type:str]
+        userPasswordKey: ENC[AES256_GCM,data:rf6AuHzpaBxVZGytZg==,iv:AoAULamvRqjaWz0mOXIb3xMhyFK/udNvJio2Bosl+gQ=,tag:H/So5obIkUJEn7G5kV+OAw==,type:str]
+    persistence:
+      enabled: true
+      size: 10Gi
+# Ingress
+sops:
+  lastmodified: "2026-03-15T18:11:42Z"
+  mac: ENC[AES256_GCM,data:wKNYnoQvMxWHQnvO0exTV8h4SmdHwltwhYjXCC7CoXox+rwYsyquiGM4iY5//GPoKWRD/CJQQm3Q586lcLBce2lWrYmJVArbeTXnGkKBVY61KlQ2BaIxbVSwWPdA/GVqxSYZ46XOzsaaTa6Ot9wRJSnvvn8XZWt9QEVwhKXIceM=,iv:s1FdScjbeohldT4EA+ILaVEWNPNiZeaesgHWIQ2SuzE=,tag:k7Ut2UI7xbjizO6whcENHA==,type:str]
+  pgp:
+    - created_at: "2026-03-15T18:11:42Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdALHawgHK5vdbWfA3or87QTn36SNDWQ/vx0oexCctBN08w
+        u5jslYzrU6D1d47+QaENSwc/Sun36DZz20l8KNk968PkoO8YsLRO+b7eZ56tgizT
+        0l4B4pLzaPpIF0HJkzgtjTwfPULTr1RHzlh/LbTMSKe2n1MyiIIPtiugo/V/O7Vv
+        zcEiJ3iQIsPQ6asrzmAioAvMwM0rm4Jv+NviWCY2h5SNZ0Rx5nn2PBNFUDewMgQA
+        =z9wl
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-03-15T18:11:42Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdArEkaoPEcKPK88K95ASJWhuM2rA2j3AWBaW50bhaD41cw
+        XMMWhXBblkuFYRP3aTJGJHvoIXp7j99Hb/Dr8k3ciHge3h8KZCA0x/BBTQ/V8Nj5
+        0l4Bg3HIVuBCw/aN5g0NAEYcUTGbzSqbIH3F6aPHbpxRNwplJ1/rhFZ/8XtlG2Ho
+        X2+deKkUHcZAv8ySCdU+QuzFEn017D+BxXHlIBhdqhyazQ9SbTvg3ZGZqf4YJT8+
+        =KBnt
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
+  version: 3.11.0
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    spec.ingressClassName: traefik
+  name: tournament-maker-tls-ingress
+  namespace: apps
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: stm.baeriswyl.dev
+      http:
+        paths:
+          - backend:
+              service:
+                name: tournament-maker-frontend
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+          - backend:
+              service:
+                name: tournament-maker-api
+                port:
+                  number: 8080
+            path: /api/
+            pathType: Prefix
+  tls:
+    - hosts:
+        - stm.baeriswyl.dev
+      secretName: tournament-maker-tls
+sops:
+  lastmodified: "2026-03-15T18:11:42Z"
+  mac: ENC[AES256_GCM,data:wKNYnoQvMxWHQnvO0exTV8h4SmdHwltwhYjXCC7CoXox+rwYsyquiGM4iY5//GPoKWRD/CJQQm3Q586lcLBce2lWrYmJVArbeTXnGkKBVY61KlQ2BaIxbVSwWPdA/GVqxSYZ46XOzsaaTa6Ot9wRJSnvvn8XZWt9QEVwhKXIceM=,iv:s1FdScjbeohldT4EA+ILaVEWNPNiZeaesgHWIQ2SuzE=,tag:k7Ut2UI7xbjizO6whcENHA==,type:str]
+  pgp:
+    - created_at: "2026-03-15T18:11:42Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4Dd4GlSl54jlASAQdALHawgHK5vdbWfA3or87QTn36SNDWQ/vx0oexCctBN08w
+        u5jslYzrU6D1d47+QaENSwc/Sun36DZz20l8KNk968PkoO8YsLRO+b7eZ56tgizT
+        0l4B4pLzaPpIF0HJkzgtjTwfPULTr1RHzlh/LbTMSKe2n1MyiIIPtiugo/V/O7Vv
+        zcEiJ3iQIsPQ6asrzmAioAvMwM0rm4Jv+NviWCY2h5SNZ0Rx5nn2PBNFUDewMgQA
+        =z9wl
+        -----END PGP MESSAGE-----
+      fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
+    - created_at: "2026-03-15T18:11:42Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
+
+        hF4DJS3PlYN8TcgSAQdArEkaoPEcKPK88K95ASJWhuM2rA2j3AWBaW50bhaD41cw
+        XMMWhXBblkuFYRP3aTJGJHvoIXp7j99Hb/Dr8k3ciHge3h8KZCA0x/BBTQ/V8Nj5
+        0l4Bg3HIVuBCw/aN5g0NAEYcUTGbzSqbIH3F6aPHbpxRNwplJ1/rhFZ/8XtlG2Ho
+        X2+deKkUHcZAv8ySCdU+QuzFEn017D+BxXHlIBhdqhyazQ9SbTvg3ZGZqf4YJT8+
+        =KBnt
+        -----END PGP MESSAGE-----
+      fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
+  encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
+  version: 3.11.0
