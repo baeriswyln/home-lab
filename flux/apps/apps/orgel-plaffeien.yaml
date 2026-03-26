@@ -8,8 +8,8 @@ spec:
   interval: 50m
   url: oci://registry-1.docker.io/bitnamicharts
 sops:
-  lastmodified: "2026-03-06T18:14:20Z"
-  mac: ENC[AES256_GCM,data:CGNP93iFC/nNUHSqAcM30WKpTmyovc/lViQuhAKejncEQm5CuC6GY949CW8M8Fiq0hAWRvWb5VZ3TtzuHJtkTood/0OelEZHzLYqoESjp/d0ZewOlm/BtwxOSjxvcizGzgxusABlW7lDyqhBUKLGGypzcPoBb15M+Bt3xQbYZmw=,iv:KrUZChCpUkq5O3iUNLsXuOqKIp3Gbx6jR55Paf9ITiU=,tag:/cbre3I5ZcWxJubZU5l9Og==,type:str]
+  lastmodified: "2026-03-26T09:45:23Z"
+  mac: ENC[AES256_GCM,data:Ley0dnFahXt/9/7/pc7dv4UtFs7ZZS24vdT8cZibZeaeb0LE1wZedOizmeRFS2NvmHZcM7lf2JzvCjCBLe3VMWor21f6w1DicayipbnoCsav40/hStj3BzvezDhenew77Z+vt5aZgRdqhjBD+NjUe6iaeXKkzjdWj78l5AsiF6s=,iv:5mP7cVsHX2TWTIFtGsVZCNRq7wKFAnN+UM9u7z1Tvug=,tag:l7z94qxR1Lgeqlxk2DxBXw==,type:str]
   pgp:
     - created_at: "2026-02-12T13:51:07Z"
       enc: |-
@@ -68,6 +68,8 @@ spec:
         target:
           kind: Deployment
   values:
+    image:
+      pullPolicy: Always
     mariadb:
       auth:
         database: ENC[AES256_GCM,data:9oUtlyFDrsvoZ4IRJE8F/WY=,iv:gYTIKOIH7cGaBNIVecEb/TKjFo5LssHW49zsWN9z8es=,tag:YBTvQvTH8HHDgWQfapHEWw==,type:str]
@@ -87,8 +89,8 @@ spec:
     updateStrategy:
       type: Recreate
 sops:
-  lastmodified: "2026-03-06T18:14:20Z"
-  mac: ENC[AES256_GCM,data:CGNP93iFC/nNUHSqAcM30WKpTmyovc/lViQuhAKejncEQm5CuC6GY949CW8M8Fiq0hAWRvWb5VZ3TtzuHJtkTood/0OelEZHzLYqoESjp/d0ZewOlm/BtwxOSjxvcizGzgxusABlW7lDyqhBUKLGGypzcPoBb15M+Bt3xQbYZmw=,iv:KrUZChCpUkq5O3iUNLsXuOqKIp3Gbx6jR55Paf9ITiU=,tag:/cbre3I5ZcWxJubZU5l9Og==,type:str]
+  lastmodified: "2026-03-26T09:45:23Z"
+  mac: ENC[AES256_GCM,data:Ley0dnFahXt/9/7/pc7dv4UtFs7ZZS24vdT8cZibZeaeb0LE1wZedOizmeRFS2NvmHZcM7lf2JzvCjCBLe3VMWor21f6w1DicayipbnoCsav40/hStj3BzvezDhenew77Z+vt5aZgRdqhjBD+NjUe6iaeXKkzjdWj78l5AsiF6s=,iv:5mP7cVsHX2TWTIFtGsVZCNRq7wKFAnN+UM9u7z1Tvug=,tag:l7z94qxR1Lgeqlxk2DxBXw==,type:str]
   pgp:
     - created_at: "2026-02-12T13:51:07Z"
       enc: |-
@@ -141,8 +143,8 @@ spec:
         - orgel-plaffeien.baeriswyl.dev
       secretName: wp--orgel-plaffeien-tls
 sops:
-  lastmodified: "2026-03-06T18:14:20Z"
-  mac: ENC[AES256_GCM,data:CGNP93iFC/nNUHSqAcM30WKpTmyovc/lViQuhAKejncEQm5CuC6GY949CW8M8Fiq0hAWRvWb5VZ3TtzuHJtkTood/0OelEZHzLYqoESjp/d0ZewOlm/BtwxOSjxvcizGzgxusABlW7lDyqhBUKLGGypzcPoBb15M+Bt3xQbYZmw=,iv:KrUZChCpUkq5O3iUNLsXuOqKIp3Gbx6jR55Paf9ITiU=,tag:/cbre3I5ZcWxJubZU5l9Og==,type:str]
+  lastmodified: "2026-03-26T09:45:23Z"
+  mac: ENC[AES256_GCM,data:Ley0dnFahXt/9/7/pc7dv4UtFs7ZZS24vdT8cZibZeaeb0LE1wZedOizmeRFS2NvmHZcM7lf2JzvCjCBLe3VMWor21f6w1DicayipbnoCsav40/hStj3BzvezDhenew77Z+vt5aZgRdqhjBD+NjUe6iaeXKkzjdWj78l5AsiF6s=,iv:5mP7cVsHX2TWTIFtGsVZCNRq7wKFAnN+UM9u7z1Tvug=,tag:l7z94qxR1Lgeqlxk2DxBXw==,type:str]
   pgp:
     - created_at: "2026-02-12T13:51:07Z"
       enc: |-
