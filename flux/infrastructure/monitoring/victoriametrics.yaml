@@ -261,7 +261,7 @@ spec:
         enabled: true
       vmScrape:
         spec:
-          jobLabel: jobLabel
+          jobLabel: app.kubernetes.io/component
           namespaceSelector:
             matchNames:
               - kube-system
@@ -281,7 +281,7 @@ spec:
         enabled: true
       vmScrape:
         spec:
-          jobLabel: jobLabel
+          jobLabel: app.kubernetes.io/component
           namespaceSelector:
             matchNames:
               - kube-system
@@ -345,7 +345,7 @@ spec:
         enabled: true
       vmScrape:
         spec: 
-          jobLabel: jobLabel
+          jobLabel: app.kubernetes.io/component
           namespaceSelector:
             matchNames:
               - kube-system
