@@ -90,17 +90,25 @@ spec:
         disableNamespaceMatcher: true
       # required otherwise the auth_password secretRef below doesn't work
       useManagedConfig: true
+      templateFiles:
+        discord.tmpl: "{{ define \"discord.title\" -}}\n{{ if eq .Status \"firing\" }}\U0001F525{{ else }}✅{{ end }} [{{ .Status | toUpper }}{{ if eq .Status \"firing\" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .CommonLabels.alertname }}\n{{- end }}\n\n{{ define \"discord.message\" -}}\n**{{ .CommonAnnotations.summary }}**\nSeverity: `{{ .CommonLabels.severity }}` | Namespace: `{{ .CommonLabels.namespace }}`\n\n{{ range .Alerts -}}\n• **{{ .Labels.pod }}**{{ if .Labels.container }} / `{{ .Labels.container }}`{{ end }}\n{{ .Annotations.description }}\n{{ if .Annotations.runbook_url }}[\U0001F4D6 runbook]({{ .Annotations.runbook_url }}){{ end }}\n\n{{ end }}\n{{- end }}"
       config:
         route:
           # this becomes the default
           receiver: discord
           group_by:
-            - alertgroup
-            - job
+            - alertname
+            - namespace
+            - severity
           group_wait: 30s
           group_interval: 5m
           repeat_interval: 12h
           routes:
+            - matchers:
+                - alertname = "CPUThrottlingHigh"
+                - severity = "info"
+              receiver: blackhole
+              continue: false
             - matchers:
                 - severity =~ "info|warning|critical"
               receiver: discord
@@ -110,7 +118,10 @@ spec:
         receivers:
           - name: discord
             discord_configs:
-              - webhook_url: ENC[AES256_GCM,data:0lXvnVqNy+2FvJCgLU+Oki19TmhShvwHWxP5BTRDWQDyCW9GvW36C9c303uMep3aoTKdHemmfSJ7MWmuZnXfQLxI9ecNG3ifeEVVXHTtMgqMVA6gc6COYb1xOD0hZzMCdjpyYggd//fBJ1AqFh8hXU5PGdQR+DK2sg==,iv:iPX2b8U1cfJ89jbj/qYniVpDcB+nnBSeJUBqELaa/5c=,tag:TizJfahaz/DsBxDEmTh+dQ==,type:str]
+              - webhook_url: ENC[AES256_GCM,data:dFLm0tgIP6l9Prb3sn7Zd/7EKPyiJzMCFm9LX3AfLxOIjqV/dMd/BAsaludCdiwnJMFcyFRwckJyjFiSxKfyFHf5KxXdFs3Vz5tcvmJQRo/knEliUvkNg2pclNMWVQfb6cXlUMVIDd+jwIiuZIiYM4MLe7oEM0ygIg==,iv:wHnH0TdgZbZZ9RWkIxZdw8brVTsI2S9AOEoeQ01jAkM=,tag:QW1O1wg5jS02QMmIdw0ymw==,type:str]
+                title: '{{ template "discord.title" . }}'
+                message: '{{ template "discord.message" . }}'
+                send_resolved: true
           - name: blackhole
       monzoTemplate:
         enabled: false
@@ -335,29 +346,29 @@ spec:
     prometheus-operator-crds:
       enabled: false
 sops:
-  lastmodified: "2026-03-07T23:45:12Z"
-  mac: ENC[AES256_GCM,data:0BvYl2dGzQyahurFfUMbSu0BGfAcY39EA8gk+m6sDNjVKxYHBEEgnsV2aPMEjGrRTUKBE/bxEuiKn66m9fOFsHW5NA6rk5pwIsTYJCrWrlRC9LmZfhC1gdnP+9/BL6ghDep5dMtnjBWbBKutg0cNTl1etug4et4vo9EBWTtWpw0=,iv:Ljsq0smdj3SqGlaZbiVrvLpUQR3TQQQfkUFQe7Vz92s=,tag:T0kORGPFoN5GvpvTvhxLtA==,type:str]
+  lastmodified: "2026-04-20T19:29:58Z"
+  mac: ENC[AES256_GCM,data:jaEAG1l7gNMsY3JB5QNI9LAvGnkcPfBrlLKbGZ9KDYlXULDyGCs21CifXOgTXWjAbUT1wdz3tsmWSrjlMkZTtqNEqQSFtU5bQ6lUkIgDSoWpVf6lCuCg9jfryXDWy+VlfAK8avvI4xwdxuWeU3T3UI99g3IoFTQDDtIuUS1uvKQ=,iv:EGNJ4gordiqWGVVfcY4woIJrrVOhgcE3I77BIqFBDo4=,tag:oOFU6z08QnezRz7e4IU48w==,type:str]
   pgp:
-    - created_at: "2026-03-07T23:45:12Z"
+    - created_at: "2026-04-20T19:29:58Z"
       enc: |-
         -----BEGIN PGP MESSAGE-----
 
-        hF4Dd4GlSl54jlASAQdApa/OikNzL8MHS98lFdBBLuConuuC+h2rFl9EuOcI6D8w
-        0PHhHg+M1EZvNSAmgrceHKg1pmR6dAUsadbM5/dwGvyqZZ/Xjr5ef/4Q+XsFyZJc
-        0l4BWSyfCbj3RaVbYpTOWBrZoYbQkfZcOHrCnYButH0zdSqteOO3V1J0lEul7Zcf
-        SimYxH3F9kgvGT5vWVRLfhkrWtgi0dILNhQxR3IIn/tN9lKHZvNnd6zqa+i2/EGJ
-        =P1tJ
+        hF4Dd4GlSl54jlASAQdA7YFjtBff8WMmPiGAUmGlVuVyqDEAHVUN6K0gD62WXBUw
+        nhtZxC7jcTXFJhJSSwE/W3sVnakF3ev7GmargO9KmA9/Fw4NZKp7C2GqLoLsU3SV
+        0l4BCw5SGJK9f8VqfIC7YhDgMxQ4C3uV1pG+Jz8KPJEuYGyRKBDwPWCuJyAZS1vC
+        JyoTbA1RStLDnjoGQ+7Vkfs74G42ddRgAJ7qbkYzCzqqAjLGvDIL/GKJGxQbDvau
+        =pu0a
         -----END PGP MESSAGE-----
       fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
-    - created_at: "2026-03-07T23:45:12Z"
+    - created_at: "2026-04-20T19:29:58Z"
       enc: |-
         -----BEGIN PGP MESSAGE-----
 
-        hF4DJS3PlYN8TcgSAQdAU0Y+DCSB4M+03SVDsFF97GURB91ZQophpvIzPzDTSTAw
-        viitSMrz9Gf/2yJtW4podtvysr55aUa0PffevjNKbSfmFmt8TqgkxAdC3HJO9wU2
-        0l4BsJzMxXWTRPDjmmZbw3MGf/Ojdr8yRzD4kro49UmJMRmPsENai8OD28siueW1
-        9R2kNq6Od3MOZ6KT6hgfazVUxUTMjGKcYw9UWocWIqoxPrHdKzwBgaZ3W0Ns9mUL
-        =s7cK
+        hF4DJS3PlYN8TcgSAQdAMYoE3VVuwQS4oaKh8EthDQ3Qo3DDizDx5bjc4ZmYYhUw
+        dkqxhSFHqqWThenPvC/EED/Ur904vyEoBOYAjD54xTyfacdw091O/op6qSnKV19T
+        0l4BPREE/2VU/2DFUxpNq8OwH8s26TC45JpWld1wae4e8+e86HsNQoWwRfBjzvrm
+        58X2lDlCTDvofdeBlepsf4MyOTJ84VjmwWjdKBchySygu7oMbfQ9jjyu6siQhEfo
+        =+yf5
         -----END PGP MESSAGE-----
       fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
   encrypted_regex: ^(data|stringData|Human|clientID|clientSecret|webhook_url)$
