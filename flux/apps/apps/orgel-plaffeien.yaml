@@ -8,29 +8,29 @@ spec:
   interval: 50m
   url: oci://registry-1.docker.io/bitnamicharts
 sops:
-  lastmodified: "2026-04-20T16:48:32Z"
-  mac: ENC[AES256_GCM,data:nLG9lqFotXOqcjINaVIGZEnN9tC73yJHmyDXXLAKN8yLkHTaFBhgzhI4IqFekdZuUG8N3AMRN2MO8lK1ACiQ6bkqCc1IgAT43qg4ryib7sIdn1h0xHi9thk8g1eFVPjFnLfdaFehO/nO9quI6bTGuKyQrgkhs2RqorjwiXPDSn0=,iv:3c/A9BBR5EPGtEZG0oeuS8RXTY3SP8H8DBJ5zsQX76w=,tag:k1oBSu6b2eKwiUt2bvalzg==,type:str]
+  lastmodified: "2026-04-20T16:50:31Z"
+  mac: ENC[AES256_GCM,data:utd4sOzFnTPNOLTdO9+Bf0vOM6glTiQWE27COsLtQ6USBmEBv0WmuTZRSV0aiX8yzNEYGhfO4iDStEDXiXsukGQyiHiWr60fbFNfB4Xta9ulZcu/B6g1Wn6bd1Ilb78968OWSuPIhAe2HfAml/MpXGTymGj1lqBNFxlLScc6U3E=,iv:mSmKs7sg/KnMyvnrED6W5DkfN/BLea/JAqXmAFp3kY8=,tag:kcWgEsbPN5Y/lckj6oNNpw==,type:str]
   pgp:
-    - created_at: "2026-04-20T16:48:32Z"
+    - created_at: "2026-04-20T16:50:31Z"
       enc: |-
         -----BEGIN PGP MESSAGE-----
 
-        hF4Dd4GlSl54jlASAQdA7iDTvIsXDB7QivvVo7bkvM0EsvWVvwO7pI4vKwvCll0w
-        Vlw+IPkCR278AoL5g86EEpMna3tfmy/JT5VeA9F3Qr185CcPsla4k2Ij/XpwCrac
-        0l4Bx6ApsBwnY7CMRSpt1sBbmRjSa2tbdwtTlicjfm3gOpUgagJh9pq083Pzuwa2
-        dtunNaKjnaJjrRB2/tYlk9AXuoDbSJnwc5tCDnMRd/5AsSPZpD86bKEShcjY4kmX
-        =M1qw
+        hF4Dd4GlSl54jlASAQdA+CyKQ9+P2Aege+fzo5IwYpAsIov1iakjhD6T2aLTyyIw
+        7cNPviM1zXPdo/kmAuSVzTIeGsDaq/KGF/tbwKNI6jXZ1P9jhesU4m8RXj4s33ce
+        0lwBIED4lhm/BHAxSZNZ7gC8sxbuEx23tRvxTkVkU/rkNG24xiRTewZpqiRtdWoi
+        xN8wFaEL9PylFanClv6GHqiShWVcOTuxFpZSumbee8+c5GflE/2PRab98UXSNA==
+        =R0NA
         -----END PGP MESSAGE-----
       fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
-    - created_at: "2026-04-20T16:48:32Z"
+    - created_at: "2026-04-20T16:50:31Z"
       enc: |-
         -----BEGIN PGP MESSAGE-----
 
-        hF4DJS3PlYN8TcgSAQdAFmRL06togtcB6iddRb0ypLAQ1PIf3Q/HX5kC+w55b38w
-        seEvX4GKRJs0uHuO2MIKqLj+olPez047ZQdljSs3GMQV4dsKnc0Xt9/PkPNxXSPW
-        0l4Bc81qWfqgaxfVh8q7ezBidammpxh60mWSllauAcZdAu/3OLTxUVEyd4do9YbE
-        0Lwy11eo9jW+fSmX7SS/OH5d76ezOwkd6lP69ZGFWetRZB3f223GQaY81rGtP/U4
-        =T1yq
+        hF4DJS3PlYN8TcgSAQdAOrK8fgd2eAh9epGEIktjS9a9zKkZ6neITzTSoEbjJA4w
+        F5hiouJq0r3AkiOEB3qh7Kqd2V5H98NO5kix91gtxbbSYccXTfvJa+po4Jw4rRLG
+        0lwBSVhZIUoRgaoRHS1CsE5Klvv9QFzMndmu3GhgmL2mQuKC8qF2BM0G0r4syx3p
+        hMve0MY8J0pg5WJTdwS+GiB5IIWxH0SRCP3GixAwCNQskj8cLFduJyGUgaZreA==
+        =CHG/
         -----END PGP MESSAGE-----
       fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
   encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
@@ -43,31 +43,31 @@ metadata:
   name: php-opcache-config
   namespace: apps
 data:
-  opcache.ini: ENC[AES256_GCM,data:oJQXQTWz0cAV4RCTyvLedBo+pY3xa21StF2pUsxZ6CPnnLICas04A7OPA5rTYQjvlMInMe/pXTKbCTN91x0PklZ5,iv:HN2unWK5cHX2nf1+xsLM8t8MALKMv9RVMidSdJxPY8A=,tag:kCpLbuYmk253K+MHBwb7HA==,type:str]
+  opcache.ini: ENC[AES256_GCM,data:8iMBabXdGSULPQSBTTUMzKvvzpNDpZvz5R+09uDy3IJvUKo44iJ0LYMtoZAH/AiKlQX/K9VrCi6a48TcisjTjJgG,iv:qRv22Grj/i5KiMfZsBQfGpkoEeC2pbZB0D9l199rpRY=,tag:d77VZf30mKAoN8d/puzv/g==,type:str]
 sops:
-  lastmodified: "2026-04-20T16:48:32Z"
-  mac: ENC[AES256_GCM,data:nLG9lqFotXOqcjINaVIGZEnN9tC73yJHmyDXXLAKN8yLkHTaFBhgzhI4IqFekdZuUG8N3AMRN2MO8lK1ACiQ6bkqCc1IgAT43qg4ryib7sIdn1h0xHi9thk8g1eFVPjFnLfdaFehO/nO9quI6bTGuKyQrgkhs2RqorjwiXPDSn0=,iv:3c/A9BBR5EPGtEZG0oeuS8RXTY3SP8H8DBJ5zsQX76w=,tag:k1oBSu6b2eKwiUt2bvalzg==,type:str]
+  lastmodified: "2026-04-20T16:50:31Z"
+  mac: ENC[AES256_GCM,data:utd4sOzFnTPNOLTdO9+Bf0vOM6glTiQWE27COsLtQ6USBmEBv0WmuTZRSV0aiX8yzNEYGhfO4iDStEDXiXsukGQyiHiWr60fbFNfB4Xta9ulZcu/B6g1Wn6bd1Ilb78968OWSuPIhAe2HfAml/MpXGTymGj1lqBNFxlLScc6U3E=,iv:mSmKs7sg/KnMyvnrED6W5DkfN/BLea/JAqXmAFp3kY8=,tag:kcWgEsbPN5Y/lckj6oNNpw==,type:str]
   pgp:
-    - created_at: "2026-04-20T16:48:32Z"
+    - created_at: "2026-04-20T16:50:31Z"
       enc: |-
         -----BEGIN PGP MESSAGE-----
 
-        hF4Dd4GlSl54jlASAQdA7iDTvIsXDB7QivvVo7bkvM0EsvWVvwO7pI4vKwvCll0w
-        Vlw+IPkCR278AoL5g86EEpMna3tfmy/JT5VeA9F3Qr185CcPsla4k2Ij/XpwCrac
-        0l4Bx6ApsBwnY7CMRSpt1sBbmRjSa2tbdwtTlicjfm3gOpUgagJh9pq083Pzuwa2
-        dtunNaKjnaJjrRB2/tYlk9AXuoDbSJnwc5tCDnMRd/5AsSPZpD86bKEShcjY4kmX
-        =M1qw
+        hF4Dd4GlSl54jlASAQdA+CyKQ9+P2Aege+fzo5IwYpAsIov1iakjhD6T2aLTyyIw
+        7cNPviM1zXPdo/kmAuSVzTIeGsDaq/KGF/tbwKNI6jXZ1P9jhesU4m8RXj4s33ce
+        0lwBIED4lhm/BHAxSZNZ7gC8sxbuEx23tRvxTkVkU/rkNG24xiRTewZpqiRtdWoi
+        xN8wFaEL9PylFanClv6GHqiShWVcOTuxFpZSumbee8+c5GflE/2PRab98UXSNA==
+        =R0NA
         -----END PGP MESSAGE-----
       fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
-    - created_at: "2026-04-20T16:48:32Z"
+    - created_at: "2026-04-20T16:50:31Z"
       enc: |-
         -----BEGIN PGP MESSAGE-----
 
-        hF4DJS3PlYN8TcgSAQdAFmRL06togtcB6iddRb0ypLAQ1PIf3Q/HX5kC+w55b38w
-        seEvX4GKRJs0uHuO2MIKqLj+olPez047ZQdljSs3GMQV4dsKnc0Xt9/PkPNxXSPW
-        0l4Bc81qWfqgaxfVh8q7ezBidammpxh60mWSllauAcZdAu/3OLTxUVEyd4do9YbE
-        0Lwy11eo9jW+fSmX7SS/OH5d76ezOwkd6lP69ZGFWetRZB3f223GQaY81rGtP/U4
-        =T1yq
+        hF4DJS3PlYN8TcgSAQdAOrK8fgd2eAh9epGEIktjS9a9zKkZ6neITzTSoEbjJA4w
+        F5hiouJq0r3AkiOEB3qh7Kqd2V5H98NO5kix91gtxbbSYccXTfvJa+po4Jw4rRLG
+        0lwBSVhZIUoRgaoRHS1CsE5Klvv9QFzMndmu3GhgmL2mQuKC8qF2BM0G0r4syx3p
+        hMve0MY8J0pg5WJTdwS+GiB5IIWxH0SRCP3GixAwCNQskj8cLFduJyGUgaZreA==
+        =CHG/
         -----END PGP MESSAGE-----
       fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
   encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
@@ -122,13 +122,13 @@ spec:
       enabled: true
     mariadb:
       auth:
-        database: ENC[AES256_GCM,data:oXg5x37/oeMfzB2JsJp/Buc=,iv:16+awiSuxqQ9kyAzD2czBci/VTg/X5RXeRdDHZ0BSyE=,tag:3NSWphF3PNk6DQnUFJ3oug==,type:str]
-        password: ENC[AES256_GCM,data:xIgvleBcr2Ako+PDyJU4bvbOJqY=,iv:bSQ+pcpv1wi9aEUVK70P7yWo+Z8pAraAfBJKfUsTpzs=,tag:wyk1l4aY2VMaScTLooyFGg==,type:str]
-        rootPassword: ENC[AES256_GCM,data:g3UHVoYsLhCWDhsHStgyLxoTYUU=,iv:/tt1RQ89/Cp4kS142oJ6V/myStGwKzY1/31LHeLiVhg=,tag:hQ+FeXzgkkZpOJr6a14rlg==,type:str]
-        username: ENC[AES256_GCM,data:8ZKLmc1ya248tXLjOR4aQ+yo8PZOTg==,iv:M728RmLoP/SXH3fItCUVSa6e9x2AQbysVaesLs6nBnU=,tag:/yh3KgrXwc8e6wGNUKYQdQ==,type:str]
+        database: ENC[AES256_GCM,data:tNqqF6WC+dH/DwOj5EaM/Ec=,iv:cxvMvkMNY5STKfpPNizEGRItNstvbF9J6FFNUSPigMM=,tag:cOxmbamnym35JIKj86JK9A==,type:str]
+        password: ENC[AES256_GCM,data:ZXtF2oOhbdUooK7SJ7cYFFGhazc=,iv:JgP4PrnHh1ySwHt/dBSJAU3pEipcqDGbyZUiRdJ9MME=,tag:ARHGh9w0NV+kCsTLqClZRg==,type:str]
+        rootPassword: ENC[AES256_GCM,data:gdsjOLXWL8MEJK2ntwS8L0iRjHE=,iv:daWa8qBlP9zRHGzBfu4E8RjC+uI4ihHrdEBiY9IN2f0=,tag:3Z8tsH4RS90YEW1WR2H0CQ==,type:str]
+        username: ENC[AES256_GCM,data:TXDfuvzgSNB5F2LDSzlWrzMf26k7rA==,iv:0rjNoCZb/oydGxVx1NkiDS7Vl/a1gFXOXgz8JHnvih0=,tag:YfkViku3jQJ3xlwG92SCog==,type:str]
       primary:
         persistence:
-          size: 500Mi
+          size: 1Gi
         resourcesPreset: none
     persistence:
       size: 4Gi
@@ -142,35 +142,35 @@ spec:
         subPath: opcache.ini
         readOnly: true
     resourcesPreset: none
-    wordpressPassword: ENC[AES256_GCM,data:EUvQbZ5lEhf9QU8qQfp+SZNaKek=,iv:6W8pCHpaGyUJP0m93F0uzgTZcu2TcjQMmp/iGR7CIJQ=,tag:av2uYzbviEUfzoQ50sRUKA==,type:str]
+    wordpressPassword: ENC[AES256_GCM,data:b3G0ySF7h6W/IPbt1p9ciwmJww8=,iv:NS68G3K3ICvKs8NY7fKrMhvud1exE2Cpj0/h6RMl2no=,tag:j0rZt10FaPB/JkU8I1351g==,type:str]
     wordpressScheme: https
-    wordpressUsername: ENC[AES256_GCM,data:LjvtIGphYNDYviEXAFA=,iv:94qq6SQFWanDy1K/CbzZMjtS/C+xShDyA+gDglB/Aqs=,tag:twI82ctrjrH26sJL/AxcQg==,type:str]
+    wordpressUsername: ENC[AES256_GCM,data:2d8dJmnW1drxcyCpzx8=,iv:k0I3DpRONQxwx3jFFl73iZ4WgvM7ujaA5YWGu/bmZlc=,tag:sX1gTApgBr0hdUUgvsjLGg==,type:str]
     updateStrategy:
       type: Recreate
 sops:
-  lastmodified: "2026-04-20T16:48:32Z"
-  mac: ENC[AES256_GCM,data:nLG9lqFotXOqcjINaVIGZEnN9tC73yJHmyDXXLAKN8yLkHTaFBhgzhI4IqFekdZuUG8N3AMRN2MO8lK1ACiQ6bkqCc1IgAT43qg4ryib7sIdn1h0xHi9thk8g1eFVPjFnLfdaFehO/nO9quI6bTGuKyQrgkhs2RqorjwiXPDSn0=,iv:3c/A9BBR5EPGtEZG0oeuS8RXTY3SP8H8DBJ5zsQX76w=,tag:k1oBSu6b2eKwiUt2bvalzg==,type:str]
+  lastmodified: "2026-04-20T16:50:31Z"
+  mac: ENC[AES256_GCM,data:utd4sOzFnTPNOLTdO9+Bf0vOM6glTiQWE27COsLtQ6USBmEBv0WmuTZRSV0aiX8yzNEYGhfO4iDStEDXiXsukGQyiHiWr60fbFNfB4Xta9ulZcu/B6g1Wn6bd1Ilb78968OWSuPIhAe2HfAml/MpXGTymGj1lqBNFxlLScc6U3E=,iv:mSmKs7sg/KnMyvnrED6W5DkfN/BLea/JAqXmAFp3kY8=,tag:kcWgEsbPN5Y/lckj6oNNpw==,type:str]
   pgp:
-    - created_at: "2026-04-20T16:48:32Z"
+    - created_at: "2026-04-20T16:50:31Z"
       enc: |-
         -----BEGIN PGP MESSAGE-----
 
-        hF4Dd4GlSl54jlASAQdA7iDTvIsXDB7QivvVo7bkvM0EsvWVvwO7pI4vKwvCll0w
-        Vlw+IPkCR278AoL5g86EEpMna3tfmy/JT5VeA9F3Qr185CcPsla4k2Ij/XpwCrac
-        0l4Bx6ApsBwnY7CMRSpt1sBbmRjSa2tbdwtTlicjfm3gOpUgagJh9pq083Pzuwa2
-        dtunNaKjnaJjrRB2/tYlk9AXuoDbSJnwc5tCDnMRd/5AsSPZpD86bKEShcjY4kmX
-        =M1qw
+        hF4Dd4GlSl54jlASAQdA+CyKQ9+P2Aege+fzo5IwYpAsIov1iakjhD6T2aLTyyIw
+        7cNPviM1zXPdo/kmAuSVzTIeGsDaq/KGF/tbwKNI6jXZ1P9jhesU4m8RXj4s33ce
+        0lwBIED4lhm/BHAxSZNZ7gC8sxbuEx23tRvxTkVkU/rkNG24xiRTewZpqiRtdWoi
+        xN8wFaEL9PylFanClv6GHqiShWVcOTuxFpZSumbee8+c5GflE/2PRab98UXSNA==
+        =R0NA
         -----END PGP MESSAGE-----
       fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
-    - created_at: "2026-04-20T16:48:32Z"
+    - created_at: "2026-04-20T16:50:31Z"
       enc: |-
         -----BEGIN PGP MESSAGE-----
 
-        hF4DJS3PlYN8TcgSAQdAFmRL06togtcB6iddRb0ypLAQ1PIf3Q/HX5kC+w55b38w
-        seEvX4GKRJs0uHuO2MIKqLj+olPez047ZQdljSs3GMQV4dsKnc0Xt9/PkPNxXSPW
-        0l4Bc81qWfqgaxfVh8q7ezBidammpxh60mWSllauAcZdAu/3OLTxUVEyd4do9YbE
-        0Lwy11eo9jW+fSmX7SS/OH5d76ezOwkd6lP69ZGFWetRZB3f223GQaY81rGtP/U4
-        =T1yq
+        hF4DJS3PlYN8TcgSAQdAOrK8fgd2eAh9epGEIktjS9a9zKkZ6neITzTSoEbjJA4w
+        F5hiouJq0r3AkiOEB3qh7Kqd2V5H98NO5kix91gtxbbSYccXTfvJa+po4Jw4rRLG
+        0lwBSVhZIUoRgaoRHS1CsE5Klvv9QFzMndmu3GhgmL2mQuKC8qF2BM0G0r4syx3p
+        hMve0MY8J0pg5WJTdwS+GiB5IIWxH0SRCP3GixAwCNQskj8cLFduJyGUgaZreA==
+        =CHG/
         -----END PGP MESSAGE-----
       fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
   encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
@@ -213,29 +213,29 @@ spec:
         - www.orgel-plaffeien.ch
       secretName: wp--orgel-plaffeien-tls
 sops:
-  lastmodified: "2026-04-20T16:48:32Z"
-  mac: ENC[AES256_GCM,data:nLG9lqFotXOqcjINaVIGZEnN9tC73yJHmyDXXLAKN8yLkHTaFBhgzhI4IqFekdZuUG8N3AMRN2MO8lK1ACiQ6bkqCc1IgAT43qg4ryib7sIdn1h0xHi9thk8g1eFVPjFnLfdaFehO/nO9quI6bTGuKyQrgkhs2RqorjwiXPDSn0=,iv:3c/A9BBR5EPGtEZG0oeuS8RXTY3SP8H8DBJ5zsQX76w=,tag:k1oBSu6b2eKwiUt2bvalzg==,type:str]
+  lastmodified: "2026-04-20T16:50:31Z"
+  mac: ENC[AES256_GCM,data:utd4sOzFnTPNOLTdO9+Bf0vOM6glTiQWE27COsLtQ6USBmEBv0WmuTZRSV0aiX8yzNEYGhfO4iDStEDXiXsukGQyiHiWr60fbFNfB4Xta9ulZcu/B6g1Wn6bd1Ilb78968OWSuPIhAe2HfAml/MpXGTymGj1lqBNFxlLScc6U3E=,iv:mSmKs7sg/KnMyvnrED6W5DkfN/BLea/JAqXmAFp3kY8=,tag:kcWgEsbPN5Y/lckj6oNNpw==,type:str]
   pgp:
-    - created_at: "2026-04-20T16:48:32Z"
+    - created_at: "2026-04-20T16:50:31Z"
       enc: |-
         -----BEGIN PGP MESSAGE-----
 
-        hF4Dd4GlSl54jlASAQdA7iDTvIsXDB7QivvVo7bkvM0EsvWVvwO7pI4vKwvCll0w
-        Vlw+IPkCR278AoL5g86EEpMna3tfmy/JT5VeA9F3Qr185CcPsla4k2Ij/XpwCrac
-        0l4Bx6ApsBwnY7CMRSpt1sBbmRjSa2tbdwtTlicjfm3gOpUgagJh9pq083Pzuwa2
-        dtunNaKjnaJjrRB2/tYlk9AXuoDbSJnwc5tCDnMRd/5AsSPZpD86bKEShcjY4kmX
-        =M1qw
+        hF4Dd4GlSl54jlASAQdA+CyKQ9+P2Aege+fzo5IwYpAsIov1iakjhD6T2aLTyyIw
+        7cNPviM1zXPdo/kmAuSVzTIeGsDaq/KGF/tbwKNI6jXZ1P9jhesU4m8RXj4s33ce
+        0lwBIED4lhm/BHAxSZNZ7gC8sxbuEx23tRvxTkVkU/rkNG24xiRTewZpqiRtdWoi
+        xN8wFaEL9PylFanClv6GHqiShWVcOTuxFpZSumbee8+c5GflE/2PRab98UXSNA==
+        =R0NA
         -----END PGP MESSAGE-----
       fp: CBB77C32B08ADF26FBF2624638B8C929AD0DFC51
-    - created_at: "2026-04-20T16:48:32Z"
+    - created_at: "2026-04-20T16:50:31Z"
       enc: |-
         -----BEGIN PGP MESSAGE-----
 
-        hF4DJS3PlYN8TcgSAQdAFmRL06togtcB6iddRb0ypLAQ1PIf3Q/HX5kC+w55b38w
-        seEvX4GKRJs0uHuO2MIKqLj+olPez047ZQdljSs3GMQV4dsKnc0Xt9/PkPNxXSPW
-        0l4Bc81qWfqgaxfVh8q7ezBidammpxh60mWSllauAcZdAu/3OLTxUVEyd4do9YbE
-        0Lwy11eo9jW+fSmX7SS/OH5d76ezOwkd6lP69ZGFWetRZB3f223GQaY81rGtP/U4
-        =T1yq
+        hF4DJS3PlYN8TcgSAQdAOrK8fgd2eAh9epGEIktjS9a9zKkZ6neITzTSoEbjJA4w
+        F5hiouJq0r3AkiOEB3qh7Kqd2V5H98NO5kix91gtxbbSYccXTfvJa+po4Jw4rRLG
+        0lwBSVhZIUoRgaoRHS1CsE5Klvv9QFzMndmu3GhgmL2mQuKC8qF2BM0G0r4syx3p
+        hMve0MY8J0pg5WJTdwS+GiB5IIWxH0SRCP3GixAwCNQskj8cLFduJyGUgaZreA==
+        =CHG/
         -----END PGP MESSAGE-----
       fp: 3E82F2055C052B96DB314DF4D3EF8EFEAA87F564
   encrypted_regex: ^(data|stringData|auth|wordpressPassword|wordpressUsername)$
