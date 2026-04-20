@@ -8,6 +8,9 @@ machine:
 
 # required configuration for monitoring
 cluster: 
+  proxy:
+    extraArgs:
+      metrics-bind-address: 0.0.0.0
   controllerManager:
     extraArgs:
       bind-address: 0.0.0.0
