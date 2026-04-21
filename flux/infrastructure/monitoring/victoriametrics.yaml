@@ -110,6 +110,12 @@ spec:
               receiver: blackhole
               continue: false
             - matchers:
+                - alertname = "RecordingRulesNoData"
+                - group = "kube-scheduler.rules"
+                - recording =~ "cluster_quantile:scheduler_pod_scheduling_sli_duration_seconds:histogram_quantile|cluster_quantile:scheduler_scheduling_algorithm_duration_seconds:histogram_quantile|cluster_quantile:scheduler_scheduling_attempt_duration_seconds:histogram_quantile"
+              receiver: blackhole
+              continue: false
+            - matchers:
                 - severity =~ "info|warning|critical"
               receiver: discord
               continue: false
