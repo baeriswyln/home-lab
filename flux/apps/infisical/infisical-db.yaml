@@ -27,8 +27,7 @@ spec:
       security:
         allowInsecureImages: true
     image:
-      registry: public.ecr.aws
-      repository: bitnami/postgresql
+      repository: bitnamilegacy/postgresql
       tag: "16"
     auth:
       existingSecret: infisical-secret
