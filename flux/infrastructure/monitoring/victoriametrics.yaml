@@ -184,7 +184,10 @@ spec:
         type: pvc
         enabled: true
         storageClassName: longhorn
-        size: 500Mi
+        size: 4Gi
+      grafana.ini:
+        plugins:
+          allow_loading_unsigned_plugins: victoriametrics-metrics-datasource
       sidecar:
         datasources:
           enabled: true
