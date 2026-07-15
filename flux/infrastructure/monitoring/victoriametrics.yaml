@@ -202,6 +202,7 @@ spec:
       forceDeployDatasource: false
       plugins:
         - victoriametrics-logs-datasource
+        - victoriametrics-metrics-datasource
       ingress:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-prod
