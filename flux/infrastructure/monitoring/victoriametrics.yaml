@@ -39,12 +39,12 @@ spec:
       enabled: true
       spec:
         retentionPeriod: "1"
-        replicationFactor: 2
+        replicationFactor: 1
         vmstorage:
           replicaCount: 2
           storageDataPath: /vm-data
           extraArgs:
-            dedup.minScrapeInterval: 10s
+            dedup.minScrapeInterval: 30s
           storage:
             volumeClaimTemplate:
               spec:
@@ -60,7 +60,7 @@ spec:
           replicaCount: 2
           cacheMountPath: /select-cache
           extraArgs:
-            dedup.minScrapeInterval: 10s
+            dedup.minScrapeInterval: 30s
           storage:
             volumeClaimTemplate:
               spec:
@@ -151,7 +151,7 @@ spec:
       spec:
         port: "8080"
         selectAllByDefault: true
-        evaluationInterval: 15s
+        evaluationInterval: 60s
         extraArgs:
           http.pathPrefix: /
       ingress:
@@ -161,7 +161,7 @@ spec:
     vmagent:
       enabled: true
       spec:
-        scrapeInterval: 10s
+        scrapeInterval: 30s
         replicaCount: 2
       ingress:
         # enabling ingress on this because it's what allows us to check configured targets, etc.
