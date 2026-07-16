@@ -310,8 +310,7 @@ spec:
       security:
         allowInsecureImages: true
     image:
-      registry: public.ecr.aws
-      repository: bitnami/postgresql
+      repository: bitnamilegacy/postgresql
       tag: "18"
     auth:
       existingSecret: ENC[AES256_GCM,data:KotoLn1fVAKcun7GtL8Z+nUc2N2PV8o=,iv:9YvyUK9OvAYxQDi+a9hkbZLsV+Wo6mamR4BjX50dvss=,tag:gPv30moM1wJzUrs+dKBKCw==,type:str]
