@@ -72,6 +72,9 @@ Alternatively, Zitadel can be used for OIDC authentication. If the cluster is ne
 4. Copy the Client ID and paste it into the headlamp values configuration.
 5. Create a user on zitadel, and update the credentials in `flux/infrastructure/headlamp/users.yaml`
 6. Patch talos with the command `talosctl patch machineconfig --nodes <controller-node-ip> --patch @oidc-patch.yaml` on all controllers, using the following template as a patch.
+    Create a cluster role binding: `kubectl create clusterrolebinding oidc-admin \
+  --clusterrole=cluster-admin \
+  --user='oidc:headlamp@castor.baeriswyl.dev'
 
 ```yaml
 cluster:

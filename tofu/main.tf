@@ -23,7 +23,7 @@ module "talos-cluster" {
     # Define the DNS IP Address based on your system settings
     gateway     = "172.16.0.1"
     nameserver1 = "172.16.0.10"
-    nameserver2 = "172.16.0.1"
+    nameserver2 = "172.16.0.11"
   }
 
   talos_cluster_details = {

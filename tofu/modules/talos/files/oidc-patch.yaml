@@ -1,0 +1,11 @@
+# oidc-patch.yaml
+# patch this to make sure headlamp can use zitadel
+cluster:
+  apiServer:
+    extraArgs:
+      oidc-issuer-url: https://auth.castor.baeriswyl.dev
+      oidc-client-id: <replace with id>
+      oidc-username-claim: "email"
+      oidc-username-prefix: "oidc:"
+      oidc-groups-claim: "groups"
+      oidc-groups-prefix: "oidc:"
