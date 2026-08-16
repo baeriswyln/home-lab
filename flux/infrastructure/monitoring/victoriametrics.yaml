@@ -180,6 +180,8 @@ spec:
       enabled: true
       admin:
         existingSecret: grafana-admin-password
+      deploymentStrategy:
+        type: Recreate
       persistence:
         type: pvc
         enabled: true
