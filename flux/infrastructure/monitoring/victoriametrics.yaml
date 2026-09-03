@@ -91,7 +91,47 @@ spec:
       # required otherwise the auth_password secretRef below doesn't work
       useManagedConfig: true
       templateFiles:
-        discord.tmpl: "{{ define \"discord.title\" -}}\n{{ if eq .Status \"firing\" }}\U0001F525{{ else }}✅{{ end }} [{{ .Status | toUpper }}{{ if eq .Status \"firing\" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .CommonLabels.alertname }}\n{{- end }}\n\n{{ define \"discord.message\" -}}\n**{{ .CommonAnnotations.summary }}**\nSeverity: `{{ .CommonLabels.severity }}` | Namespace: `{{ .CommonLabels.namespace }}`\n\n{{ range .Alerts -}}\n• **{{ .Labels.pod }}**{{ if .Labels.container }} / `{{ .Labels.container }}`{{ end }}\n{{ .Annotations.description }}\n{{ if .Annotations.runbook_url }}[\U0001F4D6 runbook]({{ .Annotations.runbook_url }}){{ end }}\n\n{{ end }}\n{{- end }}"
+        discord.tmpl: |
+          {{ define "discord.severityIcon" -}}
+          {{- if eq .Status "resolved" -}}
+          🟩
+          {{- else if or (eq .CommonLabels.severity "critical") (eq .CommonLabels.severity "error") -}}
+          🟥
+          {{- else if eq .CommonLabels.severity "warning" -}}
+          🟨
+          {{- else -}}
+          ⬜
+          {{- end -}}
+          {{- end }}
+
+          {{ define "discord.severityLabel" -}}
+          {{- if eq .Status "resolved" -}}
+          RESOLVED
+          {{- else -}}
+          {{ .CommonLabels.severity | toUpper }}
+          {{- end -}}
+          {{- end }}
+
+          {{ define "discord.title" -}}
+          {{ template "discord.severityIcon" . }} [{{ template "discord.severityLabel" . }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .CommonLabels.alertname }}
+          {{- end }}
+
+          {{ define "discord.message" -}}
+          {{ $first := index .Alerts 0 -}}
+          **{{ .CommonAnnotations.summary }}**
+
+          Severity: `{{ .CommonLabels.severity }}`{{ "\u00A0\u00A0" }}|{{ "\u00A0\u00A0" }}Namespace: `{{ .CommonLabels.namespace }}`{{ if .CommonLabels.job }}{{ "\u00A0\u00A0" }}|{{ "\u00A0\u00A0" }}Job: `{{ .CommonLabels.job }}`{{ end }}{{ if or .CommonLabels.node .CommonLabels.instance }}{{ "\u00A0\u00A0" }}|{{ "\u00A0\u00A0" }}Node: `{{ if .CommonLabels.node }}{{ .CommonLabels.node }}{{ else }}{{ .CommonLabels.instance }}{{ end }}`{{ end }}{{ "\u00A0\u00A0" }}|{{ "\u00A0\u00A0" }}Duration: `{{ if eq .Status "firing" }}{{ ($first.StartsAt | since).Seconds | humanizeDuration }}{{ else }}{{ ($first.EndsAt.Sub $first.StartsAt).Seconds | humanizeDuration }}{{ end }}`{{ if $first.Annotations.value }}{{ "\u00A0\u00A0" }}|{{ "\u00A0\u00A0" }}Value: `{{ $first.Annotations.value }}`{{ end }}
+
+          {{ range .Alerts -}}
+          - **{{ .Labels.pod }}**{{ if .Labels.container }} / `{{ .Labels.container }}`{{ end }}
+          {{ .Annotations.description }}
+          
+          {{ end -}}
+          
+          {{ if $first.Annotations.runbook_url }}[📖 runbook]({{ $first.Annotations.runbook_url }}) · {{ end }}[🔕 silence]({{ .ExternalURL }}/#/silences/new?filter={{ printf "{alertname=\"%s\",namespace=\"%s\",severity=\"%s\"}" .CommonLabels.alertname .CommonLabels.namespace .CommonLabels.severity | urlquery }}){{ if $first.Annotations.dashboard_url }} · [📊 dashboard]({{ $first.Annotations.dashboard_url }}){{ end }}
+
+          🕒 {{ if eq .Status "firing" }}{{ date "15:04 MST" $first.StartsAt }}{{ else }}{{ date "15:04 MST" $first.EndsAt }}{{ end }}
+          {{- end }}
       config:
         route:
           # this becomes the default
@@ -115,6 +155,10 @@ spec:
                 - recording =~ "cluster_quantile:scheduler_pod_scheduling_sli_duration_seconds:histogram_quantile|cluster_quantile:scheduler_scheduling_algorithm_duration_seconds:histogram_quantile|cluster_quantile:scheduler_scheduling_attempt_duration_seconds:histogram_quantile"
               receiver: blackhole
               continue: false
+            - matchers:
+                - alertname = "RecordingRulesNoData"
+                - group = "kube-prometheus-general.rules"
+                - recording = "count:up0"
             - matchers:
                 - severity =~ "info|warning|critical"
               receiver: discord
