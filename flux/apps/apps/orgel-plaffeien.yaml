@@ -154,9 +154,6 @@ spec:
       enabled: true
       runAsUser: 1001
       runAsNonRoot: true
-    # TLS 1.3 fix
-    fips:
-      openssl: "off"
 sops:
   lastmodified: "2026-04-20T16:50:31Z"
   mac: ENC[AES256_GCM,data:utd4sOzFnTPNOLTdO9+Bf0vOM6glTiQWE27COsLtQ6USBmEBv0WmuTZRSV0aiX8yzNEYGhfO4iDStEDXiXsukGQyiHiWr60fbFNfB4Xta9ulZcu/B6g1Wn6bd1Ilb78968OWSuPIhAe2HfAml/MpXGTymGj1lqBNFxlLScc6U3E=,iv:mSmKs7sg/KnMyvnrED6W5DkfN/BLea/JAqXmAFp3kY8=,tag:kcWgEsbPN5Y/lckj6oNNpw==,type:str]
