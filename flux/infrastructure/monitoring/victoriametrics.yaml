@@ -145,6 +145,16 @@ spec:
           repeat_interval: 12h
           routes:
             - matchers:
+                - severity = "error|critical"
+              receiver: discord
+              repeat_interval: 1h
+              continue: false
+            - matchers:
+                - severity = "warning"
+              receiver: discord
+              repeat_interval: 2h
+              continue: false
+            - matchers:
                 - alertname = "CPUThrottlingHigh"
                 - severity = "info"
               receiver: blackhole
@@ -159,8 +169,10 @@ spec:
                 - alertname = "RecordingRulesNoData"
                 - group = "kube-prometheus-general.rules"
                 - recording = "count:up0"
+              receiver: blackhole
+              continue: false
             - matchers:
-                - severity =~ "info|warning|critical"
+                - severity =~ "info|warning|error|critical"
               receiver: discord
               continue: false
             - continue: true
