@@ -157,6 +157,8 @@ spec:
         - hosts:
             - limesurvey.baeriswyl.dev
           secretName: limesurvey-tls
+    image:
+      tag: 7-apache
     limesurvey:
       admin:
         email: nicolas.baeriswyl@rega-sense.ch
