@@ -18,7 +18,7 @@ spec:
   chart:
     spec:
       chart: longhorn
-      version: v1.11.3
+      version: v1.12.1
       sourceRef:
         kind: HelmRepository
         name: longhorn
@@ -46,7 +46,7 @@ spec:
       storageOverProvisioningPercentage: 200
       storageMinimalAvailablePercentage: 10
       storageReservedPercentageForDefaultDisk: 10
-      snapshotMaxCount: 10
+      snapshotMaxCount: 30
     defaultBackupStore:
       backupTarget: s3://longhorn-bucket@garage/longhorn
       backupTargetCredentialSecret: garage-secret-longhorn-backup
