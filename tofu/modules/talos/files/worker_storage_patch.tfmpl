@@ -16,3 +16,9 @@ volumeType: disk
 provisioning:
   diskSelector:
     match: disk.dev_path == '/dev/sdb'
+---
+apiVersion: v1alpha1
+kind: VolumeConfig
+name: EPHEMERAL
+mount:
+  secure: false
