@@ -365,8 +365,8 @@ spec:
       enabled: true
       service:
         enabled: true
-        port: 2379
-        targetPort: 2379
+        port: 2383
+        targetPort: 2383
         selector:
           # instead of using hardcoded IP endpoints,
           component: kube-controller-manager
